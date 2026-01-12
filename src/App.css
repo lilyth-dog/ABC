@@ -10,6 +10,8 @@
   --surface: #111114;
   --font-heading: 'Outfit', sans-serif;
   --font-body: 'Inter', sans-serif;
+  --neon-blue: #00f3ff;
+  --neon-purple: #b026ff;
 }
 
 * {
@@ -231,6 +233,86 @@ body {
   gap: 4rem;
 }
 
+/* Avatar Creator - Bio Chamber Aesthetic */
+.avatar-creator-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(7, 7, 9, 0.95);
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.5s ease;
+}
+
+.avatar-creator-header {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  z-index: 2001;
+}
+
+.avatar-creator-iframe {
+  width: 90%;
+  height: 85%;
+  border: 1px solid var(--neon-blue);
+  border-radius: 12px;
+  box-shadow: 0 0 50px rgba(0, 243, 255, 0.1);
+  animation: slideUp 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--neon-blue);
+  font-family: 'Courier New', monospace;
+}
+
+.scanner-line {
+  width: 300px;
+  height: 2px;
+  background: var(--neon-blue);
+  box-shadow: 0 0 10px var(--neon-blue);
+  margin-top: 20px;
+  animation: scan 2s infinite ease-in-out;
+}
+
+@keyframes scan {
+  0% {
+    width: 0;
+    opacity: 0;
+  }
+
+  50% {
+    width: 300px;
+    opacity: 1;
+  }
+
+  100% {
+    width: 0;
+    opacity: 0;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+
 /* Responsive */
 @media (max-width: 1024px) {
   .hero {
@@ -297,4 +379,145 @@ body {
   outline: none;
   border-color: var(--primary) !important;
   background: rgba(255, 255, 255, 0.06) !important;
+}
+
+/* Identity Configurator - Bio Chamber Aesthetic (Matching Avatar Creator) */
+.identity-configurator-overlay {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2000;
+  width: 900px;
+  max-width: 95vw;
+  background: rgba(7, 7, 9, 0.95);
+  border: 1px solid var(--neon-blue);
+  border-radius: 12px;
+  box-shadow: 0 0 50px rgba(0, 243, 255, 0.1);
+  padding: 2rem;
+  animation: fadeIn 0.5s ease;
+  /* Glass panel override */
+  backdrop-filter: blur(20px);
+}
+
+.config-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid var(--glass-border);
+  padding-bottom: 1rem;
+}
+
+.config-header h2 {
+  color: var(--neon-blue);
+  font-family: var(--font-heading);
+  letter-spacing: 2px;
+  font-size: 1.5rem;
+  text-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
+}
+
+.btn-close {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 2rem;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.btn-close:hover {
+  color: var(--neon-purple);
+}
+
+.btn-xs {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--glass-border);
+  color: var(--text-muted);
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: 'Courier New', monospace;
+  transition: all 0.3s ease;
+}
+
+.btn-xs.active,
+.btn-xs:hover {
+  background: rgba(0, 243, 255, 0.1);
+  border-color: var(--neon-blue);
+  color: var(--neon-blue);
+  text-shadow: 0 0 5px var(--neon-blue);
+}
+
+.step-genomics,
+.step-neural,
+.step-personality,
+.step-kinematics {
+  animation: slideUp 0.4s ease-out;
+}
+
+/* Neural Step Specifics */
+.neural-viz-container {
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.8);
+}
+
+.neural-viz-container::after {
+  content: "LIVE SIGNAL";
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  color: #ff0055;
+  font-size: 0.7rem;
+  font-family: 'Courier New', monospace;
+  animation: blink 1s infinite;
+}
+
+.sync-loader {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border: 2px solid var(--glass-border);
+  position: relative;
+  margin: 50px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sync-circle {
+  background: radial-gradient(circle, var(--neon-purple), transparent);
+  border-radius: 50%;
+  transition: all 0.1s ease;
+  box-shadow: 0 0 30px var(--neon-purple);
+}
+
+.sync-percentage {
+  position: absolute;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #fff;
+  z-index: 2;
+}
+
+.status-text {
+  text-align: center;
+  color: var(--neon-blue);
+  font-family: 'Courier New', monospace;
+  margin-top: 2rem;
+}
+
+@keyframes blink {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.3;
+  }
 }

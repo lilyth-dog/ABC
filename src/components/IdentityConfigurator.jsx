@@ -5,11 +5,15 @@ import { OrbitControls } from '@react-three/drei';
 import DNAHelix from './DNAHelix';
 import BrainWaveVisualizer from './BrainWaveVisualizer';
 import NeuroKinematicDashboard from './NeuroKinematicDashboard';
+import { useAudio } from './AudioManager';
+import useNeuroStream from '../hooks/useNeuroStream';
 
 const IdentityConfigurator = ({ onComplete, onCancel, coupling, setCoupling }) => {
+  const { playChime, playSuccess } = useAudio();
+  const { sendEEG, isConnected } = useNeuroStream('/ws/simulation');
+  
   const [step, setStep] = useState('genomics'); // genomics | personality | neural | kinematics | sync
   const [progress, setProgress] = useState(0);
-  // Removed local coupling state
 
   // Simulated Personality Data (Big Five)
   const [traits, setTraits] = useState([
@@ -20,32 +24,68 @@ const IdentityConfigurator = ({ onComplete, onCancel, coupling, setCoupling }) =
     { subject: 'Neuroticism', A: 40, fullMark: 100 },
   ]);
 
+  const [showBloom, setShowBloom] = useState(false);
+  const [showSummary, setShowSummary] = useState(false);
+
+  // Update backend when slider moves
+  useEffect(() => {
+    if (step === 'neural' && isConnected) {
+        // Map Coupling (0-10) to Theta (0-1) and Beta (0-1)
+        // High Coupling = High Sync (Peace) = High Theta, Low Beta
+        // Low Coupling = Chaos (Activity) = Low Theta, High Beta
+        const theta = Math.min(coupling / 10, 1.0);
+        const beta = Math.min((10 - coupling) / 10, 1.0);
+        
+        sendEEG(theta, beta);
+    }
+  }, [coupling, step, isConnected, sendEEG]);
+
   useEffect(() => {
     if (step === 'sync') {
       const interval = setInterval(() => {
         setProgress((prev) => {
           if (prev >= 100) {
             clearInterval(interval);
-            setTimeout(() => onComplete(traits), 500);
+            playSuccess();
+            setShowBloom(true);
+            setTimeout(() => {
+                setShowSummary(true);
+            }, 500);
             return 100;
           }
+          if (prev % 10 === 0) playChime(440 + prev * 2, 'sine', 0.05);
           return prev + 2;
         });
       }, 50);
       return () => clearInterval(interval);
     }
-  }, [step, onComplete, traits]);
+  }, [step, traits, playChime, playSuccess]);
+  
+  if (showSummary) {
+      const topTrait = traits.reduce((prev, current) => (prev.A > current.A) ? prev : current).subject;
+      return (
+          <div className="identity-configurator-overlay glass-panel soul-card fade-in">
+              <h2 className="neon-cyan">TWIN SOUL CRYSTALLIZED</h2>
+              <div className="soul-trait-highlight">{topTrait}</div>
+              <p style={{ color: 'rgba(255,255,255,0.7)', marginBottom: '30px' }}>
+                  Your neural signature has bifurcated. The Digital Twin is now an autonomous reflection of your {topTrait.toLowerCase()} essence.
+              </p>
+              <button className="btn btn-primary glow-effect" onClick={() => onComplete(traits)}>
+                  SYNCHRONIZE & AWAKEN
+              </button>
+          </div>
+      )
+  }
 
   const randomizeTraits = () => {
-    const newTraits = traits.map(t => ({
-      ...t,
-      A: Math.floor(Math.random() * 60) + 40 // Random value between 40 and 100
-    }));
-    setTraits(newTraits);
+      const newTraits = traits.map(t => ({...t, A: Math.floor(Math.random() * 60) + 40}));
+      setTraits(newTraits);
+      playChime(800, 'square', 0.1);
   };
 
   return (
-    <div className="identity-configurator-overlay glass-panel" style={{ width: step === 'kinematics' ? '900px' : '500px', transition: 'width 0.3s' }}>
+    <div className="identity-configurator-overlay glass-panel">
+      {showBloom && <div className="neural-bloom"></div>}
       <div className="config-header">
         <h2>BIO-DIGITAL LINK INTERFACE</h2>
         <button onClick={onCancel} className="btn-close">×</button>
@@ -54,10 +94,10 @@ const IdentityConfigurator = ({ onComplete, onCancel, coupling, setCoupling }) =
       <div className="config-content">
         {/* TAB NAVIGATION For Dev/Demo */}
         <div style={{ display: 'flex', gap: '5px', marginBottom: '10px', justifyContent: 'center' }}>
-            <button className={`btn-xs ${step === 'genomics' ? 'active' : ''}`} onClick={() => setStep('genomics')}>DNA</button>
-            <button className={`btn-xs ${step === 'personality' ? 'active' : ''}`} onClick={() => setStep('personality')}>PSYCHE</button>
-            <button className={`btn-xs ${step === 'neural' ? 'active' : ''}`} onClick={() => setStep('neural')}>PHYSICS</button>
-            <button className={`btn-xs ${step === 'kinematics' ? 'active' : ''}`} onClick={() => setStep('kinematics')}>MATH</button>
+            <button className={`btn-xs ${step === 'genomics' ? 'active' : ''}`} onClick={() => { playChime(440); setStep('genomics'); }}>DNA</button>
+            <button className={`btn-xs ${step === 'personality' ? 'active' : ''}`} onClick={() => { playChime(550); setStep('personality'); }}>PSYCHE</button>
+            <button className={`btn-xs ${step === 'neural' ? 'active' : ''}`} onClick={() => { playChime(660); setStep('neural'); }}>PHYSICS</button>
+            <button className={`btn-xs ${step === 'kinematics' ? 'active' : ''}`} onClick={() => { playChime(770); setStep('kinematics'); }}>MATH</button>
         </div>
 
         {step === 'genomics' && (
@@ -86,7 +126,7 @@ const IdentityConfigurator = ({ onComplete, onCancel, coupling, setCoupling }) =
 
         {step === 'personality' && (
           <div className="step-personality fade-in">
-            <h3>PSYCHE MATRIX CONFIGURATION</h3>
+            <h3 style={{textAlign: 'center', marginBottom: '1rem', color: 'var(--text-muted)'}}>PSYCHE MATRIX CONFIGURATION</h3>
             <div className="chart-container" style={{ width: '100%', height: '300px' }}>
               <ResponsiveContainer width="100%" height="100%">
                 <RadarChart cx="50%" cy="50%" outerRadius="80%" data={traits}>
@@ -104,8 +144,8 @@ const IdentityConfigurator = ({ onComplete, onCancel, coupling, setCoupling }) =
                 </RadarChart>
               </ResponsiveContainer>
             </div>
-            <div className="controls">
-              <button className="btn btn-secondary" onClick={randomizeTraits}>RANDOMIZE TRAITS</button>
+            <div className="controls" style={{display: 'flex', justifyContent: 'center', gap: '1rem', marginTop: '1rem'}}>
+              <button className="btn btn-secondary glass-effect" onClick={randomizeTraits}>RANDOMIZE TRAITS</button>
               <button className="btn btn-primary glow-effect" onClick={() => setStep('neural')}>
                 INITIALIZE NEURAL ENGINE
               </button>
@@ -115,7 +155,7 @@ const IdentityConfigurator = ({ onComplete, onCancel, coupling, setCoupling }) =
 
         {step === 'neural' && (
           <div className="step-neural fade-in" style={{ width: '100%', textAlign: 'center' }}>
-            <h3>NEURAL PHYSICS SIMULATION</h3>
+            <h3 style={{color: 'var(--text-muted)', marginBottom: '1rem'}}>NEURAL PHYSICS SIMULATION</h3>
             <div className="neural-viz-container" style={{ width: '100%', height: '300px', background: '#000' }}>
                <Canvas camera={{ position: [0, 0, 10], fov: 60 }}>
                   <ambientLight intensity={0.2} />
@@ -127,9 +167,11 @@ const IdentityConfigurator = ({ onComplete, onCancel, coupling, setCoupling }) =
             </div>
             
             <div className="controls" style={{ marginTop: '20px', width: '80%', margin: '20px auto' }}>
-                <label style={{ display: 'block', marginBottom: '10px' }}>
-                  SYNCHRONIZATION COUPLING (K): <span className="neon-green">{coupling}</span>
-                </label>
+                <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px'}}>
+                     <label>SYNCHRONIZATION COUPLING (K)</label>
+                     <span className="neon-green" style={{fontFamily: 'monospace', fontSize: '1.2rem'}}>{coupling}</span>
+                </div>
+                
                 <input 
                   type="range" 
                   min="0" 
@@ -137,14 +179,20 @@ const IdentityConfigurator = ({ onComplete, onCancel, coupling, setCoupling }) =
                   step="0.1" 
                   value={coupling} 
                   onChange={(e) => setCoupling(parseFloat(e.target.value))}
-                  style={{ width: '100%' }}
+                  style={{ width: '100%', accentColor: 'var(--neon-blue)' }}
                 />
-                <p style={{ fontSize: '0.8rem', color: '#aaa', marginTop: '5px' }}>
-                  Adjust K to observe Phase Transition (Chaos → Sync)
+                
+                <div style={{display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', color: '#666', marginTop: '5px'}}>
+                     <span>CHAOS (Beta)</span>
+                     <span>SYNC (Theta)</span>
+                </div>
+                
+                <p style={{ fontSize: '0.8rem', color: isConnected ? 'var(--neon-blue)' : '#ff5555', marginTop: '10px', fontFamily: 'monospace' }}>
+                   {isConnected ? `[LINK ACTIVE] TRANSMITTING NEURAL PARAMS...` : `[OFFLINE] SIMULATION RUNNING LOCALLY`}
                 </p>
                 
                 <div style={{display: 'flex', gap: '10px', justifyContent: 'center', marginTop: '20px'}}>
-                     <button className="btn btn-secondary" onClick={() => setStep('kinematics')}>
+                     <button className="btn btn-secondary glass-effect" onClick={() => setStep('kinematics')}>
                         VIEW MATHEMATICS
                      </button>
                      <button className="btn btn-primary glow-effect" onClick={() => setStep('sync')}>
@@ -157,7 +205,7 @@ const IdentityConfigurator = ({ onComplete, onCancel, coupling, setCoupling }) =
 
         {step === 'kinematics' && (
             <div className="step-kinematics fade-in" style={{ width: '100%', height: '500px' }}>
-                <h3 style={{ textAlign: 'center' }}>NEURO-KINEMATIC SKELETON</h3>
+                <h3 style={{ textAlign: 'center', color: 'var(--text-muted)' }}>NEURO-KINEMATIC SKELETON</h3>
                 <NeuroKinematicDashboard />
                 <div className="controls" style={{ marginTop: '20px', textAlign: 'center' }}>
                     <button className="btn btn-primary glow-effect" onClick={() => setStep('sync')}>
@@ -173,7 +221,7 @@ const IdentityConfigurator = ({ onComplete, onCancel, coupling, setCoupling }) =
               <div className="sync-circle" style={{ width: `${progress}%`, height: `${progress}%` }}></div>
               <span className="sync-percentage">{progress}%</span>
             </div>
-            <p className="status-text">SYNCHRONIZING BIO-DATA WITH DIGITAL HOST...</p>
+            <p className="status-text blink">SYNCHRONIZING BIO-DATA WITH DIGITAL HOST...</p>
           </div>
         )}
       </div>

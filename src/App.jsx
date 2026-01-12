@@ -8,6 +8,8 @@ import AvatarCreator from './components/AvatarCreator'
 import IdentityConfigurator from './components/IdentityConfigurator'
 const WorldScene = React.lazy(() => import('./components/WorldScene'));
 
+import AudioManager from './components/AudioManager'
+
 function App() {
   const [mousePos, setMousePos] = useState({ x: 50, y: 50 });
   const [avatarUrl, setAvatarUrl] = useState(null);
@@ -31,13 +33,16 @@ function App() {
 
   if (isInWorld) {
       return (
-          <Suspense fallback={<div style={{color:'white'}}>Loading World...</div>}>
-              <WorldScene avatarUrl={avatarUrl} coupling={neuralCoupling} onExit={() => setIsInWorld(false)} />
-          </Suspense>
+          <AudioManager>
+            <Suspense fallback={<div style={{color:'white'}}>Loading World...</div>}>
+                <WorldScene avatarUrl={avatarUrl} coupling={neuralCoupling} onExit={() => setIsInWorld(false)} />
+            </Suspense>
+          </AudioManager>
       )
   }
 
   return (
+    <AudioManager>
     <div className="app-container">
       <div 
         className="glow-bg" 
@@ -81,6 +86,7 @@ function App() {
         />
       )}
     </div>
+    </AudioManager>
   )
 }
 

@@ -36,6 +36,33 @@ npm install
 pip install -r backend/requirements.txt
 ```
 
+## 📊 Datasets
+
+프로젝트에 필요한 대용량 데이터셋 파일들은 GitHub에 포함되지 않습니다 (100MB 제한).
+
+### 필요한 데이터셋
+
+1. **TESS (Toronto Emotional Speech Set)** - 427.79 MB
+   - 감정 인식 및 오디오 분석용
+   - 다운로드: [TESS 공식 사이트](https://tspace.library.utoronto.ca/handle/1807/24487)
+   - 압축 해제: `unzip datasets/toronto-emotional-speech-set-tess.zip -d datasets/tess/`
+
+2. **Workout Fitness Video** - 330.12 MB
+   - 모션 분석 및 바이오시그널 통합용
+   - 팀 내부에서 공유된 링크 사용 또는 별도 제공
+
+자세한 내용은 [`datasets/README.md`](datasets/README.md)를 참고하세요.
+
+### Git LFS 사용 (선택사항)
+
+대용량 파일을 Git에 포함하려면:
+
+```bash
+git lfs install
+git lfs track "datasets/*.zip"
+git add .gitattributes
+```
+
 ## 🏃 Running
 
 ```bash
@@ -70,6 +97,9 @@ ABC/
 │   ├── api_server.py   # FastAPI 서버
 │   ├── neuro_controller.py
 │   └── simulation_db.py
+├── datasets/           # 데이터셋 파일 (GitHub에 제외됨)
+│   ├── README.md       # 데이터셋 사용 가이드
+│   └── .gitkeep        # 폴더 구조 유지
 ├── public/             # 정적 파일
 └── package.json
 ```

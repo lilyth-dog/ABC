@@ -617,3 +617,526 @@ body::before {
   text-transform: uppercase;
   letter-spacing: 4px;
 }
+
+/* ========== MOBILE RESPONSIVE STYLES ========== */
+
+/* Mobile Menu Button */
+.mobile-menu-btn {
+  display: none;
+  background: transparent;
+  border: 1px solid var(--glass-border);
+  color: var(--neon-cyan);
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 1001;
+}
+
+.mobile-menu-btn:hover {
+  background: rgba(0, 212, 255, 0.1);
+  box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
+}
+
+/* Mobile Menu Overlay */
+.mobile-menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.9);
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.3s ease;
+}
+
+.mobile-menu {
+  text-align: center;
+  padding: 2rem;
+}
+
+.mobile-nav-links {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 2rem;
+}
+
+.mobile-nav-links li {
+  margin: 1.5rem 0;
+}
+
+.mobile-nav-links a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  transition: color 0.3s ease;
+}
+
+.mobile-nav-links a:hover {
+  color: var(--neon-cyan);
+  text-shadow: 0 0 10px var(--neon-cyan);
+}
+
+.mobile-nav-cta {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.mobile-nav-cta button {
+  width: 100%;
+  min-width: 200px;
+}
+
+/* ========== RESPONSIVE BREAKPOINTS ========== */
+
+@media (max-width: 768px) {
+
+  /* Hide desktop nav */
+  .desktop-nav {
+    display: none !important;
+  }
+
+  /* Show mobile menu button */
+  .mobile-menu-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Navbar adjustments */
+  .navbar {
+    padding: 1rem 1.5rem;
+  }
+
+  /* Hero section */
+  .hero-section {
+    flex-direction: column;
+    padding: 6rem 1.5rem 2rem;
+    text-align: center;
+  }
+
+  .hero-content h1 {
+    font-size: 2rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .hero-buttons button {
+    width: 100%;
+    margin-left: 0 !important;
+  }
+
+  .hero-visual {
+    width: 100%;
+    height: 300px;
+  }
+
+  /* Features grid */
+  .features-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  /* Section padding */
+  section {
+    padding: 3rem 1.5rem !important;
+  }
+
+  .section-title {
+    font-size: 1.8rem;
+  }
+
+  /* Analytics dashboard grid */
+  #analytics>div:last-child {
+    grid-template-columns: 1fr !important;
+  }
+
+  #analytics>div:last-child>*:first-child {
+    grid-column: 1 !important;
+  }
+
+  #analytics>div:last-child>*:last-child {
+    grid-column: 1 !important;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  /* Infrastructure section */
+  #infrastructure>div {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Pricing grid */
+  .pricing-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  /* Trust section */
+  #trust>div {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Footer */
+  .footer-content {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .footer-links {
+    flex-direction: column !important;
+    gap: 2rem !important;
+  }
+
+  /* Stats overlay */
+  .stats-overlay {
+    position: relative;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  /* Identity configurator */
+  .identity-configurator-overlay {
+    width: 95vw;
+    max-height: 85vh;
+    overflow-y: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-content h1 {
+    font-size: 1.5rem;
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    padding: 10px 16px;
+    font-size: 0.9rem;
+  }
+
+  .soul-trait-highlight {
+    font-size: 2rem;
+  }
+}
+
+/* ========== EMOTIONAL UX ANIMATIONS ========== */
+
+/* Spiritual Glow Effect - 영적인 빛 효과 */
+@keyframes spiritualGlow {
+
+  0%,
+  100% {
+    box-shadow:
+      0 0 20px rgba(255, 0, 255, 0.3),
+      0 0 40px rgba(0, 212, 255, 0.2),
+      0 0 60px rgba(255, 0, 255, 0.1);
+  }
+
+  50% {
+    box-shadow:
+      0 0 40px rgba(255, 0, 255, 0.5),
+      0 0 80px rgba(0, 212, 255, 0.4),
+      0 0 120px rgba(255, 0, 255, 0.2);
+  }
+}
+
+.spiritual-glow {
+  animation: spiritualGlow 3s ease-in-out infinite;
+}
+
+/* Heartbeat Pulse Effect - 심장 박동 효과 */
+@keyframes heartbeatPulse {
+
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  10% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+
+  20% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+
+  30% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+
+  40%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.heartbeat {
+  animation: heartbeatPulse 2s ease-in-out infinite;
+}
+
+/* Ascension Effect - 상승 효과 */
+@keyframes ascension {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+    filter: brightness(1);
+  }
+
+  50% {
+    opacity: 1;
+    filter: brightness(1.5);
+  }
+
+  100% {
+    transform: translateY(-100px) scale(0.8);
+    opacity: 0;
+    filter: brightness(2);
+  }
+}
+
+.ascend {
+  animation: ascension 2s ease-out forwards;
+}
+
+/* Soul Connection Effect - 영혼 연결 효과 */
+@keyframes soulConnection {
+  0% {
+    stroke-dashoffset: 100%;
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+}
+
+/* Breathing Effect - 호흡 효과 */
+@keyframes breathing {
+
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+
+  50% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+}
+
+.breathing {
+  animation: breathing 4s ease-in-out infinite;
+}
+
+/* Ethereal Float - 초월적 부유 효과 */
+@keyframes etherealFloat {
+
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+    filter: hue-rotate(0deg);
+  }
+
+  25% {
+    transform: translateY(-10px) rotate(1deg);
+  }
+
+  50% {
+    transform: translateY(0) rotate(0deg);
+    filter: hue-rotate(20deg);
+  }
+
+  75% {
+    transform: translateY(-5px) rotate(-1deg);
+  }
+}
+
+.ethereal-float {
+  animation: etherealFloat 6s ease-in-out infinite;
+}
+
+/* Cosmic Ripple - 우주적 물결 효과 */
+@keyframes cosmicRipple {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+    border-width: 4px;
+  }
+
+  100% {
+    transform: scale(4);
+    opacity: 0;
+    border-width: 1px;
+  }
+}
+
+.cosmic-ripple::before,
+.cosmic-ripple::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid var(--neon-cyan);
+  transform: translate(-50%, -50%);
+  animation: cosmicRipple 2s ease-out infinite;
+}
+
+.cosmic-ripple::after {
+  animation-delay: 1s;
+  border-color: var(--neon-magenta);
+}
+
+/* Neon Flicker - 네온 깜빡임 효과 */
+@keyframes neonFlicker {
+
+  0%,
+  19%,
+  21%,
+  23%,
+  25%,
+  54%,
+  56%,
+  100% {
+    text-shadow:
+      0 0 5px #fff,
+      0 0 10px #fff,
+      0 0 20px var(--neon-cyan),
+      0 0 40px var(--neon-cyan),
+      0 0 80px var(--neon-cyan);
+  }
+
+  20%,
+  24%,
+  55% {
+    text-shadow: none;
+  }
+}
+
+.neon-flicker {
+  animation: neonFlicker 1.5s infinite alternate;
+}
+
+/* Transcendence Effect - 초월 효과 */
+@keyframes transcendence {
+  0% {
+    opacity: 0;
+    transform: translateY(50px) scale(0.8);
+    filter: blur(10px);
+  }
+
+  60% {
+    opacity: 1;
+    filter: blur(2px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+.transcend {
+  animation: transcendence 1.5s ease-out forwards;
+}
+
+/* Emotional Color Classes */
+.neon-cyan {
+  color: var(--neon-cyan);
+}
+
+.neon-magenta {
+  color: var(--neon-magenta);
+}
+
+.neon-green {
+  color: var(--neon-green);
+}
+
+/* Text Muted */
+.text-muted {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* Glass Effect for buttons */
+.glass-effect {
+  background: var(--glass);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+}
+
+/* Glow Effect for buttons */
+.glow-effect {
+  transition: all 0.3s ease;
+}
+
+.glow-effect:hover {
+  box-shadow:
+    0 0 20px var(--neon-cyan),
+    0 0 40px rgba(0, 212, 255, 0.3);
+}
+
+/* Button Outline Style */
+.btn-outline {
+  background: transparent;
+  border: 1px solid currentColor;
+  padding: 12px 24px;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-outline:hover {
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 15px currentColor;
+}
+
+/* Privacy Consent Overlay - 추가 스타일 */
+.privacy-consent-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(20px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9998;
+}

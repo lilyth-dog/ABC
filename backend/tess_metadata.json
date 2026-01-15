@@ -1,0 +1,81 @@
+{
+  "dataset": "TESS",
+  "description": "Toronto Emotional Speech Set",
+  "total_samples": 2400,
+  "emotions": [
+    "angry",
+    "disgust",
+    "fear",
+    "happy",
+    "neutral",
+    "ps",
+    "sad"
+  ],
+  "emotion_distribution": {
+    "angry": 400,
+    "disgust": 400,
+    "fear": 400,
+    "happy": 400,
+    "neutral": 400,
+    "sad": 400
+  },
+  "emotion_mappings": {
+    "angry": {
+      "valence": -0.7,
+      "arousal": 0.8,
+      "personality_weight": {
+        "neuroticism": 0.3
+      }
+    },
+    "disgust": {
+      "valence": -0.6,
+      "arousal": 0.2,
+      "personality_weight": {
+        "neuroticism": 0.2,
+        "agreeableness": -0.2
+      }
+    },
+    "fear": {
+      "valence": -0.8,
+      "arousal": 0.7,
+      "personality_weight": {
+        "neuroticism": 0.4
+      }
+    },
+    "happy": {
+      "valence": 0.9,
+      "arousal": 0.6,
+      "personality_weight": {
+        "extraversion": 0.3,
+        "openness": 0.2
+      }
+    },
+    "neutral": {
+      "valence": 0.0,
+      "arousal": 0.0,
+      "personality_weight": {}
+    },
+    "ps": {
+      "valence": 0.7,
+      "arousal": 0.8,
+      "personality_weight": {
+        "openness": 0.3
+      }
+    },
+    "sad": {
+      "valence": -0.7,
+      "arousal": -0.3,
+      "personality_weight": {
+        "neuroticism": 0.2
+      }
+    }
+  },
+  "actors": [
+    "OAF",
+    "YAF"
+  ],
+  "actor_descriptions": {
+    "OAF": "Older Actor Female (64 years)",
+    "YAF": "Younger Actor Female (26 years)"
+  }
+}

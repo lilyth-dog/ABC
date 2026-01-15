@@ -1,0 +1,23 @@
+{
+    "name": "Nexus Entertainment",
+    "short_name": "Nexus",
+    "description": "The Future of Digital Human Twins and Virtual Idols",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#020617",
+    "theme_color": "#00d4ff",
+    "orientation": "portrait-primary",
+    "icons": [
+        {
+            "src": "/favicon.svg",
+            "sizes": "any",
+            "type": "image/svg+xml",
+            "purpose": "any maskable"
+        }
+    ],
+    "categories": [
+        "entertainment",
+        "games",
+        "social"
+    ]
+}

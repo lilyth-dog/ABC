@@ -3,11 +3,11 @@ FROM python:3.11-slim
 WORKDIR /app
 
 # Copy requirements first for caching
-COPY src/backend/requirements.txt .
+COPY backend/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy backend code
-COPY src/backend/ .
+COPY backend/ .
 
 # Expose port
 EXPOSE 8080

@@ -1,0 +1,154 @@
+{
+    "metadata": {
+        "version": "1.0",
+        "description": "Cultural weight modifiers for behavioral personality inference",
+        "last_updated": "2026-01-14",
+        "note": "These are initial values based on cross-cultural psychology research. Should be validated with real user studies."
+    },
+    "cultures": {
+        "east_asian": {
+            "name": "동아시아 (한국, 일본, 중국)",
+            "description": "High-context cultures with emphasis on deliberation and group harmony",
+            "modifiers": {
+                "latency_interpretation": {
+                    "type": "positive",
+                    "description": "Higher latency indicates thoroughness and careful consideration",
+                    "logic_weight_boost": 0.1,
+                    "intuition_weight_reduction": 0.05
+                },
+                "revision_interpretation": {
+                    "type": "positive",
+                    "description": "Revisions indicate attention to detail and pursuit of perfection",
+                    "complexity_weight_boost": 0.15
+                },
+                "efficiency_interpretation": {
+                    "type": "neutral",
+                    "description": "Path efficiency is less culturally loaded"
+                }
+            },
+            "archetype_mappings": {
+                "high_logic_high_complexity": "신중한 분석가 (Careful Analyst)",
+                "high_intuition_high_fluidity": "조화로운 창작자 (Harmonious Creator)",
+                "balanced": "균형 잡힌 사색가 (Balanced Thinker)"
+            }
+        },
+        "western": {
+            "name": "서양 (미국, 유럽)",
+            "description": "Low-context cultures with emphasis on speed and individual decision-making",
+            "modifiers": {
+                "latency_interpretation": {
+                    "type": "neutral_to_negative",
+                    "description": "Very high latency may indicate indecision",
+                    "logic_weight_boost": 0.0,
+                    "intuition_weight_reduction": 0.0
+                },
+                "revision_interpretation": {
+                    "type": "mixed",
+                    "description": "Some revisions are normal, too many may indicate uncertainty",
+                    "complexity_weight_boost": 0.05
+                },
+                "efficiency_interpretation": {
+                    "type": "positive",
+                    "description": "High efficiency is often valued in Western contexts",
+                    "fluidity_weight_boost": 0.1
+                }
+            },
+            "archetype_mappings": {
+                "high_logic_high_complexity": "Strategic Analyst",
+                "high_intuition_high_fluidity": "Dynamic Innovator",
+                "balanced": "Adaptive Leader"
+            }
+        },
+        "latin_american": {
+            "name": "라틴 아메리카",
+            "description": "Relationship-oriented cultures with flexible time perception",
+            "modifiers": {
+                "latency_interpretation": {
+                    "type": "flexible",
+                    "description": "Latency is less diagnostic in polychronic cultures",
+                    "logic_weight_boost": 0.05,
+                    "intuition_weight_reduction": 0.0
+                },
+                "revision_interpretation": {
+                    "type": "positive",
+                    "description": "Iterative refinement is culturally acceptable",
+                    "complexity_weight_boost": 0.1
+                },
+                "efficiency_interpretation": {
+                    "type": "neutral",
+                    "description": "Process is often valued over pure efficiency"
+                }
+            },
+            "archetype_mappings": {
+                "high_logic_high_complexity": "Pensador Estratégico",
+                "high_intuition_high_fluidity": "Creador Apasionado",
+                "balanced": "Líder Adaptable"
+            }
+        },
+        "middle_eastern": {
+            "name": "중동",
+            "description": "Collectivist cultures with emphasis on relationship and deliberation",
+            "modifiers": {
+                "latency_interpretation": {
+                    "type": "positive",
+                    "description": "Deliberation is valued and expected",
+                    "logic_weight_boost": 0.1,
+                    "intuition_weight_reduction": 0.05
+                },
+                "revision_interpretation": {
+                    "type": "positive",
+                    "description": "Striving for excellence is culturally valued",
+                    "complexity_weight_boost": 0.1
+                },
+                "efficiency_interpretation": {
+                    "type": "neutral",
+                    "description": "Relationship context affects efficiency interpretation"
+                }
+            },
+            "archetype_mappings": {
+                "high_logic_high_complexity": "محلل حكيم (Wise Analyst)",
+                "high_intuition_high_fluidity": "مبدع متناغم (Harmonious Creator)",
+                "balanced": "قائد متوازن (Balanced Leader)"
+            }
+        },
+        "default": {
+            "name": "Global Default",
+            "description": "Neutral baseline without cultural adjustments",
+            "modifiers": {
+                "latency_interpretation": {
+                    "type": "baseline",
+                    "logic_weight_boost": 0.0,
+                    "intuition_weight_reduction": 0.0
+                },
+                "revision_interpretation": {
+                    "type": "baseline",
+                    "complexity_weight_boost": 0.0
+                },
+                "efficiency_interpretation": {
+                    "type": "baseline",
+                    "fluidity_weight_boost": 0.0
+                }
+            },
+            "archetype_mappings": {
+                "high_logic_high_complexity": "Analytical & Complex",
+                "high_intuition_high_fluidity": "Intuitive & Adaptive",
+                "balanced": "Balanced & Steady"
+            }
+        }
+    },
+    "validation_notes": {
+        "status": "experimental",
+        "recommended_actions": [
+            "Conduct user studies across different cultural groups",
+            "Validate weight modifiers with A/B testing",
+            "Consider individual variation within cultures",
+            "Allow users to opt-out of cultural adjustments"
+        ],
+        "ethical_considerations": [
+            "Avoid stereotyping individuals based on cultural background",
+            "Cultural context should enhance, not determine, personality inference",
+            "Users should be informed about cultural adjustments",
+            "Allow manual override of cultural settings"
+        ]
+    }
+}

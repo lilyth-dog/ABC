@@ -11,6 +11,9 @@
 - **3D World** - Three.js 기반 인터랙티브 월드
 - **Analytics Dashboard** - 실시간 분석 대시보드
 - **Neuro Controller** - 뉴럴 커플링 시스템
+- **Game Data Pipeline** - 게임 플레이 데이터를 통한 성격 추론 (3단계 파이프라인)
+- **Behavioral Analysis** - 행동 기반 디지털 휴먼 트윈 생성 및 진화
+- **Continuous Learning** - 세션 간 지속적 학습 및 프로필 업데이트
 
 ## 🛠 Tech Stack
 
@@ -94,20 +97,85 @@ ABC/
 │   ├── styles/         # 스타일시트
 │   └── utils/          # 유틸리티 함수
 ├── backend/
-│   ├── api_server.py   # FastAPI 서버
-│   ├── neuro_controller.py
-│   └── simulation_db.py
+│   ├── api_server.py           # FastAPI 서버
+│   ├── neuro_controller.py    # 신경 제어 및 성격 추론
+│   ├── game_event_parser.py    # 게임 이벤트 파서
+│   ├── game_behavior_processor.py  # 게임 행동 처리
+│   ├── user_profiles.py        # 사용자 프로필 관리 (GDPR)
+│   ├── ml_personality_model.py # ML 기반 성격 모델
+│   ├── simulation_db.py        # 시뮬레이션 데이터베이스
+│   ├── tests/                  # 백엔드 테스트
+│   └── final_verification_test.py  # 최종 검증 테스트
+├── docs/
+│   ├── ABC해커톤_논문_발표용.md  # 발표 논문
+│   ├── DEVELOPER_GUIDE.md      # 개발자 가이드
+│   └── FINAL_VERIFICATION_REPORT.md  # 최종 검증 리포트
 ├── datasets/           # 데이터셋 파일 (GitHub에 제외됨)
 │   ├── README.md       # 데이터셋 사용 가이드
-│   └── .gitkeep        # 폴더 구조 유지
+│   └── public/         # 공개 게임 데이터
 ├── public/             # 정적 파일
 └── package.json
 ```
 
-## 🔧 Environment Variables
+## Environment Variables
 
-`.env.production` 파일에서 환경 변수를 설정합니다.
+환경 변수는 `.env.production` 파일 또는 시스템 환경 변수로 설정합니다.
 
-## 📄 License
+### 주요 환경 변수
+
+- `CORS_ORIGINS`: CORS 허용 오리진 (기본값: `http://localhost:5173,http://localhost:3000,http://localhost:5180`)
+- `LOG_LEVEL`: 로그 레벨 (기본값: `INFO`)
+- `PORT`: 백엔드 서버 포트 (기본값: `8000`)
+- `VITE_API_URL`: 프론트엔드 API URL (기본값: `http://localhost:8000`)
+- `VITE_WS_URL`: WebSocket URL (기본값: `ws://localhost:8000`)
+
+자세한 내용은 `backend/env_validator.py`를 참고하세요.
+
+## 📡 API Documentation
+
+백엔드 서버 실행 후 다음 URL에서 API 문서를 확인할 수 있습니다:
+
+- **Swagger UI**: http://localhost:8000/docs
+- **ReDoc**: http://localhost:8000/redoc
+
+### 주요 API 엔드포인트
+
+- `GET /health` - 서버 상태 확인
+- `POST /api/game/events` - 게임 원시 이벤트 처리
+- `POST /api/game/session` - 게임 세션 데이터 처리
+- `POST /api/behavior` - 행동 프로필 처리 및 성격 추론
+- `POST /api/user/{id}/consent` - 사용자 동의 저장
+- `GET /api/user/{id}/export` - GDPR 데이터 내보내기
+- `DELETE /api/user/{id}` - 사용자 데이터 삭제
+
+## 최종 검증 결과
+
+프로젝트는 최종 검증을 통과했습니다:
+
+- **시스템 컴포넌트**: 5/5 통과 (100%)
+- **API 엔드포인트**: 4/4 통과 (100%)
+- **게임 파이프라인**: 3/3 통과 (100%)
+- **성능 벤치마크**: 2/2 통과 (100%)
+- **E2E 통합**: 1/1 통과 (100%)
+
+**전체 결과: 15/15 통과 (100%)**
+
+자세한 내용은 [`docs/FINAL_VERIFICATION_REPORT.md`](docs/FINAL_VERIFICATION_REPORT.md)를 참고하세요.
+
+## Testing
+
+```bash
+# 백엔드 테스트 실행
+cd backend
+python -m pytest tests/
+
+# 최종 검증 테스트 실행
+python final_verification_test.py
+
+# 프론트엔드 테스트 실행
+npm run test
+```
+
+##License
 
 MIT License

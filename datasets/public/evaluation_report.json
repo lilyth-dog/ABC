@@ -1,0 +1,193 @@
+{
+  "test_date": "2026-01-16T13:46:23.429982",
+  "tests": {
+    "parsing_accuracy": {
+      "overall_accuracy": 0.6666666666666666,
+      "details": [
+        {
+          "test_name": "계획 시간 테스트",
+          "metrics": {
+            "planning_time": 1000,
+            "revision_count": 0,
+            "complexity": 0.0,
+            "path_efficiency": 1.0,
+            "risk_taking": 0.0,
+            "diversity": 0.1
+          },
+          "expected": {
+            "planning_time": 4000
+          },
+          "accuracy": {
+            "planning_time": 0.0
+          },
+          "avg_accuracy": 0.0
+        },
+        {
+          "test_name": "수정 빈도 테스트",
+          "metrics": {
+            "planning_time": 0,
+            "revision_count": 1,
+            "complexity": 0.0,
+            "path_efficiency": 1.0,
+            "risk_taking": 0.0,
+            "diversity": 0.0
+          },
+          "expected": {
+            "revision_count": 1
+          },
+          "accuracy": {
+            "revision_count": 1.0
+          },
+          "avg_accuracy": 1.0
+        },
+        {
+          "test_name": "경로 효율성 테스트",
+          "metrics": {
+            "planning_time": 0,
+            "revision_count": 0,
+            "complexity": 0.0,
+            "path_efficiency": 1.0,
+            "risk_taking": 0.0,
+            "diversity": 0.0
+          },
+          "expected": {
+            "path_efficiency": 1.0
+          },
+          "accuracy": {
+            "path_efficiency": 1.0
+          },
+          "avg_accuracy": 1.0
+        }
+      ]
+    },
+    "performance": [
+      {
+        "event_count": 10,
+        "parse_time": 0.0,
+        "process_time": 0.0,
+        "total_time": 0.0,
+        "events_per_second": Infinity
+      },
+      {
+        "event_count": 50,
+        "parse_time": 0.0,
+        "process_time": 0.0,
+        "total_time": 0.0,
+        "events_per_second": Infinity
+      },
+      {
+        "event_count": 100,
+        "parse_time": 0.0,
+        "process_time": 0.0,
+        "total_time": 0.0,
+        "events_per_second": Infinity
+      },
+      {
+        "event_count": 500,
+        "parse_time": 0.0060253143310546875,
+        "process_time": 0.0,
+        "total_time": 0.0060253143310546875,
+        "events_per_second": 82983.22253877809
+      },
+      {
+        "event_count": 1000,
+        "parse_time": 0.015937328338623047,
+        "process_time": 0.0,
+        "total_time": 0.015937328338623047,
+        "events_per_second": 62745.77386829429
+      }
+    ],
+    "consistency": {
+      "is_consistent": true,
+      "results": 5
+    },
+    "edge_cases": [
+      {
+        "case": "빈 이벤트 리스트",
+        "status": "success",
+        "profile": {
+          "pathEfficiency": 0.59,
+          "avgDecisionLatency": 0,
+          "revisionRate": 0,
+          "jitterIndex": 0.41000000000000003,
+          "intensity": 0.6499999999999999,
+          "gameId": "minecraft",
+          "gameSpecific": {
+            "buildComplexity": 0.5,
+            "explorationRange": 0.5,
+            "resourceDiversity": 0.5
+          }
+        }
+      },
+      {
+        "case": "단일 이벤트",
+        "status": "success",
+        "profile": {
+          "pathEfficiency": 0.79,
+          "avgDecisionLatency": 0,
+          "revisionRate": 0,
+          "jitterIndex": 0.20999999999999996,
+          "intensity": 0.0,
+          "gameId": "minecraft",
+          "gameSpecific": {
+            "buildComplexity": 0.5,
+            "explorationRange": 0.5,
+            "resourceDiversity": 0.5
+          }
+        }
+      },
+      {
+        "case": "타임스탬프 없음",
+        "status": "error",
+        "error": "'timestamp'"
+      },
+      {
+        "case": "위치 정보 없음",
+        "status": "success",
+        "profile": {
+          "pathEfficiency": 0.79,
+          "avgDecisionLatency": 0,
+          "revisionRate": 0,
+          "jitterIndex": 0.20999999999999996,
+          "intensity": 0.0,
+          "gameId": "minecraft",
+          "gameSpecific": {
+            "buildComplexity": 0.5,
+            "explorationRange": 0.5,
+            "resourceDiversity": 0.5
+          }
+        }
+      }
+    ],
+    "real_data": [
+      {
+        "file": "datasets/public/opendota_real_match_8650963582.json",
+        "status": "exists",
+        "size": 21518,
+        "keys": [
+          "match_id",
+          "match_detail",
+          "converted_events"
+        ]
+      },
+      {
+        "file": "datasets/public/full_pipeline_result.json",
+        "status": "exists",
+        "size": 2227,
+        "keys": [
+          "raw_events",
+          "parsed_metrics",
+          "behavioral_profile",
+          "personality_weights"
+        ]
+      }
+    ]
+  },
+  "summary": {
+    "parsing_accuracy": "66.67%",
+    "performance": "62746 events/sec",
+    "consistency": "✓",
+    "edge_cases_handled": 3,
+    "real_data_files": 2
+  }
+}

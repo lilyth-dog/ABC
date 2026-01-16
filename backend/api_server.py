@@ -24,6 +24,8 @@ from logger_config import logger, log_request, log_error, log_websocket_event
 from env_validator import validate_environment
 from biosignal_integration import get_biosignal_integration
 from predictive_model import get_predictive_model
+from game_behavior_processor import GameBehaviorProcessor, GameBehavioralData
+from game_event_parser import parse_game_events
 
 # 환경 변수 검증 (애플리케이션 시작 시)
 validate_environment()
@@ -279,6 +281,185 @@ async def get_sample_behavior(emotion: str):
 class SessionData(BaseModel):
     user_id: str
     behavioral_profile: dict
+
+class GameRawEventsData(BaseModel):
+    """게임 원시 이벤트 데이터 (1단계 입력)"""
+    user_id: str
+    game_id: str = Field(..., description="게임 ID (minecraft, stardew_valley, animal_crossing)")
+    session_id: str
+    raw_events: List[Dict] = Field(..., description="원시 게임 이벤트 리스트")
+
+class GameSessionData(BaseModel):
+    """게임에서 수집한 세션 데이터 (2-3단계 입력)"""
+    user_id: str
+    game_id: str = Field(..., description="게임 ID (minecraft, stardew_valley, animal_crossing)")
+    session_id: str
+    decision_latency: float = Field(0, ge=0)
+    planning_time: float = Field(0, ge=0)
+    revision_count: int = Field(0, ge=0)
+    path_efficiency: float = Field(0.5, ge=0, le=1)
+    task_efficiency: float = Field(0.5, ge=0, le=1)
+    complexity: float = Field(0.5, ge=0, le=1)
+    diversity: float = Field(0.5, ge=0, le=1)
+    game_specific_metrics: dict = Field(default_factory=dict)
+
+@app.post("/api/game/events")
+@limiter.limit("30/minute")
+async def process_game_raw_events(request: Request, data: GameRawEventsData):
+    """
+    게임 원시 이벤트를 받아서 파싱하고 성격 특성을 추론합니다.
+    
+    입력: 원시 게임 이벤트 리스트
+    처리: 1) 이벤트 파싱 → 2) 메트릭 계산 → 3) 프로필 변환 → 4) 성격 추론
+    """
+    log_request("POST", "/api/game/events", user_id=data.user_id)
+    try:
+        # 1단계: 원시 이벤트 파싱 및 메트릭 계산
+        metrics = parse_game_events(data.game_id, data.raw_events)
+        
+        # 2단계: 메트릭을 표준 프로필로 변환
+        game_processor = GameBehaviorProcessor()
+        game_behavior = GameBehavioralData(
+            game_id=data.game_id,
+            session_id=data.session_id,
+            decision_latency=0,  # 게임은 실시간이므로 0
+            planning_time=metrics.get("planning_time", 0),
+            revision_count=metrics.get("revision_count", 0),
+            path_efficiency=metrics.get("path_efficiency", 0.5),
+            task_efficiency=0.8,  # 기본값 또는 계산
+            complexity=metrics.get("complexity", 0.5),
+            diversity=metrics.get("diversity", 0.5),
+            game_specific_metrics={
+                "riskTaking": metrics.get("risk_taking", 0.5),
+                **metrics  # 기타 메트릭 포함
+            }
+        )
+        
+        behavioral_profile = game_processor.process(game_behavior)
+        
+        # 3단계: 표준 세션 저장 프로세스 사용
+        session_id = profile_manager.save_session(data.user_id, behavioral_profile)
+        previous = profile_manager.get_latest_profile(data.user_id)
+        user_data = profile_manager.get_or_create_user(data.user_id)
+        maturity_level = user_data.get("maturity_level", 1)
+        
+        behavioral_profile["maturityLevel"] = maturity_level
+        result = controller.process_behavioral_profile(behavioral_profile)
+        new_weights = result.get("behavioral_traits", {}).get("weights", {})
+        sync_score = result.get("sync_score", 0.0)
+        
+        if previous:
+            current_weights = {
+                "Logic": previous.get("logic_weight", 0.5),
+                "Intuition": previous.get("intuition_weight", 0.5),
+                "Fluidity": previous.get("fluidity_weight", 0.5),
+                "Complexity": previous.get("complexity_weight", 0.5)
+            }
+            updated_weights = continuous_learner.update_weights(current_weights, new_weights)
+        else:
+            updated_weights = new_weights
+        
+        archetype = continuous_learner.generate_archetype(updated_weights)
+        history = profile_manager.get_session_history(data.user_id)
+        confidence = continuous_learner.compute_confidence(len(history), 0.7)
+        
+        profile_manager.save_profile_evolution(
+            data.user_id, updated_weights, archetype, confidence
+        )
+        
+        return {
+            "session_id": session_id,
+            "game_id": data.game_id,
+            "parsed_metrics": metrics,  # 파싱된 메트릭 반환
+            "updated_weights": updated_weights,
+            "archetype": archetype,
+            "confidence": confidence,
+            "sync_score": sync_score
+        }
+    except Exception as e:
+        log_error(e, "process_game_raw_events", user_id=data.user_id)
+        raise HTTPException(status_code=500, detail=f"Game events processing failed: {str(e)}")
+
+
+@app.post("/api/game/session")
+@limiter.limit("30/minute")
+async def save_game_session(request: Request, data: GameSessionData):
+    """
+    게임에서 수집한 행동 데이터를 처리하고 성격 특성을 추론합니다.
+    
+    지원 게임:
+    - minecraft: 마인크래프트
+    - stardew_valley: 스타듀밸리
+    - animal_crossing: 두근두근타운
+    """
+    log_request("POST", "/api/game/session", user_id=data.user_id)
+    try:
+        # 게임 데이터를 표준 행동 프로필로 변환
+        game_processor = GameBehaviorProcessor()
+        game_behavior = GameBehavioralData(
+            game_id=data.game_id,
+            session_id=data.session_id,
+            decision_latency=data.decision_latency,
+            planning_time=data.planning_time,
+            revision_count=data.revision_count,
+            path_efficiency=data.path_efficiency,
+            task_efficiency=data.task_efficiency,
+            complexity=data.complexity,
+            diversity=data.diversity,
+            game_specific_metrics=data.game_specific_metrics
+        )
+        
+        behavioral_profile = game_processor.process(game_behavior)
+        
+        # 표준 세션 저장 프로세스 사용
+        session_data = SessionData(
+            user_id=data.user_id,
+            behavioral_profile=behavioral_profile
+        )
+        
+        # 기존 save_session 로직 재사용
+        session_id = profile_manager.save_session(data.user_id, behavioral_profile)
+        previous = profile_manager.get_latest_profile(data.user_id)
+        user_data = profile_manager.get_or_create_user(data.user_id)
+        maturity_level = user_data.get("maturity_level", 1)
+        
+        behavioral_profile["maturityLevel"] = maturity_level
+        result = controller.process_behavioral_profile(behavioral_profile)
+        new_weights = result.get("behavioral_traits", {}).get("weights", {})
+        sync_score = result.get("sync_score", 0.0)
+        
+        if previous:
+            current_weights = {
+                "Logic": previous.get("logic_weight", 0.5),
+                "Intuition": previous.get("intuition_weight", 0.5),
+                "Fluidity": previous.get("fluidity_weight", 0.5),
+                "Complexity": previous.get("complexity_weight", 0.5)
+            }
+            updated_weights = continuous_learner.update_weights(current_weights, new_weights)
+        else:
+            updated_weights = new_weights
+        
+        archetype = continuous_learner.generate_archetype(updated_weights)
+        history = profile_manager.get_session_history(data.user_id)
+        confidence = continuous_learner.compute_confidence(len(history), 0.7)
+        
+        profile_manager.save_profile_evolution(
+            data.user_id, updated_weights, archetype, confidence
+        )
+        
+        return {
+            "session_id": session_id,
+            "game_id": data.game_id,
+            "updated_weights": updated_weights,
+            "archetype": archetype,
+            "confidence": confidence,
+            "sync_score": sync_score,
+            "game_specific": behavioral_profile.get("gameSpecific", {})
+        }
+    except Exception as e:
+        log_error(e, "save_game_session", user_id=data.user_id)
+        raise HTTPException(status_code=500, detail=f"Game session processing failed: {str(e)}")
+
 
 @app.post("/api/session")
 @limiter.limit("20/minute")

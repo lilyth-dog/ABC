@@ -47,10 +47,24 @@ class BehavioralPersonalityDecoder:
     Maps behavioral metrics to 'Synthetic EEG' values.
     
     Now supports cultural context for bias mitigation (Phase 2 improvement).
+    Uses machine learning models instead of rule-based formulas.
     """
-    def __init__(self, cultural_context: str = "default"):
+    def __init__(self, cultural_context: str = "default", use_ml: bool = True):
         self.cultural_context = cultural_context
         self.cultural_weights = self._load_cultural_weights()
+        self.use_ml = use_ml
+        
+        # 머신러닝 모델 초기화
+        if self.use_ml:
+            try:
+                from ml_personality_model import MLPersonalityModel
+                self.ml_model = MLPersonalityModel(model_type="random_forest", use_pretrained=True)
+            except ImportError:
+                logger.warning("ML 모델을 로드할 수 없습니다. 규칙 기반으로 대체합니다.")
+                self.use_ml = False
+                self.ml_model = None
+        else:
+            self.ml_model = None
     
     def _load_cultural_weights(self) -> dict:
         """Load cultural weight modifiers from JSON configuration."""
@@ -152,27 +166,37 @@ class BehavioralPersonalityDecoder:
         # Level 3 (Synthesis): Full sensitivity
         signal_sensitivity = 0.3 if maturity_level == 1 else 0.7 if maturity_level == 2 else 1.0
         
-        # --- Self-Exploration Weighting Logic ---
+        # --- 성격 가중치 추론 (머신러닝 또는 규칙 기반) ---
         
-        # 1. Logic vs Intuition Weighting
-        # Base weights on latency: Slow latency (>3s) -> Logic; Fast latency (<1.5s) -> Intuition
-        logic_weight = min(max((latency - 1000) / 4000, 0.0), 1.0)
-        intuition_weight = 1.0 - logic_weight
-        
-        # 2. Fluidity Weight (Confidence/Stability)
-        fluidity_weight = efficiency
-        
-        # 3. Complexity (Engagement/Detail focus)
-        # More revisions + high latency -> High complexity
-        complexity_weight = min((revisions * 0.2) + (latency / 10000), 1.0)
+        if self.use_ml and self.ml_model:
+            # 머신러닝 모델 사용
+            behavioral_features = {
+                'latency': latency,
+                'revisions': revisions,
+                'efficiency': efficiency,
+                'intensity': profile.get('intensity', 1.0)
+            }
+            base_weights = self.ml_model.predict(behavioral_features)
+            # 반올림
+            base_weights = {k: round(v, 2) for k, v in base_weights.items()}
+        else:
+            # 규칙 기반 폴백
+            # 1. Logic vs Intuition Weighting
+            logic_weight = min(max((latency - 1000) / 4000, 0.0), 1.0)
+            intuition_weight = 1.0 - logic_weight
+            
+            # 2. Fluidity Weight (Confidence/Stability)
+            fluidity_weight = efficiency
+            
+            # 3. Complexity (Engagement/Detail focus)
+            complexity_weight = min((revisions * 0.2) + (latency / 10000), 1.0)
 
-        # Base weights before cultural adjustment
-        base_weights = {
-            "Logic": round(logic_weight, 2),
-            "Intuition": round(intuition_weight, 2),
-            "Fluidity": round(fluidity_weight, 2),
-            "Complexity": round(complexity_weight, 2)
-        }
+            base_weights = {
+                "Logic": round(logic_weight, 2),
+                "Intuition": round(intuition_weight, 2),
+                "Fluidity": round(fluidity_weight, 2),
+                "Complexity": round(complexity_weight, 2)
+            }
         
         # Apply cultural modifiers
         adjusted_weights = self._apply_cultural_modifiers(base_weights)
@@ -182,6 +206,9 @@ class BehavioralPersonalityDecoder:
         intuition_weight = adjusted_weights["Intuition"]
         fluidity_weight = adjusted_weights["Fluidity"]
         complexity_weight = adjusted_weights["Complexity"]
+        
+        # ML 모델 사용 여부를 evidence에 추가
+        ml_used = self.use_ml and self.ml_model is not None
 
         # Determine Primary Trait
         is_analytical = logic_weight > 0.6 or revisions > 3
@@ -241,7 +268,9 @@ class BehavioralPersonalityDecoder:
                     "latency_ms": latency,
                     "revisions": revisions,
                     "cultural_context": self.cultural_context,
-                    "maturity_level": maturity_level
+                    "maturity_level": maturity_level,
+                    "ml_model_used": ml_used,
+                    "model_type": "random_forest" if ml_used else "rule_based"
                 },
                 "experience_level": "Novice" if txp < 0.5 else "Adept" if txp < 0.8 else "Master"
             }

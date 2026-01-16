@@ -1,0 +1,17 @@
+{
+  "user_id": "test_user_full_pipeline",
+  "game_id": "minecraft",
+  "session_id": "full_pipeline_session_001",
+  "raw_events": [
+    {
+      "type": "block_place",
+      "timestamp": 1000,
+      "position": {
+        "x": 0,
+        "y": 64,
+        "z": 0
+      },
+      "block_type": "minecraft:stone"
+    }
+  ]
+}

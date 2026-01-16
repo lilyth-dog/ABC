@@ -103,7 +103,17 @@ class UserProfileManager:
         init_database()
     
     def get_or_create_user(self, user_id: str, avatar_url: str = None, display_name: str = None) -> Dict:
-        """Get existing user or create new one."""
+        """
+        기존 사용자를 조회하거나 새 사용자를 생성합니다.
+        
+        Args:
+            user_id (str): 사용자 고유 ID
+            avatar_url (str, optional): 아바타 이미지 URL
+            display_name (str, optional): 표시 이름
+        
+        Returns:
+            Dict: 사용자 정보 딕셔너리
+        """
         conn = get_connection()
         cursor = conn.cursor()
         
@@ -123,7 +133,16 @@ class UserProfileManager:
         return dict(user)
     
     def save_session(self, user_id: str, behavioral_profile: Dict) -> int:
-        """Save a behavioral session for continuous learning."""
+        """
+        행동 세션 데이터를 저장합니다 (연속 학습용).
+        
+        Args:
+            user_id (str): 사용자 고유 ID
+            behavioral_profile (Dict): 행동 프로필 데이터
+        
+        Returns:
+            int: 생성된 세션 ID
+        """
         conn = get_connection()
         cursor = conn.cursor()
         
@@ -156,7 +175,16 @@ class UserProfileManager:
         return session_id
     
     def get_session_history(self, user_id: str, limit: int = 10) -> List[Dict]:
-        """Get user's behavioral session history."""
+        """
+        사용자의 행동 세션 히스토리를 조회합니다.
+        
+        Args:
+            user_id (str): 사용자 고유 ID
+            limit (int): 조회할 최대 세션 수 (기본값: 10)
+        
+        Returns:
+            List[Dict]: 세션 데이터 리스트 (최신순)
+        """
         conn = get_connection()
         cursor = conn.cursor()
         

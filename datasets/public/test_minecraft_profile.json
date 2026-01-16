@@ -1,0 +1,13 @@
+{
+  "pathEfficiency": 0.64,
+  "avgDecisionLatency": 0.0,
+  "revisionRate": 1,
+  "jitterIndex": 0.36,
+  "intensity": 0.13999999999999999,
+  "gameId": "minecraft",
+  "gameSpecific": {
+    "buildComplexity": 0.5,
+    "explorationRange": 0.5,
+    "resourceDiversity": 0.5
+  }
+}

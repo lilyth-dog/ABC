@@ -1,0 +1,219 @@
+{
+  "verification_date": "2026-01-16T13:53:42.865988",
+  "tests": {
+    "parsing_accuracy": {
+      "overall_accuracy": 0.75,
+      "details": [
+        {
+          "test_name": "계획 시간 테스트 (개선 후)",
+          "metrics": {
+            "planning_time": 1000,
+            "revision_count": 0,
+            "complexity": 0.0,
+            "path_efficiency": 1.0,
+            "risk_taking": 0.0,
+            "diversity": 0.1
+          },
+          "expected": {
+            "planning_time": 4000
+          },
+          "accuracy": {
+            "planning_time": 0.0
+          },
+          "avg_accuracy": 0.0,
+          "status": "SUCCESS"
+        },
+        {
+          "test_name": "수정 빈도 테스트",
+          "metrics": {
+            "planning_time": 0,
+            "revision_count": 1,
+            "complexity": 0.0,
+            "path_efficiency": 1.0,
+            "risk_taking": 0.0,
+            "diversity": 0.0
+          },
+          "expected": {
+            "revision_count": 1
+          },
+          "accuracy": {
+            "revision_count": 1.0
+          },
+          "avg_accuracy": 1.0,
+          "status": "SUCCESS"
+        },
+        {
+          "test_name": "경로 효율성 테스트",
+          "metrics": {
+            "planning_time": 0,
+            "revision_count": 0,
+            "complexity": 0.0,
+            "path_efficiency": 1.0,
+            "risk_taking": 0.0,
+            "diversity": 0.0
+          },
+          "expected": {
+            "path_efficiency": 1.0
+          },
+          "accuracy": {
+            "path_efficiency": 1.0
+          },
+          "avg_accuracy": 1.0,
+          "status": "SUCCESS"
+        },
+        {
+          "test_name": "타임스탬프 누락 처리 테스트",
+          "metrics": {
+            "planning_time": 0,
+            "revision_count": 0,
+            "complexity": 0.0,
+            "path_efficiency": 1.0,
+            "risk_taking": 0.0,
+            "diversity": 0.0
+          },
+          "expected": {
+            "should_not_error": true
+          },
+          "accuracy": {
+            "should_not_error": 1.0
+          },
+          "avg_accuracy": 1.0,
+          "status": "SUCCESS"
+        }
+      ]
+    },
+    "edge_cases": {
+      "success_rate": 1.0,
+      "details": [
+        {
+          "case": "빈 이벤트 리스트",
+          "status": "SUCCESS",
+          "metrics": {
+            "planning_time": 0,
+            "revision_count": 0,
+            "complexity": 0.5,
+            "path_efficiency": 0.5,
+            "risk_taking": 0.5,
+            "diversity": 0.5
+          }
+        },
+        {
+          "case": "단일 이벤트",
+          "status": "SUCCESS",
+          "metrics": {
+            "planning_time": 0,
+            "revision_count": 0,
+            "complexity": 0.0,
+            "path_efficiency": 1.0,
+            "risk_taking": 0.0,
+            "diversity": 0.0
+          }
+        },
+        {
+          "case": "타임스탬프 없음",
+          "status": "SUCCESS",
+          "metrics": {
+            "planning_time": 0,
+            "revision_count": 0,
+            "complexity": 0.0,
+            "path_efficiency": 1.0,
+            "risk_taking": 0.0,
+            "diversity": 0.0
+          }
+        },
+        {
+          "case": "위치 정보 없음",
+          "status": "SUCCESS",
+          "metrics": {
+            "planning_time": 0,
+            "revision_count": 0,
+            "complexity": 0.0,
+            "path_efficiency": 1.0,
+            "risk_taking": 0.0,
+            "diversity": 0.0
+          }
+        },
+        {
+          "case": "불완전한 위치 정보",
+          "status": "SUCCESS",
+          "metrics": {
+            "planning_time": 0,
+            "revision_count": 0,
+            "complexity": 0.0,
+            "path_efficiency": 1.0,
+            "risk_taking": 0.0,
+            "diversity": 0.0
+          }
+        },
+        {
+          "case": "None 값",
+          "status": "SUCCESS"
+        },
+        {
+          "case": "잘못된 타입",
+          "status": "SUCCESS",
+          "metrics": {
+            "planning_time": 0,
+            "revision_count": 0,
+            "complexity": 0.5,
+            "path_efficiency": 0.5,
+            "risk_taking": 0.5,
+            "diversity": 0.5
+          }
+        }
+      ]
+    },
+    "api_integration": [
+      {
+        "file": "datasets/public/test_api_request.json",
+        "status": "EXISTS",
+        "size": 4140,
+        "valid_json": true
+      },
+      {
+        "file": "datasets/public/api_request_example.json",
+        "status": "EXISTS",
+        "size": 333,
+        "valid_json": true
+      },
+      {
+        "file": "datasets/public/full_pipeline_result.json",
+        "status": "EXISTS",
+        "size": 2227,
+        "valid_json": true
+      }
+    ],
+    "full_pipeline": {
+      "parse_time": 0.0,
+      "process_time": 0.0,
+      "total_time": 0.0,
+      "metrics": {
+        "planning_time": 1000,
+        "revision_count": 1,
+        "complexity": 0.0,
+        "path_efficiency": 1.0,
+        "risk_taking": 0.0,
+        "diversity": 0.15
+      },
+      "profile": {
+        "pathEfficiency": 0.79,
+        "avgDecisionLatency": 0.0,
+        "revisionRate": 1,
+        "jitterIndex": 0.20999999999999996,
+        "intensity": 0.175,
+        "gameId": "minecraft",
+        "gameSpecific": {
+          "buildComplexity": 0.5,
+          "explorationRange": 0.5,
+          "resourceDiversity": 0.5
+        }
+      }
+    }
+  },
+  "summary": {
+    "parsing_accuracy": "75.00%",
+    "edge_cases_rate": "100.00%",
+    "api_files": 3,
+    "pipeline_performance": "0.00ms"
+  }
+}

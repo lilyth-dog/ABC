@@ -1,0 +1,116 @@
+{
+  "timestamp": "2026-01-16T14:36:07.306916",
+  "tests": {
+    "system_components": {
+      "passed": 5,
+      "total": 5,
+      "results": [
+        {
+          "name": "MagnonicController 초기화",
+          "status": "PASS",
+          "details": ""
+        },
+        {
+          "name": "UserProfileManager 초기화",
+          "status": "PASS",
+          "details": ""
+        },
+        {
+          "name": "game_event_parser 임포트",
+          "status": "PASS",
+          "details": ""
+        },
+        {
+          "name": "GameBehaviorProcessor 초기화",
+          "status": "PASS",
+          "details": ""
+        },
+        {
+          "name": "BehavioralPersonalityDecoder 초기화",
+          "status": "PASS",
+          "details": ""
+        }
+      ]
+    },
+    "api_endpoints": {
+      "passed": 4,
+      "total": 4,
+      "results": [
+        {
+          "name": "GET /health",
+          "status": "PASS",
+          "details": ""
+        },
+        {
+          "name": "POST /api/user/{id}/consent",
+          "status": "PASS",
+          "details": ""
+        },
+        {
+          "name": "POST /api/game/events",
+          "status": "PASS",
+          "details": ""
+        },
+        {
+          "name": "POST /api/behavior",
+          "status": "PASS",
+          "details": ""
+        }
+      ]
+    },
+    "game_pipeline": {
+      "passed": 3,
+      "total": 3,
+      "results": [
+        {
+          "name": "Minecraft 이벤트 파싱",
+          "status": "PASS",
+          "details": "메트릭 수: 6"
+        },
+        {
+          "name": "게임 프로필 변환",
+          "status": "PASS",
+          "details": "프로필 키 수: 7"
+        },
+        {
+          "name": "빈 이벤트 리스트 처리",
+          "status": "PASS",
+          "details": ""
+        }
+      ]
+    },
+    "performance": {
+      "passed": 2,
+      "total": 2,
+      "results": [
+        {
+          "name": "대량 이벤트 처리 (1000개)",
+          "status": "PASS",
+          "details": "0.84ms, 1186843 events/sec"
+        },
+        {
+          "name": "API 응답 시간 (/health)",
+          "status": "PASS",
+          "details": "3.62ms"
+        }
+      ]
+    },
+    "e2e_integration": {
+      "passed": 1,
+      "total": 1,
+      "results": [
+        {
+          "name": "E2E 파이프라인 (게임 이벤트 → 성격 추론)",
+          "status": "PASS",
+          "details": "신뢰도: 0.50"
+        }
+      ]
+    }
+  },
+  "summary": {
+    "total_tests": 15,
+    "total_passed": 15,
+    "overall_percentage": 100.0,
+    "status": "PASS"
+  }
+}

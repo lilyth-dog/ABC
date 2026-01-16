@@ -181,7 +181,15 @@ class PredictiveModel:
         }
     
     def _categorize_stress(self, level: float) -> str:
-        """스트레스 레벨 분류"""
+        """
+        스트레스 레벨을 카테고리로 분류합니다.
+        
+        Args:
+            level (float): 스트레스 레벨 (0.0 ~ 1.0)
+        
+        Returns:
+            str: "low", "moderate", 또는 "high"
+        """
         if level < 0.3:
             return "low"
         elif level < 0.6:
@@ -190,7 +198,15 @@ class PredictiveModel:
             return "high"
     
     def _get_stress_recommendation(self, level: float) -> str:
-        """스트레스 레벨에 따른 권장사항"""
+        """
+        스트레스 레벨에 따른 사용자 권장사항을 반환합니다.
+        
+        Args:
+            level (float): 스트레스 레벨 (0.0 ~ 1.0)
+        
+        Returns:
+            str: 권장사항 메시지
+        """
         if level < 0.3:
             return "정상적인 패턴입니다. 계속 진행하세요."
         elif level < 0.6:

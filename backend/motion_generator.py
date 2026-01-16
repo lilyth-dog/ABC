@@ -24,7 +24,20 @@ class EmotionalMotionGenerator:
 
     def generate_modifiers(self, profile: Dict) -> Dict:
         """
-        Maps a behavioral profile (from TESS or interaction) to kinematic modifiers.
+        행동 프로필(TESS 또는 상호작용)을 운동학적 수정자로 매핑합니다.
+        
+        Args:
+            profile (Dict): 행동 프로필 딕셔너리
+                - emotionalContext (Dict): 감정 컨텍스트
+                    - valence (float): 감정 가치 (-1.0 ~ 1.0)
+                    - arousal (float): 각성도 (-1.0 ~ 1.0)
+                - intensity (float): 상호작용 강도 (0.0 ~ 1.0)
+        
+        Returns:
+            Dict: 운동학적 수정자 및 신경 타겟
+                - kinematics (Dict): 3D 운동학 파라미터
+                - neural_targets (Dict): 신경 신호 타겟 값
+                - interpretation (str): 감정 해석
         """
         valence = profile.get("emotionalContext", {}).get("valence", 0.0)
         arousal = profile.get("emotionalContext", {}).get("arousal", 0.0)
@@ -63,6 +76,21 @@ class EmotionalMotionGenerator:
         }
 
     def _get_interpretation(self, valence: float, arousal: float) -> str:
+        """
+        감정 가치와 각성도로부터 감정 해석 문자열을 생성합니다.
+        
+        Args:
+            valence (float): 감정 가치 (-1.0 ~ 1.0)
+            arousal (float): 각성도 (-1.0 ~ 1.0)
+        
+        Returns:
+            str: 감정 해석 문자열
+                - "Positive/Energetic": 높은 가치, 높은 각성
+                - "Positive/Calm": 높은 가치, 낮은 각성
+                - "Negative/Agitated": 낮은 가치, 높은 각성
+                - "Negative/Withdrawn": 낮은 가치, 낮은 각성
+                - "Neutral": 중간 범위
+        """
         if valence > 0.5:
             return "Positive/Energetic" if arousal > 0 else "Positive/Calm"
         elif valence < -0.5:

@@ -2,24 +2,37 @@ import json
 import numpy as np
 import os
 import glob
+from typing import Dict, Optional, Any
 from scipy.signal import savgol_filter
 
 class MetricAnalyzer:
     """
     Analyzes NKC log files to compute objective metrics defined in evaluation_strategy.md.
     """
-    def __init__(self, log_dir):
+    def __init__(self, log_dir: str) -> None:
+        """
+        Initialize MetricAnalyzer.
+        
+        Args:
+            log_dir: Directory containing NKC log files
+        """
         self.log_dir = log_dir
 
-    def load_latest_session(self):
+    def load_latest_session(self) -> Optional[Dict[str, Any]]:
+        """
+        Load the most recent NKC session log file.
+        
+        Returns:
+            Parsed JSON data from the latest log file, or None if no files found
+        """
         list_of_files = glob.glob(os.path.join(self.log_dir, '*.nkc.json'))
         if not list_of_files:
             return None
         latest_file = max(list_of_files, key=os.path.getctime)
-        with open(latest_file, 'r') as f:
+        with open(latest_file, 'r', encoding='utf-8') as f:
             return json.load(f)
 
-    def calculate_metrics(self, data):
+    def calculate_metrics(self, data: Dict[str, Any]) -> Dict[str, Any]:
         """
         Computes:
         1. Normalized Jerk Score (NJS) for Fluidity.

@@ -1,0 +1,39 @@
+{
+  "mcpServers": {
+    "anthropics/mcp-integration": {
+      "url": "https://smithery.ai/skills/anthropics/mcp-integration",
+      "description": "MCP integration patterns for Claude Code",
+      "enabled": true
+    },
+    "local-behavioral-analysis": {
+      "type": "local",
+      "path": "./backend/api_server.py",
+      "description": "Local behavioral analysis API",
+      "enabled": true
+    }
+  },
+  "skills": {
+    "behavioral-analysis": {
+      "path": ".claude/skills/behavioral-analysis",
+      "enabled": true
+    },
+    "neural-simulation": {
+      "path": ".claude/skills/neural-simulation",
+      "enabled": true
+    }
+  },
+  "promptPatterns": {
+    "fewShot": {
+      "enabled": true,
+      "exampleSelection": "semantic_similarity"
+    },
+    "chainOfThought": {
+      "enabled": true,
+      "verification": true
+    },
+    "progressiveDisclosure": {
+      "enabled": true,
+      "levels": 3
+    }
+  }
+}

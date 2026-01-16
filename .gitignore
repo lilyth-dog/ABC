@@ -54,3 +54,7 @@ coverage/
 # Large dataset files (excluded due to GitHub 100MB limit)
 datasets/*.zip
 datasets/tess/
+
+# Paper submission archive (optional - uncomment if you want to exclude)
+# archive/paper_submission/*.docx
+# archive/paper_submission/*.pdf

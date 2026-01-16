@@ -1,0 +1,115 @@
+{
+  "raw_events": [
+    {
+      "type": "inventory_change",
+      "timestamp": 1000,
+      "items": [
+        "minecraft:stone",
+        "minecraft:dirt",
+        "minecraft:wood"
+      ]
+    },
+    {
+      "type": "inventory_change",
+      "timestamp": 2000,
+      "items": [
+        "minecraft:stone",
+        "minecraft:dirt"
+      ]
+    },
+    {
+      "type": "block_place",
+      "timestamp": 5000,
+      "position": {
+        "x": 0,
+        "y": 64,
+        "z": 0
+      },
+      "block_type": "minecraft:stone"
+    },
+    {
+      "type": "block_place",
+      "timestamp": 6000,
+      "position": {
+        "x": 1,
+        "y": 64,
+        "z": 0
+      },
+      "block_type": "minecraft:stone"
+    },
+    {
+      "type": "block_place",
+      "timestamp": 7000,
+      "position": {
+        "x": 2,
+        "y": 64,
+        "z": 0
+      },
+      "block_type": "minecraft:stone"
+    },
+    {
+      "type": "block_break",
+      "timestamp": 8000,
+      "position": {
+        "x": 0,
+        "y": 64,
+        "z": 0
+      }
+    },
+    {
+      "type": "player_move",
+      "timestamp": 10000,
+      "from": {
+        "x": 0,
+        "y": 64,
+        "z": 0
+      },
+      "to": {
+        "x": 10,
+        "y": 64,
+        "z": 10
+      }
+    },
+    {
+      "type": "player_move",
+      "timestamp": 11000,
+      "from": {
+        "x": 10,
+        "y": 64,
+        "z": 10
+      },
+      "to": {
+        "x": 20,
+        "y": 64,
+        "z": 20
+      }
+    }
+  ],
+  "parsed_metrics": {
+    "planning_time": 1000,
+    "revision_count": 1,
+    "complexity": 0.0,
+    "path_efficiency": 1.0,
+    "risk_taking": 0.0,
+    "diversity": 0.15
+  },
+  "behavioral_profile": {
+    "pathEfficiency": 0.79,
+    "avgDecisionLatency": 0.0,
+    "revisionRate": 1,
+    "jitterIndex": 0.20999999999999996,
+    "intensity": 0.175,
+    "gameId": "minecraft",
+    "gameSpecific": {
+      "buildComplexity": 0.5,
+      "explorationRange": 0.5,
+      "resourceDiversity": 0.5
+    }
+  },
+  "personality_weights": {
+    "Logic": 0.0033333333333333335,
+    "Intuition": 0.9966666666666667,
+    "Fluidity": 1.0,
+    "Complexity": 0.0
+  }
+}

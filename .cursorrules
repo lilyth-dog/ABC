@@ -1,0 +1,638 @@
+# Cursor AI Rules for ABC Project - Enhanced Edition
+
+## 🎯 Project Context
+Digital Human Twin platform with behavioral analysis, neural simulation, and 3D avatar rendering.
+- **Frontend**: React 19 + TypeScript + Three.js
+- **Backend**: Python 3.10+ + FastAPI
+- **Architecture**: 3-tier (Presentation → Application → Data)
+
+---
+
+## ⚡ Quick Start (핵심 규칙)
+
+**항상 준수할 5가지:**
+1. ✅ **타입 힌트 필수**: 모든 함수에 타입 명시
+2. ✅ **에러 처리 필수**: try-catch + 로깅
+3. ✅ **문서화 필수**: docstring/주석 작성
+4. ✅ **검증 필수**: 사용자 입력 항상 검증
+5. ✅ **테스트 제안**: 새 함수에 테스트 케이스 제안
+
+**코드 생성 시 체크리스트:**
+- [ ] 타입 힌트/TypeScript types
+- [ ] 에러 처리 및 로깅
+- [ ] 입력 검증
+- [ ] 문서화
+- [ ] 성능 고려사항
+
+---
+
+## 🚀 Efficiency Rules
+
+### 1. Code Generation Priority
+When generating code, prioritize:
+1. **Type safety first**: Always use TypeScript types / Python type hints
+2. **Error handling**: Include try-catch with specific exceptions
+3. **Logging**: Use structured logging (`logger_config.logger`)
+4. **Documentation**: Add docstrings before implementation
+5. **Testing**: Suggest test cases for new functions
+
+### 2. File Organization
+- **Backend**: `backend/` - All Python code
+- **Frontend**: `src/` - React components, hooks, utils
+- **Tests**: Co-located with source (`tests/` subdirectory)
+- **Docs**: `docs/` - All documentation
+- **Config**: Root level (`.cursorrules`, `package.json`, etc.)
+
+### 3. Naming Conventions
+- **Python**: `snake_case` for functions/variables, `PascalCase` for classes
+- **TypeScript**: `camelCase` for functions/variables, `PascalCase` for components/types
+- **Files**: Match component/class name (e.g., `BehaviorTracker.ts` → `BehaviorTracker` class)
+- **Constants**: `UPPER_SNAKE_CASE` in both languages
+
+---
+
+## 📝 Code Style Standards
+
+### Python
+```python
+from typing import Dict, List, Optional
+import logging
+
+logger = logging.getLogger(__name__)
+
+def process_behavioral_data(
+    user_id: str,
+    profile: Dict,
+    cultural_context: Optional[str] = None
+) -> Dict[str, float]:
+    """
+    Process behavioral profile and return personality weights.
+    
+    Args:
+        user_id: Unique user identifier
+        profile: Behavioral metrics dictionary
+        cultural_context: Optional cultural context for bias adjustment
+    
+    Returns:
+        Dictionary with personality trait weights
+    
+    Raises:
+        ValueError: If profile data is invalid
+        KeyError: If required metrics are missing
+    
+    Examples:
+        >>> process_behavioral_data("user123", {"latency": 2000})
+        {"Logic": 0.5, "Intuition": 0.5, ...}
+    """
+    try:
+        # Implementation
+        pass
+    except (ValueError, KeyError) as e:
+        logger.error(f"Failed to process profile for {user_id}: {e}")
+        raise
+```
+
+### TypeScript/React
+```typescript
+import { useState, useEffect } from 'react';
+import type { BehavioralProfile } from '@/types';
+
+interface BehavioralAnalyzerProps {
+  userId: string;
+  profile: BehavioralProfile;
+  onAnalysisComplete?: (result: AnalysisResult) => void;
+}
+
+/**
+ * Analyzes user behavioral patterns and generates personality insights.
+ * 
+ * @param userId - Unique user identifier
+ * @param profile - Behavioral metrics object
+ * @param onAnalysisComplete - Optional callback when analysis completes
+ */
+export function BehavioralAnalyzer({
+  userId,
+  profile,
+  onAnalysisComplete
+}: BehavioralAnalyzerProps): JSX.Element {
+  // Implementation
+}
+```
+
+---
+
+## 🏗️ Architecture Patterns
+
+### Backend API Endpoints
+```python
+@app.post("/api/endpoint")
+@limiter.limit("30/minute")  # Always include rate limiting
+async def endpoint_handler(request: Request, data: Model):
+    """
+    Endpoint description.
+    
+    - Rate limit: 30 requests/minute
+    - Authentication: Required (future)
+    - GDPR: Compliant
+    """
+    try:
+        log_request("POST", "/api/endpoint", user_id=data.user_id)
+        # Implementation
+        return result
+    except Exception as e:
+        log_error(e, "endpoint_handler", user_id=data.user_id)
+        raise HTTPException(status_code=500, detail=str(e))
+```
+
+### React Component Structure
+```typescript
+// 1. Imports (external → internal → types)
+import { useState } from 'react';
+import { useBehavioralAnalysis } from '@/hooks';
+import type { Profile } from '@/types';
+
+// 2. Types/Interfaces
+interface Props { /* ... */ }
+
+// 3. Component
+export function Component({ prop }: Props) {
+  // 4. Hooks
+  const [state, setState] = useState();
+  
+  // 5. Effects
+  useEffect(() => { /* ... */ }, []);
+  
+  // 6. Handlers
+  const handleClick = () => { /* ... */ };
+  
+  // 7. Render
+  return <div>...</div>;
+}
+```
+
+---
+
+## 🔧 Common Patterns
+
+### Error Handling Pattern
+```python
+# Always use specific exceptions and logging
+try:
+    result = risky_operation()
+except SpecificError as e:
+    logger.error(f"Context: {e}", extra={"user_id": user_id})
+    # Provide fallback or re-raise
+    raise
+except Exception as e:
+    logger.exception(f"Unexpected error: {e}")
+    raise HTTPException(status_code=500, detail="Internal error")
+```
+
+### Data Validation Pattern
+```python
+from pydantic import BaseModel, Field, validator
+
+class RequestModel(BaseModel):
+    value: float = Field(..., ge=0, le=1, description="Value between 0 and 1")
+    
+    @validator('value')
+    def validate_value(cls, v):
+        if v < 0 or v > 1:
+            raise ValueError("Value must be between 0 and 1")
+        return v
+```
+
+### React Hook Pattern
+```typescript
+export function useCustomHook<T>(initialValue: T) {
+  const [value, setValue] = useState<T>(initialValue);
+  const [error, setError] = useState<Error | null>(null);
+  const [loading, setLoading] = useState(false);
+  
+  useEffect(() => {
+    // Implementation
+  }, []);
+  
+  return { value, error, loading, setValue };
+}
+```
+
+---
+
+## 🧪 Testing Guidelines
+
+### Test Coverage Goals
+- **Unit Tests**: Minimum 70% coverage for critical paths
+- **Integration Tests**: All API endpoints and WebSocket connections
+- **E2E Tests**: Critical user flows (signup, profile creation, data export)
+- **Target Coverage**: 70-80% overall
+
+### Python Tests
+```python
+import pytest
+from unittest.mock import Mock, patch
+
+def test_function_success():
+    """Test normal operation."""
+    result = function(input)
+    assert result == expected
+
+def test_function_error_handling():
+    """Test error cases."""
+    with pytest.raises(ValueError):
+        function(invalid_input)
+
+@patch('module.external_dependency')
+def test_function_with_mock(mock_dep):
+    """Test with mocked dependencies."""
+    mock_dep.return_value = mock_data
+    result = function(input)
+    assert result == expected
+
+# Run with coverage: pytest --cov=backend --cov-report=html
+```
+
+### TypeScript Tests
+```typescript
+import { describe, it, expect, vi } from 'vitest';
+import { render, screen } from '@testing-library/react';
+
+describe('Component', () => {
+  it('should render correctly', () => {
+    render(<Component prop="value" />);
+    expect(screen.getByText('Expected')).toBeInTheDocument();
+  });
+  
+  it('should handle errors', () => {
+    // Test error handling
+  });
+});
+
+// Run with coverage: npm run test:coverage
+```
+
+### E2E Testing (Playwright/Cypress)
+```typescript
+// Example E2E test structure
+import { test, expect } from '@playwright/test';
+
+test('user can create profile', async ({ page }) => {
+  await page.goto('/');
+  await page.click('[data-testid="start-button"]');
+  // ... test flow
+  await expect(page.locator('[data-testid="profile-created"]')).toBeVisible();
+});
+```
+
+---
+
+## ⚡ Performance Optimization
+
+### Performance Metrics Targets
+- **API Response Time**: < 200ms (P95)
+- **Frontend First Contentful Paint**: < 1.5s
+- **Bundle Size**: < 500KB (gzipped)
+- **WebSocket Latency**: < 50ms
+- **Database Query Time**: < 100ms (P95)
+
+### Backend
+- Use async/await for I/O operations
+- Cache frequently accessed data (user profiles, cultural weights)
+- Use database connection pooling
+- Batch database operations when possible
+- Rate limit all endpoints
+- **Profiling**: Use `cProfile` or `py-spy` for performance analysis
+
+### Frontend
+- Use `React.memo()` for expensive components
+- Implement `useMemo()` and `useCallback()` for heavy computations
+- Lazy load routes with `React.lazy()`
+- Optimize Three.js rendering (frustum culling, LOD)
+- Use Web Workers for heavy calculations
+- **Profiling**: Use React DevTools Profiler, Chrome Performance tab
+
+### Code Generation Hints
+When generating performance-critical code:
+1. Check if memoization is needed
+2. Suggest Web Worker for CPU-intensive tasks
+3. Recommend database indexing for queries
+4. Propose caching strategy
+5. **Always profile before optimizing** - measure first!
+
+---
+
+## 🔒 Security & Privacy
+
+### Always Include
+- Input validation (Pydantic models)
+- Rate limiting (slowapi)
+- Error messages don't leak sensitive info
+- GDPR compliance for user data
+- SQL injection prevention (parameterized queries)
+- XSS prevention (React auto-escapes, but be explicit)
+
+### Data Handling
+```python
+# Always validate and sanitize user input
+from pydantic import BaseModel, validator
+
+class UserInput(BaseModel):
+    user_id: str = Field(..., min_length=1, max_length=100)
+    
+    @validator('user_id')
+    def validate_user_id(cls, v):
+        # Sanitize: remove dangerous characters
+        return sanitize_input(v)
+```
+
+---
+
+## 📚 Documentation Standards
+
+### Function Documentation
+- **Purpose**: What it does (one sentence)
+- **Args**: All parameters with types and descriptions
+- **Returns**: Return type and description
+- **Raises**: All possible exceptions
+- **Examples**: At least one usage example
+- **Notes**: Important implementation details
+
+### Component Documentation
+- **Purpose**: Component's role
+- **Props**: All props with types
+- **Usage**: Example JSX
+- **Dependencies**: Required hooks/contexts
+
+---
+
+## 🎨 Skills Integration
+
+### When to Use Skills
+- **Behavioral Analysis**: User behavior processing, personality inference
+- **Neural Simulation**: EEG processing, kinematics generation
+- **Prompt Engineering**: AI interactions, few-shot learning
+
+### Skill Reference
+Always check `.claude/skills/` and `.cursor/skills-reference.md` before implementing:
+- Behavioral analysis → Use Progressive Disclosure pattern
+- Neural simulation → Follow EEG-to-Kinematics pipeline
+- ML models → Include fallback to rule-based system
+
+---
+
+## 🔄 State Management Patterns
+
+### React Context (Local State)
+```typescript
+// For component-level or feature-level state
+const UserContext = createContext<UserState | null>(null);
+
+export function UserProvider({ children }: { children: React.ReactNode }) {
+  const [user, setUser] = useState<User | null>(null);
+  return (
+    <UserContext.Provider value={{ user, setUser }}>
+      {children}
+    </UserContext.Provider>
+  );
+}
+```
+
+### Global State (When Needed)
+- **Current**: React Context for simple global state
+- **Future Consideration**: Zustand or Jotai for complex state
+- **Avoid**: Redux unless absolutely necessary (overhead)
+
+### Data Fetching Pattern
+```typescript
+// Use custom hooks for data fetching
+export function useUserProfile(userId: string) {
+  const [data, setData] = useState<UserProfile | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<Error | null>(null);
+  
+  useEffect(() => {
+    fetchUserProfile(userId)
+      .then(setData)
+      .catch(setError)
+      .finally(() => setLoading(false));
+  }, [userId]);
+  
+  return { data, loading, error };
+}
+
+// Future: Consider React Query for advanced caching
+```
+
+---
+
+## 📦 Git Workflow
+
+### Commit Message Format
+```
+<type>(<scope>): <subject>
+
+<body>
+
+<footer>
+```
+
+**Types:**
+- `feat`: New feature
+- `fix`: Bug fix
+- `docs`: Documentation
+- `style`: Code style (formatting)
+- `refactor`: Code refactoring
+- `test`: Adding tests
+- `chore`: Maintenance tasks
+
+**Examples:**
+```
+feat(backend): add behavioral profile processing endpoint
+
+- Implements POST /api/behavior endpoint
+- Adds Pydantic validation models
+- Includes rate limiting and error handling
+
+Closes #123
+```
+
+### Branch Naming
+- `feature/description`: New features
+- `fix/description`: Bug fixes
+- `docs/description`: Documentation updates
+- `refactor/description`: Code refactoring
+- `test/description`: Test additions
+
+### Pull Request Template
+```markdown
+## Description
+Brief description of changes
+
+## Type of Change
+- [ ] Bug fix
+- [ ] New feature
+- [ ] Breaking change
+- [ ] Documentation update
+
+## Testing
+- [ ] Unit tests added/updated
+- [ ] Integration tests pass
+- [ ] Manual testing completed
+
+## Checklist
+- [ ] Code follows style guidelines
+- [ ] Self-review completed
+- [ ] Comments added for complex code
+- [ ] Documentation updated
+- [ ] No new warnings generated
+```
+
+---
+
+## 🚀 CI/CD Guidelines
+
+### Pre-commit Checks
+```bash
+# Suggested pre-commit hooks
+- Linting (ESLint, flake8)
+- Type checking (TypeScript, mypy)
+- Formatting (Prettier, black)
+- Test run (quick smoke tests)
+```
+
+### GitHub Actions Workflow
+```yaml
+# .github/workflows/ci.yml
+name: CI
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run tests
+        run: npm run test && npm run test:backend
+      - name: Check coverage
+        run: npm run test:coverage
+```
+
+### Deployment Checklist
+- [ ] All tests passing
+- [ ] Coverage above 70%
+- [ ] No security vulnerabilities
+- [ ] Environment variables configured
+- [ ] Database migrations applied
+- [ ] Performance benchmarks met
+
+---
+
+## 🚨 Common Pitfalls to Avoid
+
+1. **Missing Type Hints**: Always add types in Python/TypeScript
+2. **Silent Failures**: Never use bare `except:` - catch specific exceptions
+3. **Hardcoded Values**: Use environment variables or config files
+4. **No Error Logging**: Always log errors with context
+5. **Missing Validation**: Validate all user inputs
+6. **Memory Leaks**: Clean up event listeners, subscriptions, timers
+7. **Race Conditions**: Use proper async/await patterns
+8. **Insecure Defaults**: Never trust user input, always validate
+
+---
+
+## 🔄 Code Review Checklist
+
+Before suggesting code, verify:
+- [ ] Type hints/TypeScript types present
+- [ ] Error handling implemented
+- [ ] Logging added for errors
+- [ ] Documentation complete
+- [ ] Tests suggested or included
+- [ ] Performance considerations addressed
+- [ ] Security best practices followed
+- [ ] Follows project architecture patterns
+- [ ] No hardcoded secrets/values
+- [ ] GDPR compliance for user data
+
+---
+
+## 📖 Quick Reference
+
+### Import Order (Python)
+1. Standard library
+2. Third-party packages
+3. Local application imports
+
+### Import Order (TypeScript)
+1. React and React-related
+2. Third-party libraries
+3. Internal utilities
+4. Types/interfaces
+5. Styles
+
+### File Headers
+```python
+"""
+Module description.
+
+Author: ABC Project
+Created: 2026-01-14
+"""
+```
+
+```typescript
+/**
+ * Module description.
+ * 
+ * @author ABC Project
+ * @created 2026-01-14
+ */
+```
+
+---
+
+## 🎯 Context-Aware Suggestions
+
+### When User Asks to:
+- **"Add a new API endpoint"**: Include rate limiting, validation, error handling, logging
+- **"Create a React component"**: Include TypeScript types, proper hooks, error boundaries
+- **"Fix a bug"**: First understand root cause, then fix with proper error handling
+- **"Optimize performance"**: Suggest profiling first, then targeted optimizations
+- **"Add tests"**: Cover happy path, error cases, edge cases
+
+### Always Suggest:
+1. **Better error messages**: Specific, actionable, user-friendly
+2. **Performance improvements**: If code can be optimized
+3. **Security enhancements**: If vulnerabilities detected
+4. **Documentation**: If missing or incomplete
+5. **Test coverage**: If critical paths untested
+
+---
+
+## 🔗 Related Files
+- Skills: `.claude/skills/`
+- Skills Reference: `.cursor/skills-reference.md`
+- Prompt Templates: `.claude/prompt-templates/`
+- MCP Config: `.claude/mcp-config.json`
+- Developer Guide: `docs/DEVELOPER_GUIDE.md`
+- Evaluation Report: `.cursor/RULES_EVALUATION.md`
+
+---
+
+## 📊 Quality Metrics & Monitoring
+
+### Code Quality Tools
+- **Linting**: ESLint (frontend), flake8/ruff (backend)
+- **Type Checking**: TypeScript, mypy
+- **Formatting**: Prettier, black
+- **Security**: npm audit, safety (Python)
+
+### Monitoring (Production)
+- **Error Tracking**: Sentry (recommended)
+- **Performance**: APM tools (New Relic, Datadog)
+- **Logging**: Structured logging to centralized system
+- **Metrics**: Prometheus + Grafana (future)
+
+### Code Review Metrics
+- **Response Time**: < 24 hours
+- **Review Focus**: Functionality, security, performance, maintainability
+- **Approval Required**: At least 1 reviewer for PRs

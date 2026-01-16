@@ -1,0 +1,17 @@
+Styles in docs/ABC해커톤_논문_제출용.docx:
+ Normal
+ 바탕글
+ 국문제목
+ 쪽 번호
+ 1.1
+ Body Text
+ 그림
+ 표안
+ 영문제목
+ 저자
+ 요약
+ 1.
+ 논문 내용
+ Header
+ Footer
+ Balloon Text

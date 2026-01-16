@@ -1,0 +1,2500 @@
+{
+  "paragraphs": [
+    {
+      "index": 0,
+      "text": "1. 서 론 ",
+      "style": "1.",
+      "runs": [
+        {
+          "text": "1. 서 론 ",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 9.0
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "text": "최근들어, 10대들 사이에서 새로운 소통 방식으로 자리잡고 있는 ‘젠리’ 위치공유 소통 시스템이 끌고 있는 편이다. 20~30대에게는 꺼려하는 위치공유 시스템이 10대들에게는 인기...",
+      "style": "바탕글",
+      "runs": [
+        {
+          "text": "최근들어",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": ", 10대들 사이에서 새로운 소통 방식으로 자리잡고 있는 ",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": "‘",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": "젠리",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": "’",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": " ",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": "위치공유",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": " 소통 시스템이 끌고 있는 편이다. 20~30대에게는 꺼려하는 ",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": "위치공유",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": " 시스템이 10대들에게는 인기있는 소통 방식이다. 성장기 시절부터 PC보다 모바일에 익숙한...",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": "로그인된",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": " 상태로 구동되는 모바일에 친숙하다. 그만큼 10대들에게는 글로 적혀있는 주소 보다는 투명...",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": " ",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": "매우 익숙한 편이다[1].",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "text": "  이 논문에서는 저희는 2005년 이래 각 지자체에서 결식아동 급식사업의 일환으로 저소득층 아이들에게 발급하는 IC 카드인 아동급식카드에 대해 조사를 하고자한다. 아동 급식 카드...",
+      "style": "바탕글",
+      "runs": [
+        {
+          "text": "  이 논문에서는 저희는 2005년 이래 각 지자체에서 결식아동 ",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": "급식사업의",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": " 일환으로 저소득층 아이들에게 발급하는 IC 카드인 아동급식카드에 대해 조사를 ",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": "하고자한다",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": ". 아동 급식 카드의 정의로는 경제적 빈곤 상태에 놓여 있는 가정의 자녀가 학교에서 급식을...",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "text": "  현재 아동 급식카드 가맹점에 대해 소재구당 초등학교 수와 저소득층 통계를 통해 어떤 연관성을 보이는지 파악하고 이에 바탕으로 아동들이 자신의 폰을 가지고 편하게 가맹점을 찾을 ...",
+      "style": "바탕글",
+      "runs": [
+        {
+          "text": "  현재 아동 ",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": "급식카드",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": " 가맹점에 대해 ",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": "소재구당",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": " 초등학교 수와",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": " ",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": "저소득층 통계를 통해 어떤 연관성을 보이는지 파악하고 이에 바탕으로 아동들이 자신의 폰을 ...",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": "지차체이서",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": " 어떤 ",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": "소재구가",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": " 가맹점 지원이 더 필요하며 ",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": "소재구",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": " 학교에서 가맹점의 거리가 어느 정도 되는지 바탕이 되는 자료가 될 수 있을 것이다. ",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        }
+      ]
+    },
+    {
+      "index": 6,
+      "text": "2. 선행 연구",
+      "style": "1.",
+      "runs": [
+        {
+          "text": "2. 선행 연구",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 9.0
+        }
+      ]
+    },
+    {
+      "index": 7,
+      "text": "2.1 현재 저소득층 소재구 통계 분석",
+      "style": "1.",
+      "runs": [
+        {
+          "text": "2.1 현재 저소득층 ",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 9.0
+        },
+        {
+          "text": "소재구",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 9.0
+        },
+        {
+          "text": " 통계 분석",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 9.0
+        }
+      ]
+    },
+    {
+      "index": 8,
+      "text": "  서울시 저소득 한부모가족 통계를 서울시 소재구에 따라 통계를 시각화해본 결과이다[3]. 아래 (그림 1)을 통해 확인할 수 있다.",
+      "style": "1.",
+      "runs": [
+        {
+          "text": "  서울시 저소득 ",
+          "bold": false,
+          "italic": null,
+          "font_name": null,
+          "font_size": 9.0
+        },
+        {
+          "text": "한부모가족",
+          "bold": false,
+          "italic": null,
+          "font_name": null,
+          "font_size": 9.0
+        },
+        {
+          "text": " 통계를 서울시 ",
+          "bold": false,
+          "italic": null,
+          "font_name": null,
+          "font_size": 9.0
+        },
+        {
+          "text": "소재구에",
+          "bold": false,
+          "italic": null,
+          "font_name": null,
+          "font_size": 9.0
+        },
+        {
+          "text": " 따라 통계를 ",
+          "bold": false,
+          "italic": null,
+          "font_name": null,
+          "font_size": 9.0
+        },
+        {
+          "text": "시각화해본",
+          "bold": false,
+          "italic": null,
+          "font_name": null,
+          "font_size": 9.0
+        },
+        {
+          "text": " 결과이다[3]. 아래 (그림 1)을 통해 확인할 수 있다.",
+          "bold": false,
+          "italic": null,
+          "font_name": null,
+          "font_size": 9.0
+        }
+      ]
+    },
+    {
+      "index": 11,
+      "text": "(그림 1) 서울시 저소득 한부모가족 통계(2019)",
+      "style": "그림",
+      "runs": [
+        {
+          "text": "(그림 1) 서울시 저소득 ",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 8.0
+        },
+        {
+          "text": "한부모가족",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 8.0
+        },
+        {
+          "text": " 통계(2019)",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 8.0
+        }
+      ]
+    },
+    {
+      "index": 13,
+      "text": " 아동급식카드 지원은 저소득층과 한부모가족 아이들에게 지원하는 IC카드이다. 이에 아동급식카드 지원은 위 통계에 연관성이 있다. 위 통계에서는 노원구가 가장 높은 점유율을 나타내는...",
+      "style": "1.",
+      "runs": [
+        {
+          "text": " 아동급식카드 지원은 저소득층과 ",
+          "bold": false,
+          "italic": null,
+          "font_name": null,
+          "font_size": 9.0
+        },
+        {
+          "text": "한부모가족",
+          "bold": false,
+          "italic": null,
+          "font_name": null,
+          "font_size": 9.0
+        },
+        {
+          "text": " 아이들에게 지원하는 IC카드이다. 이에 아동급식카드 지원은 위 통계에 연관성이 있다. 위...",
+          "bold": false,
+          "italic": null,
+          "font_name": null,
+          "font_size": 9.0
+        }
+      ]
+    },
+    {
+      "index": 14,
+      "text": "2.2 아동 급식카드 가맹점과 소재구 초등학교 수의 대한 연관성",
+      "style": "1.",
+      "runs": [
+        {
+          "text": "2.2 아동 ",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 9.0
+        },
+        {
+          "text": "급식카드",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 9.0
+        },
+        {
+          "text": " 가맹점과 ",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 9.0
+        },
+        {
+          "text": "소재구",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 9.0
+        },
+        {
+          "text": " 초등학교 수의 대한 연관성",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 9.0
+        }
+      ]
+    },
+    {
+      "index": 15,
+      "text": "  서울특별시 아동급식카드 가맹점 정보는 Groupby 메소드를 통해 지역구 별 가맹점 수를 파악하였다[4]. 그리고 소재구 초등학교 수도 지역구를 Groupby 메소드를 통해 초...",
+      "style": "바탕글",
+      "runs": [
+        {
+          "text": "  서울특별시 아동급식카드 가맹점 정보는 ",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": "Groupby",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": " ",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": "메소드를",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": " 통해 지역구 별 가맹점 수를 파악하였다[4]. 그리고 ",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": "소재구",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": " 초등학교 수도 지역구를 ",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": "Groupby",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": " ",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": "메소드를",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": " 통해 초등학교 수를 파악하였다[5]. ",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": "concat",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": " ",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": "메소드를",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": " 이용하여 이 데이터프레임을 시각화 한 결과이다. 아래 (그림 2)를 통해 확인할 수 있다...",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        }
+      ]
+    },
+    {
+      "index": 18,
+      "text": "(그림 2) 서울시 소재구에 따른 초등학교 수와 급식카드 가맹점 수 통계",
+      "style": "그림",
+      "runs": [
+        {
+          "text": "(그림 2) 서울시 ",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 8.0
+        },
+        {
+          "text": "소재구에",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 8.0
+        },
+        {
+          "text": " 따른 초등학교 수와 ",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 8.0
+        },
+        {
+          "text": "급식카드",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 8.0
+        },
+        {
+          "text": " 가맹점 수 통계",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 8.0
+        }
+      ]
+    },
+    {
+      "index": 20,
+      "text": " 위 통계를 시각화해보았을 때, 가맹점 수는 노원구, 은평구, 서초구가 가장 많았으며, 초등학교 수는 노원구, 송파구, 은평구가 가장 많았음을 확인할 수 있었다.",
+      "style": "1.",
+      "runs": [
+        {
+          "text": " 위 통계를 ",
+          "bold": false,
+          "italic": null,
+          "font_name": null,
+          "font_size": 9.0
+        },
+        {
+          "text": "시각화해보았을",
+          "bold": false,
+          "italic": null,
+          "font_name": null,
+          "font_size": 9.0
+        },
+        {
+          "text": " 때, 가맹점 수는 노원구, 은평구, 서초구가 가장 많았으며, 초등학교 수는 노원구, 송파...",
+          "bold": false,
+          "italic": null,
+          "font_name": null,
+          "font_size": 9.0
+        }
+      ]
+    },
+    {
+      "index": 21,
+      "text": "  노원구는 저소득 층 가구 수가 많으면서 이에 맞게 가맹점 수가 높은 것으로 알 수 있었고 이에 은평구가 뒤를 따르고 있음을 확인 할 수 있었다. ",
+      "style": "1.",
+      "runs": [
+        {
+          "text": "  노원구는 저소득 층 가구 수가 많으면서 이에 맞게 가맹점 수가 높은 것으로 알 수 있었...",
+          "bold": false,
+          "italic": null,
+          "font_name": null,
+          "font_size": 9.0
+        }
+      ]
+    },
+    {
+      "index": 23,
+      "text": "2.3 아동 급식카드 가맹점의 종류 비율",
+      "style": "1.",
+      "runs": [
+        {
+          "text": "2.3 아동 ",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 9.0
+        },
+        {
+          "text": "급식카드",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 9.0
+        },
+        {
+          "text": " 가맹점의 종류 비율",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 9.0
+        }
+      ]
+    },
+    {
+      "index": 24,
+      "text": "  추가적으로, 아동 급식카드 가맹점의 업종명을 Groupby하여 파이차트로 시각화한 결과, 주로 가맹점은 한식과 제과점, 중식이 대다수임을 확인할 수 있었다. 위 결과는 (그림 ...",
+      "style": "바탕글",
+      "runs": [
+        {
+          "text": "  추가적으로, 아동 ",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": "급식카드",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": " 가맹점의 ",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": "업종명을",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": " ",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": "Groupby",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": "하여 ",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": "파이차트로",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": " 시각화한 결과, 주로 가맹점은 한식과 제과점, 중식이 대다수임을 확인할 수 있었다. 위 ...",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        }
+      ]
+    },
+    {
+      "index": 26,
+      "text": "(그림 3) 아동 급식카드 가맹점 종류",
+      "style": "그림",
+      "runs": [
+        {
+          "text": "(그림 3) 아동 ",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 8.0
+        },
+        {
+          "text": "급식카드",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 8.0
+        },
+        {
+          "text": " 가맹점 종류",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 8.0
+        }
+      ]
+    },
+    {
+      "index": 28,
+      "text": "  보건복지부에서는 1식에 지원금액을 4,000원으로 권고 하고 있고 서울시에서는 5,000원을 지원한다, 가맹점의 업종을 보면 한식과 제과점 중식이 대다수 이다[6]. 즉, 한식...",
+      "style": "바탕글",
+      "runs": [
+        {
+          "text": "  보건복지부에서는 1식에 지원금액을 4,000원으로 권고 하고 있고 서울시에서는 5,00...",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": "이상임에",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": " 비하면 낮은 분포의 가맹점인 슈퍼마켓이나 편의점에서 값싼 음식을 먹을 수 없다라는 문제를...",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        }
+      ]
+    },
+    {
+      "index": 31,
+      "text": "3. 실험 및 결과",
+      "style": "1.",
+      "runs": [
+        {
+          "text": "3. 실험 및 결과",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 9.0
+        }
+      ]
+    },
+    {
+      "index": 32,
+      "text": " 이 논문에서는 초등학교 현황 데이터 셋과 아동급식카드 가맹점 정보 데이터 셋을 이용하여 지도내 가맹점과 초등학교 관한 분포도를 만들어보기로 한다. 이 분포를 위해 Kakao De...",
+      "style": "바탕글",
+      "runs": [
+        {
+          "text": " 이 논문에서는 초등학교 현황 데이터 셋과 아동급식카드 가맹점 정보 데이터 셋을 이용하여 ...",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": "Kakao",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": " Developers에서 제공하는 Local API를 활용하여 가맹점과 초등학교들의 주소를...",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": "좌표계로",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": " 변환하였다[7]. 그리고 ",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": "folium 모듈을 사용하여 위 좌표들을 지도로 정의하여 Marker 하였다. 위 결과는 ...",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        }
+      ]
+    },
+    {
+      "index": 36,
+      "text": "(그림 4) 서울시 초등학교 아동급식 카드 가맹점과 초등학교 수 분포",
+      "style": "그림",
+      "runs": [
+        {
+          "text": "(그림 4) 서울시 초등학교 아동급식 카드 가맹점과 초등학교 수 분포",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 8.0
+        }
+      ]
+    },
+    {
+      "index": 40,
+      "text": "(그림 5) 서울시 초등학교 아동급식 카드 가맹점과 초등학교 수의 100m 반경 분포",
+      "style": "그림",
+      "runs": [
+        {
+          "text": "(그림 5) 서울시 초등학교 아동급식 카드 가맹점과 초등학교 수의 100m 반경 ",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 8.0
+        },
+        {
+          "text": "분포",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 8.0
+        }
+      ]
+    },
+    {
+      "index": 42,
+      "text": "  본 연구를 위해 개발환경은 Mac BigSur OS 11.0, RAM 16GB, intel Iris Plus Graphics 655를 사용하였으며, 아나콘다 10.1과 파이썬 ...",
+      "style": "바탕글",
+      "runs": [
+        {
+          "text": "  본 연구를 위해 ",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": "개발환경은",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": " Mac ",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": "BigSur",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": " OS 11.0, RAM 16GB, intel Iris Plus Graphics 655를 ...",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": "파이썬",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": " 3.8를 사용하여 ",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": "Jupyterlab",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": "으로 구현하였다. 데이터셋으로 서울시 초등학교 현황과 아동급식카드 가맹점 정보, 서울시 저...",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        }
+      ]
+    },
+    {
+      "index": 44,
+      "text": "4. 결론",
+      "style": "1.",
+      "runs": [
+        {
+          "text": "4. 결론",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 9.0
+        }
+      ]
+    },
+    {
+      "index": 45,
+      "text": "  위 연구에서는 아동 급식카드 가맹점과 초등학교 수에 관한 분포를 folium 모듈을 이용한 지도를 통해 나타내었다. ",
+      "style": "바탕글",
+      "runs": [
+        {
+          "text": "  위 연구에서는 아동 ",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": "급식카드",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": " 가맹점과 초등학교 수에 관한 분포를 folium 모듈을 이용한 지도를 통해 나타내었다. ",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        }
+      ]
+    },
+    {
+      "index": 46,
+      "text": "  이를 통해 결식아동 급식 사업에 관한 문제점을 파악할 수 있으며 가맹점 분포도를 이용하여 정부 지차제에서 어떤 소재구가 가맹점 지원이 더 필요하며 소재구 학교에서 가맹점의 거리...",
+      "style": "바탕글",
+      "runs": [
+        {
+          "text": "  이를 통해 결식아동 급식 사업에 관한 문제점을 파악할 수 있으며 가맹점 분포도를 이용하...",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": "지차제에서",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": " 어떤 ",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": "소재구가",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": " 가맹점 지원이 더 필요하며 ",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": "소재구",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": " 학교에서 가맹점의 거리가 어느정도 되는지 바탕이 되는 자료가 될 수 있을 것이다. 추가적...",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": " ",
+          "bold": null,
+          "italic": null,
+          "font_name": "함초롬바탕",
+          "font_size": null
+        }
+      ]
+    },
+    {
+      "index": 48,
+      "text": "참 고 문 헌 ",
+      "style": "Body Text",
+      "runs": [
+        {
+          "text": "참 고 문 헌",
+          "bold": true,
+          "italic": null,
+          "font_name": "신명 견명조",
+          "font_size": null
+        },
+        {
+          "text": " ",
+          "bold": null,
+          "italic": null,
+          "font_name": "신명 견명조",
+          "font_size": null
+        }
+      ]
+    },
+    {
+      "index": 50,
+      "text": "[1] “힙한 10대 ‘인싸’들이 주목하는 새로운 소통 방식 ‘젠리(Zenly)’, SKhynix newsroom, 2020년 04월 16일 수정, 2020년 12월 10일 접속,...",
+      "style": "바탕글",
+      "runs": [
+        {
+          "text": "[1] ",
+          "bold": null,
+          "italic": null,
+          "font_name": "함초롬바탕",
+          "font_size": null
+        },
+        {
+          "text": "“",
+          "bold": null,
+          "italic": null,
+          "font_name": "함초롬바탕",
+          "font_size": null
+        },
+        {
+          "text": "힙한",
+          "bold": null,
+          "italic": null,
+          "font_name": "함초롬바탕",
+          "font_size": null
+        },
+        {
+          "text": " 10대 ",
+          "bold": null,
+          "italic": null,
+          "font_name": "함초롬바탕",
+          "font_size": null
+        },
+        {
+          "text": "‘",
+          "bold": null,
+          "italic": null,
+          "font_name": "함초롬바탕",
+          "font_size": null
+        },
+        {
+          "text": "인싸",
+          "bold": null,
+          "italic": null,
+          "font_name": "함초롬바탕",
+          "font_size": null
+        },
+        {
+          "text": "’",
+          "bold": null,
+          "italic": null,
+          "font_name": "함초롬바탕",
+          "font_size": null
+        },
+        {
+          "text": "들이 주목하는 새로운 소통 방식 ",
+          "bold": null,
+          "italic": null,
+          "font_name": "함초롬바탕",
+          "font_size": null
+        },
+        {
+          "text": "‘",
+          "bold": null,
+          "italic": null,
+          "font_name": "함초롬바탕",
+          "font_size": null
+        },
+        {
+          "text": "젠리",
+          "bold": null,
+          "italic": null,
+          "font_name": "함초롬바탕",
+          "font_size": null
+        },
+        {
+          "text": "(",
+          "bold": null,
+          "italic": null,
+          "font_name": "함초롬바탕",
+          "font_size": null
+        },
+        {
+          "text": "Zenly",
+          "bold": null,
+          "italic": null,
+          "font_name": "함초롬바탕",
+          "font_size": null
+        },
+        {
+          "text": ")",
+          "bold": null,
+          "italic": null,
+          "font_name": "함초롬바탕",
+          "font_size": null
+        },
+        {
+          "text": "’",
+          "bold": null,
+          "italic": null,
+          "font_name": "함초롬바탕",
+          "font_size": null
+        },
+        {
+          "text": ", ",
+          "bold": null,
+          "italic": null,
+          "font_name": "함초롬바탕",
+          "font_size": null
+        },
+        {
+          "text": "SKhynix",
+          "bold": null,
+          "italic": null,
+          "font_name": "함초롬바탕",
+          "font_size": null
+        },
+        {
+          "text": " newsroom, 2020년 04월 16일 수정, 2020년 12월 10일 접속, htt...",
+          "bold": null,
+          "italic": null,
+          "font_name": "함초롬바탕",
+          "font_size": null
+        }
+      ]
+    },
+    {
+      "index": 51,
+      "text": "   .co.kr/2174",
+      "style": "바탕글",
+      "runs": [
+        {
+          "text": "   .co.kr",
+          "bold": null,
+          "italic": null,
+          "font_name": "함초롬바탕",
+          "font_size": null
+        },
+        {
+          "text": "/2174",
+          "bold": null,
+          "italic": null,
+          "font_name": "굴림",
+          "font_size": null
+        }
+      ]
+    },
+    {
+      "index": 52,
+      "text": "[2] “아동급식카드”, 나무위키, 2020년 12월 05일 수정, 2020년 12월 10일 접속, https://namu.wiki/w/%EC\t%95%84%EB%8F%99%EA%B...",
+      "style": "바탕글",
+      "runs": [
+        {
+          "text": "[2] ",
+          "bold": null,
+          "italic": null,
+          "font_name": "함초롬바탕",
+          "font_size": null
+        },
+        {
+          "text": "“",
+          "bold": null,
+          "italic": null,
+          "font_name": "함초롬바탕",
+          "font_size": null
+        },
+        {
+          "text": "아동급식카드",
+          "bold": null,
+          "italic": null,
+          "font_name": "함초롬바탕",
+          "font_size": null
+        },
+        {
+          "text": "”",
+          "bold": null,
+          "italic": null,
+          "font_name": "함초롬바탕",
+          "font_size": null
+        },
+        {
+          "text": ", ",
+          "bold": null,
+          "italic": null,
+          "font_name": "함초롬바탕",
+          "font_size": null
+        },
+        {
+          "text": "나무위키",
+          "bold": null,
+          "italic": null,
+          "font_name": "함초롬바탕",
+          "font_size": null
+        },
+        {
+          "text": ", 2020년 12월 05일 수정, 2020년 12월 10일 접속, ",
+          "bold": null,
+          "italic": null,
+          "font_name": "함초롬바탕",
+          "font_size": null
+        },
+        {
+          "text": "\t",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": "%95%84%EB%8F%99%EA%B8%89%EC%8B%9D%EC%B9%B4%EB%93%9...",
+          "bold": null,
+          "italic": null,
+          "font_name": "함초롬바탕",
+          "font_size": null
+        }
+      ]
+    },
+    {
+      "index": 53,
+      "text": "[3] “서울시 저소득 한부모가족 통계”, 서울 열린데이터 광      장, 2020년 09월 14일 수정, 2020년 12월 10일 접속,  ",
+      "style": "바탕글",
+      "runs": [
+        {
+          "text": "[3] ",
+          "bold": null,
+          "italic": null,
+          "font_name": "함초롬바탕",
+          "font_size": null
+        },
+        {
+          "text": "“",
+          "bold": null,
+          "italic": null,
+          "font_name": "함초롬바탕",
+          "font_size": null
+        },
+        {
+          "text": "서울시 저소득 ",
+          "bold": null,
+          "italic": null,
+          "font_name": "함초롬바탕",
+          "font_size": null
+        },
+        {
+          "text": "한부모가족",
+          "bold": null,
+          "italic": null,
+          "font_name": "함초롬바탕",
+          "font_size": null
+        },
+        {
+          "text": " 통계",
+          "bold": null,
+          "italic": null,
+          "font_name": "함초롬바탕",
+          "font_size": null
+        },
+        {
+          "text": "”",
+          "bold": null,
+          "italic": null,
+          "font_name": "함초롬바탕",
+          "font_size": null
+        },
+        {
+          "text": ", 서울 ",
+          "bold": null,
+          "italic": null,
+          "font_name": "함초롬바탕",
+          "font_size": null
+        },
+        {
+          "text": "열린데이터",
+          "bold": null,
+          "italic": null,
+          "font_name": "함초롬바탕",
+          "font_size": null
+        },
+        {
+          "text": " 광      장, 2020년 09월 14일 수정, 2020년 12월 10일 접속,  ",
+          "bold": null,
+          "italic": null,
+          "font_name": "함초롬바탕",
+          "font_size": null
+        }
+      ]
+    },
+    {
+      "index": 54,
+      "text": "    http://data.seoul.go.kr/dataList/437/S/2/datasetVi",
+      "style": "바탕글",
+      "runs": [
+        {
+          "text": "    http://data.seoul.go.kr/dataList/437/S/2/datas...",
+          "bold": null,
+          "italic": null,
+          "font_name": "함초롬바탕",
+          "font_size": null
+        }
+      ]
+    },
+    {
+      "index": 55,
+      "text": "    ew.do",
+      "style": "바탕글",
+      "runs": [
+        {
+          "text": "    ew.do",
+          "bold": null,
+          "italic": null,
+          "font_name": "함초롬바탕",
+          "font_size": null
+        }
+      ]
+    },
+    {
+      "index": 56,
+      "text": "[4] “서울특별시 아동급식카드 가맹점 정보”. 서울 열린데이터 광장, 2020년 02월 26일 수정, 2020년 12월 10일 접속, https://data.seoul.go.kr...",
+      "style": "바탕글",
+      "runs": [
+        {
+          "text": "[4] ",
+          "bold": null,
+          "italic": null,
+          "font_name": "함초롬바탕",
+          "font_size": null
+        },
+        {
+          "text": "“",
+          "bold": null,
+          "italic": null,
+          "font_name": "함초롬바탕",
+          "font_size": null
+        },
+        {
+          "text": "서울특별시 아동급식카드 가맹점 정보",
+          "bold": null,
+          "italic": null,
+          "font_name": "함초롬바탕",
+          "font_size": null
+        },
+        {
+          "text": "”",
+          "bold": null,
+          "italic": null,
+          "font_name": "함초롬바탕",
+          "font_size": null
+        },
+        {
+          "text": ". 서울 ",
+          "bold": null,
+          "italic": null,
+          "font_name": "함초롬바탕",
+          "font_size": null
+        },
+        {
+          "text": "열린데이터",
+          "bold": null,
+          "italic": null,
+          "font_name": "함초롬바탕",
+          "font_size": null
+        },
+        {
+          "text": " 광장, 2020년 02월 26일 수정, 2020년 12월 10일 접속, ",
+          "bold": null,
+          "italic": null,
+          "font_name": "함초롬바탕",
+          "font_size": null
+        },
+        {
+          "text": "F/1/datasetView.do",
+          "bold": null,
+          "italic": null,
+          "font_name": "함초롬바탕",
+          "font_size": null
+        }
+      ]
+    },
+    {
+      "index": 57,
+      "text": "[5] “서울시 초등학교 현황‘, 서울 열린데이터 광장, 2014년 12월 19일 수정, 2020년 12월 10일 접속 , https://da",
+      "style": "바탕글",
+      "runs": [
+        {
+          "text": "[5] ",
+          "bold": null,
+          "italic": null,
+          "font_name": "함초롬바탕",
+          "font_size": null
+        },
+        {
+          "text": "“",
+          "bold": null,
+          "italic": null,
+          "font_name": "함초롬바탕",
+          "font_size": null
+        },
+        {
+          "text": "서울시 초등학교 현황",
+          "bold": null,
+          "italic": null,
+          "font_name": "함초롬바탕",
+          "font_size": null
+        },
+        {
+          "text": "‘",
+          "bold": null,
+          "italic": null,
+          "font_name": "함초롬바탕",
+          "font_size": null
+        },
+        {
+          "text": ", 서울 ",
+          "bold": null,
+          "italic": null,
+          "font_name": "함초롬바탕",
+          "font_size": null
+        },
+        {
+          "text": "열린데이터",
+          "bold": null,
+          "italic": null,
+          "font_name": "함초롬바탕",
+          "font_size": null
+        },
+        {
+          "text": " 광장, 2014년 12월 19일 수정, 2020년 12월 10일 ",
+          "bold": null,
+          "italic": null,
+          "font_name": "함초롬바탕",
+          "font_size": null
+        },
+        {
+          "text": "접속 ,",
+          "bold": null,
+          "italic": null,
+          "font_name": "함초롬바탕",
+          "font_size": null
+        },
+        {
+          "text": " https://da",
+          "bold": null,
+          "italic": null,
+          "font_name": "함초롬바탕",
+          "font_size": null
+        }
+      ]
+    },
+    {
+      "index": 58,
+      "text": "    ta.seoul.go.kr/dataList/OA-12059/S/1/datasetVie",
+      "style": "바탕글",
+      "runs": [
+        {
+          "text": "    ta.seoul.go.kr/",
+          "bold": null,
+          "italic": null,
+          "font_name": "함초롬바탕",
+          "font_size": null
+        },
+        {
+          "text": "dataList",
+          "bold": null,
+          "italic": null,
+          "font_name": "함초롬바탕",
+          "font_size": null
+        },
+        {
+          "text": "/OA-12059/S/1/",
+          "bold": null,
+          "italic": null,
+          "font_name": "함초롬바탕",
+          "font_size": null
+        },
+        {
+          "text": "datasetVie",
+          "bold": null,
+          "italic": null,
+          "font_name": "함초롬바탕",
+          "font_size": null
+        }
+      ]
+    },
+    {
+      "index": 59,
+      "text": "    w.do",
+      "style": "바탕글",
+      "runs": [
+        {
+          "text": "    w.do",
+          "bold": null,
+          "italic": null,
+          "font_name": "함초롬바탕",
+          "font_size": null
+        }
+      ]
+    },
+    {
+      "index": 60,
+      "text": "[6] “아동급식카드 자격 조건, 신청, 사용처 완벽정리”, oliv",
+      "style": "바탕글",
+      "runs": [
+        {
+          "text": "[6] ",
+          "bold": null,
+          "italic": null,
+          "font_name": "함초롬바탕",
+          "font_size": null
+        },
+        {
+          "text": "“",
+          "bold": null,
+          "italic": null,
+          "font_name": "함초롬바탕",
+          "font_size": null
+        },
+        {
+          "text": "아동급식카드 자격 조건, 신청, 사용처 ",
+          "bold": null,
+          "italic": null,
+          "font_name": "함초롬바탕",
+          "font_size": null
+        },
+        {
+          "text": "완벽정리",
+          "bold": null,
+          "italic": null,
+          "font_name": "함초롬바탕",
+          "font_size": null
+        },
+        {
+          "text": "”",
+          "bold": null,
+          "italic": null,
+          "font_name": "함초롬바탕",
+          "font_size": null
+        },
+        {
+          "text": ", ",
+          "bold": null,
+          "italic": null,
+          "font_name": "함초롬바탕",
+          "font_size": null
+        },
+        {
+          "text": "oliv",
+          "bold": null,
+          "italic": null,
+          "font_name": "함초롬바탕",
+          "font_size": null
+        }
+      ]
+    },
+    {
+      "index": 61,
+      "text": "    iabbase tistory, 2020년 07월 06일 수정, 2020년 12      월 10일 접속, https://oliviabbase.tistory.com/345 ",
+      "style": "바탕글",
+      "runs": [
+        {
+          "text": "    ",
+          "bold": null,
+          "italic": null,
+          "font_name": "함초롬바탕",
+          "font_size": null
+        },
+        {
+          "text": "iabbase",
+          "bold": null,
+          "italic": null,
+          "font_name": "함초롬바탕",
+          "font_size": null
+        },
+        {
+          "text": " ",
+          "bold": null,
+          "italic": null,
+          "font_name": "함초롬바탕",
+          "font_size": null
+        },
+        {
+          "text": "tistory",
+          "bold": null,
+          "italic": null,
+          "font_name": "함초롬바탕",
+          "font_size": null
+        },
+        {
+          "text": ", 2020년 07월 06일 수정, 2020년 12      월 10일 접속, ",
+          "bold": null,
+          "italic": null,
+          "font_name": "함초롬바탕",
+          "font_size": null
+        },
+        {
+          "text": " ",
+          "bold": null,
+          "italic": null,
+          "font_name": "함초롬바탕",
+          "font_size": null
+        }
+      ]
+    },
+    {
+      "index": 62,
+      "text": "[7] “지도/로컬”, Kakao Developers, 2020년 12월 10일      접속, https://developers.kakao.com/product/map ",
+      "style": "바탕글",
+      "runs": [
+        {
+          "text": "[7] ",
+          "bold": null,
+          "italic": null,
+          "font_name": "함초롬바탕",
+          "font_size": null
+        },
+        {
+          "text": "“",
+          "bold": null,
+          "italic": null,
+          "font_name": "함초롬바탕",
+          "font_size": null
+        },
+        {
+          "text": "지도/로컬",
+          "bold": null,
+          "italic": null,
+          "font_name": "함초롬바탕",
+          "font_size": null
+        },
+        {
+          "text": "”",
+          "bold": null,
+          "italic": null,
+          "font_name": "함초롬바탕",
+          "font_size": null
+        },
+        {
+          "text": ", ",
+          "bold": null,
+          "italic": null,
+          "font_name": "함초롬바탕",
+          "font_size": null
+        },
+        {
+          "text": "Kakao",
+          "bold": null,
+          "italic": null,
+          "font_name": "함초롬바탕",
+          "font_size": null
+        },
+        {
+          "text": " Developers, 2020년 12월 10일      접속, https://develo...",
+          "bold": null,
+          "italic": null,
+          "font_name": "함초롬바탕",
+          "font_size": null
+        }
+      ]
+    },
+    {
+      "index": 70,
+      "text": "서식 안내",
+      "style": "바탕글",
+      "runs": [
+        {
+          "text": "서식 안내",
+          "bold": true,
+          "italic": null,
+          "font_name": null,
+          "font_size": 11.0
+        }
+      ]
+    },
+    {
+      "index": 71,
+      "text": "본 논문 양식을 이용하여 논문을 작성합니다. ",
+      "style": "바탕글",
+      "runs": [
+        {
+          "text": "본 논문 양식을 이용하여 논문을 작성합니다. ",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 10.0
+        }
+      ]
+    },
+    {
+      "index": 72,
+      "text": "작성 후 본 서식 안내는 삭제합니다.",
+      "style": "바탕글",
+      "runs": [
+        {
+          "text": "작성 후 본 ",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 10.0
+        },
+        {
+          "text": "서식 안내",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 10.0
+        },
+        {
+          "text": "는 삭제합니다.",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 10.0
+        }
+      ]
+    },
+    {
+      "index": 73,
+      "text": "논문작성은 2~4페이지로 작성합니다. ",
+      "style": "바탕글",
+      "runs": [
+        {
+          "text": "논문작성은",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 10.0
+        },
+        {
+          "text": " ",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 10.0
+        },
+        {
+          "text": "2~4페이지",
+          "bold": true,
+          "italic": null,
+          "font_name": null,
+          "font_size": 10.0
+        },
+        {
+          "text": "로 작성합니다. ",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 10.0
+        }
+      ]
+    },
+    {
+      "index": 74,
+      "text": "본문에서 인용번호는 [1], [2], ... 순으로 언급하며, 참고문헌란에는 인용한 순서대로 기재합니다. ",
+      "style": "바탕글",
+      "runs": [
+        {
+          "text": "본문에서 ",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 10.0
+        },
+        {
+          "text": "인용번호는",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 10.0
+        },
+        {
+          "text": " [1], [2], ",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 10.0
+        },
+        {
+          "text": "...",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 10.0
+        },
+        {
+          "text": " 순으로 언급하며, 참고문헌란에는 인용한 순서대로 기재합니다. ",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 10.0
+        }
+      ]
+    },
+    {
+      "index": 75,
+      "text": "그림 서식\n-‘캡션 넣기’로 그림 아래에 캡션을 넣음\n-캡션 번호는 (그림 #)와 같이 표기 \n-캡션의 폰트 크기는 ‘9’, 폰트 종류는 ‘중고딕’, 정렬은 ‘가운데 정렬’  ",
+      "style": "바탕글",
+      "runs": [
+        {
+          "text": "그림 서식",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 10.0
+        },
+        {
+          "text": "\n",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": "-",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 10.0
+        },
+        {
+          "text": "‘",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 10.0
+        },
+        {
+          "text": "캡션 넣기",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 10.0
+        },
+        {
+          "text": "’",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 10.0
+        },
+        {
+          "text": "로 그림 아래에 캡션을 넣음",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 10.0
+        },
+        {
+          "text": "\n",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": "-캡션 번호는 ",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 10.0
+        },
+        {
+          "text": "(그림 #)",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 10.0
+        },
+        {
+          "text": "와 같이 표기 ",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 10.0
+        },
+        {
+          "text": "\n",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": "-캡션의 폰트 크기는 ",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 10.0
+        },
+        {
+          "text": "‘",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 10.0
+        },
+        {
+          "text": "9",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 10.0
+        },
+        {
+          "text": "’",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 10.0
+        },
+        {
+          "text": ", 폰트 종류는 ",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 10.0
+        },
+        {
+          "text": "‘",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 10.0
+        },
+        {
+          "text": "중고딕",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 10.0
+        },
+        {
+          "text": "’",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 10.0
+        },
+        {
+          "text": ", 정렬은 ",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 10.0
+        },
+        {
+          "text": "‘",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 10.0
+        },
+        {
+          "text": "가운데 정렬",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 10.0
+        },
+        {
+          "text": "’",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 10.0
+        },
+        {
+          "text": "  ",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 10.0
+        }
+      ]
+    },
+    {
+      "index": 76,
+      "text": " (그림 5) 서울시 초등학교 아동급식 카드 가맹점과 초등학교 수의 100m 반경 분포",
+      "style": "바탕글",
+      "runs": [
+        {
+          "text": "",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": " ",
+          "bold": null,
+          "italic": null,
+          "font_name": "한양중고딕",
+          "font_size": null
+        },
+        {
+          "text": "(그림 5) 서울시 초등학교 아동급식 카드 가맹점과 초등학교 수의 100m 반경 분포",
+          "bold": null,
+          "italic": null,
+          "font_name": "한양중고딕",
+          "font_size": null
+        }
+      ]
+    },
+    {
+      "index": 77,
+      "text": "표 서식\n-캡션 번호는 <표 #>와 같이 표 위에 표기\n-캡션의 폰트 크기는 ‘9’, 폰트 종류는 ‘중고딕’, 정렬은 ‘가운데 정렬’  ",
+      "style": "바탕글",
+      "runs": [
+        {
+          "text": "표 서식",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 10.0
+        },
+        {
+          "text": "\n",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": "-캡션 번호는 ",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 10.0
+        },
+        {
+          "text": "<표 #>",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 10.0
+        },
+        {
+          "text": "와 같이 ",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 10.0
+        },
+        {
+          "text": "표 위에 ",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 10.0
+        },
+        {
+          "text": "표기",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 10.0
+        },
+        {
+          "text": "\n",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": null
+        },
+        {
+          "text": "-캡션의 폰트 크기는 ",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 10.0
+        },
+        {
+          "text": "‘",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 10.0
+        },
+        {
+          "text": "9",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 10.0
+        },
+        {
+          "text": "’",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 10.0
+        },
+        {
+          "text": ", 폰트 종류는 ",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 10.0
+        },
+        {
+          "text": "‘",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 10.0
+        },
+        {
+          "text": "중고딕",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 10.0
+        },
+        {
+          "text": "’",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 10.0
+        },
+        {
+          "text": ", 정렬은 ",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 10.0
+        },
+        {
+          "text": "‘",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 10.0
+        },
+        {
+          "text": "가운데 정렬",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 10.0
+        },
+        {
+          "text": "’",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 10.0
+        },
+        {
+          "text": "  ",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 10.0
+        }
+      ]
+    },
+    {
+      "index": 78,
+      "text": "<표 1> IBM의 양자컴퓨터 (2021.03.22 기준 현황)",
+      "style": "논문 내용",
+      "runs": [
+        {
+          "text": "<표 1> IBM의 양자컴퓨터 (2021.03.22 기준 현황)",
+          "bold": null,
+          "italic": null,
+          "font_name": "한양중고딕",
+          "font_size": 9.0
+        }
+      ]
+    },
+    {
+      "index": 79,
+      "text": "참고문헌 기술방식",
+      "style": "바탕글",
+      "runs": [
+        {
+          "text": "참고문헌 기술방식",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 10.0
+        }
+      ]
+    },
+    {
+      "index": 80,
+      "text": "-저자, 제목, 학술지명, 권, 호, 쪽번호,         발행년도. 순으로 작성 (학술지 경우)",
+      "style": "바탕글",
+      "runs": [
+        {
+          "text": "-저자, 제목, ",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 10.0
+        },
+        {
+          "text": "학술지명",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 10.0
+        },
+        {
+          "text": ", 권, 호, 쪽번호",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 10.0
+        },
+        {
+          "text": ",         ",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 10.0
+        },
+        {
+          "text": "발행년도",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 10.0
+        },
+        {
+          "text": ". 순으로 작성 ",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 10.0
+        },
+        {
+          "text": "(학술지 경우)",
+          "bold": true,
+          "italic": null,
+          "font_name": null,
+          "font_size": 10.0
+        }
+      ]
+    },
+    {
+      "index": 81,
+      "text": "-저자, 제목, 학술대회명, 개최지, 개최년도, 쪽번호 (학술대회, 컨퍼런스, 워크샵 경우)",
+      "style": "바탕글",
+      "runs": [
+        {
+          "text": "-저자, 제목, ",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 10.0
+        },
+        {
+          "text": "학술대회명",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 10.0
+        },
+        {
+          "text": ", 개최지, ",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 10.0
+        },
+        {
+          "text": "개최년도",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 10.0
+        },
+        {
+          "text": ", 쪽번호 ",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 10.0
+        },
+        {
+          "text": "(학술대회, 컨퍼런스, 워크샵 경우)",
+          "bold": true,
+          "italic": null,
+          "font_name": null,
+          "font_size": 10.0
+        }
+      ]
+    },
+    {
+      "index": 82,
+      "text": "-저자, 책제목, 출판지(도시), 출판사, 연도 (단행본 도서 경우)",
+      "style": "바탕글",
+      "runs": [
+        {
+          "text": "-저자, 책제목, ",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 10.0
+        },
+        {
+          "text": "출판지",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 10.0
+        },
+        {
+          "text": "(도시), 출판사, 연도",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 10.0
+        },
+        {
+          "text": " (단행본 도서 경우)",
+          "bold": true,
+          "italic": null,
+          "font_name": null,
+          "font_size": 10.0
+        }
+      ]
+    },
+    {
+      "index": 83,
+      "text": "-제목, 제공기관, 최근 접속일(연월일), 웹사이트 주소 (웹사이트 경우)",
+      "style": "바탕글",
+      "runs": [
+        {
+          "text": "-제목, 제공기관, 최근 접속일(연월일), 웹사이트 주소",
+          "bold": null,
+          "italic": null,
+          "font_name": null,
+          "font_size": 10.0
+        },
+        {
+          "text": " (웹사이트 경우)",
+          "bold": true,
+          "italic": null,
+          "font_name": null,
+          "font_size": 10.0
+        }
+      ]
+    }
+  ],
+  "tables": [
+    {
+      "index": 0,
+      "rows": 10,
+      "cols": 5,
+      "sample_data": [
+        [
+          "",
+          "",
+          "서울시 지역구 별 아동 급식카드 가맹점과 \n초등학교 수에 관한 분포",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "홍길동*, 김철수**, 이영희***     \n*한신대학교 IT영상콘텐츠학과\n**한신대학교 문예창작학과\n***한신대학교 한국사학과\ngildong@hs.ac.kr, cheolsoo@hs.ac.kr, younghee@hs.ac.kr",
+          "",
+          ""
+        ]
+      ]
+    },
+    {
+      "index": 1,
+      "rows": 9,
+      "cols": 3,
+      "sample_data": [
+        [
+          "양자 컴퓨터",
+          "큐의 대기 작업 수",
+          "큐비트 수"
+        ],
+        [
+          "Ibmqx2",
+          "2069",
+          "5"
+        ],
+        [
+          "Ibmq_16_melbourne",
+          "8267",
+          "15"
+        ]
+      ]
+    }
+  ],
+  "styles": "{'그림', '바탕글', '1.', 'Body Text', '논문 내용'}"
+}

@@ -1,0 +1,127 @@
+{
+  "user_id": "demo_user_001",
+  "name": "시연 사용자",
+  "sessions": [
+    {
+      "session": 1,
+      "timestamp": "2026-01-14T10:00:00Z",
+      "behavioral_profile": {
+        "pathEfficiency": 0.68,
+        "avgDecisionLatency": 2500,
+        "revisionRate": 2,
+        "jitterIndex": 0.15,
+        "intensity": 1.8
+      },
+      "personality_weights": {
+        "Logic": 0.45,
+        "Intuition": 0.55,
+        "Fluidity": 0.68,
+        "Complexity": 0.52
+      },
+      "confidence": 0.30,
+      "maturity_level": 1,
+      "sync_score": 0.65
+    },
+    {
+      "session": 3,
+      "timestamp": "2026-01-14T11:30:00Z",
+      "behavioral_profile": {
+        "pathEfficiency": 0.72,
+        "avgDecisionLatency": 3200,
+        "revisionRate": 3,
+        "jitterIndex": 0.12,
+        "intensity": 2.1
+      },
+      "personality_weights": {
+        "Logic": 0.52,
+        "Intuition": 0.48,
+        "Fluidity": 0.72,
+        "Complexity": 0.58
+      },
+      "confidence": 0.50,
+      "maturity_level": 1,
+      "sync_score": 0.72
+    },
+    {
+      "session": 5,
+      "timestamp": "2026-01-14T14:00:00Z",
+      "behavioral_profile": {
+        "pathEfficiency": 0.75,
+        "avgDecisionLatency": 3800,
+        "revisionRate": 4,
+        "jitterIndex": 0.10,
+        "intensity": 2.3
+      },
+      "personality_weights": {
+        "Logic": 0.58,
+        "Intuition": 0.42,
+        "Fluidity": 0.75,
+        "Complexity": 0.62
+      },
+      "confidence": 0.70,
+      "maturity_level": 2,
+      "sync_score": 0.78
+    },
+    {
+      "session": 7,
+      "timestamp": "2026-01-14T16:30:00Z",
+      "behavioral_profile": {
+        "pathEfficiency": 0.78,
+        "avgDecisionLatency": 4200,
+        "revisionRate": 5,
+        "jitterIndex": 0.08,
+        "intensity": 2.5
+      },
+      "personality_weights": {
+        "Logic": 0.65,
+        "Intuition": 0.35,
+        "Fluidity": 0.78,
+        "Complexity": 0.68
+      },
+      "confidence": 0.82,
+      "maturity_level": 2,
+      "sync_score": 0.85
+    }
+  ],
+  "predictions": {
+    "30days": {
+      "Logic": 0.72,
+      "Intuition": 0.28,
+      "Fluidity": 0.82,
+      "Complexity": 0.75
+    },
+    "trend": {
+      "Logic": "increasing",
+      "Intuition": "decreasing",
+      "Fluidity": "stable",
+      "Complexity": "increasing"
+    },
+    "slope": {
+      "Logic": 0.012,
+      "Intuition": -0.012,
+      "Fluidity": 0.003,
+      "Complexity": 0.008
+    }
+  },
+  "stress_analysis": {
+    "level": 0.3,
+    "category": "low",
+    "indicators": [
+      "경로 효율성 안정적",
+      "의사결정 패턴 일관성 유지"
+    ],
+    "recommendation": "현재 상태 양호. 지속적인 모니터링 권장."
+  },
+  "anomaly_detection": {
+    "has_anomaly": false,
+    "anomaly_score": 0.15,
+    "anomalies": []
+  },
+  "evolution_summary": {
+    "total_sessions": 7,
+    "confidence_growth": "30% → 82%",
+    "primary_trait": "Analytical (Logic-dominant)",
+    "stability": "high",
+    "drift_detected": false
+  }
+}

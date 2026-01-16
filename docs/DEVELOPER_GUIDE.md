@@ -163,6 +163,53 @@ Body: { "user_id": "...", "behavioral_profile": {...} }
 Response: { "weights": {...}, "archetype": "..." }
 ```
 
+### Game Data Pipeline
+
+게임 플레이 데이터를 통한 성격 추론을 위한 3단계 파이프라인:
+
+```
+POST /api/game/events
+Body: {
+  "user_id": "user123",
+  "game_id": "minecraft",
+  "session_id": "session001",
+  "raw_events": [
+    {"type": "player_move", "timestamp": 1000, ...},
+    {"type": "block_place", "timestamp": 2000, ...}
+  ]
+}
+Response: {
+  "session_id": "...",
+  "parsed_metrics": {...},
+  "updated_weights": {...},
+  "archetype": "...",
+  "confidence": 0.65
+}
+
+POST /api/game/session
+Body: {
+  "user_id": "user123",
+  "game_id": "minecraft",
+  "session_id": "session001",
+  "decision_latency": 1500,
+  "planning_time": 3000,
+  "revision_count": 2,
+  "path_efficiency": 0.85,
+  ...
+}
+Response: {
+  "session_id": "...",
+  "updated_weights": {...},
+  "archetype": "...",
+  "confidence": 0.65
+}
+```
+
+**지원 게임:**
+- `minecraft`: 마인크래프트
+- `stardew_valley`: 스타듀밸리
+- `animal_crossing`: 두근두근타운
+
 ### WebSocket
 
 ```

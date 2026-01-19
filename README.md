@@ -176,6 +176,75 @@ python final_verification_test.py
 npm run test
 ```
 
-##License
+## 🐳 Docker 실행
+
+Python/Node.js 환경 없이 Docker만으로 백엔드를 실행할 수 있습니다.
+
+### 사전 요구사항
+- Docker 설치 ([Docker Desktop](https://www.docker.com/products/docker-desktop/) 권장)
+
+### 빌드 및 실행
+
+```bash
+# 1. Docker 이미지 빌드
+docker build -t abc-backend .
+
+# 2. 컨테이너 실행
+docker run -p 8080:8080 abc-backend
+
+# 3. 헬스체크 (다른 터미널에서)
+curl http://localhost:8080/health
+# 또는 브라우저에서 http://localhost:8080/docs 접속
+```
+
+### 환경 변수 설정
+
+```bash
+# 환경 변수와 함께 실행
+docker run -p 8080:8080 \
+  -e LOG_LEVEL=DEBUG \
+  -e CORS_ORIGINS="http://localhost:5173" \
+  abc-backend
+```
+
+### 개발 모드 (볼륨 마운트)
+
+```bash
+# 코드 변경 시 컨테이너 재시작 없이 반영 (개발용)
+docker run -p 8080:8080 \
+  -v $(pwd)/backend:/app \
+  abc-backend
+```
+
+### 트러블슈팅
+
+| 문제 | 해결 방법 |
+|------|----------|
+| 포트 충돌 | `-p 8081:8080`으로 다른 포트 사용 |
+| 빌드 실패 | `docker build --no-cache -t abc-backend .` |
+| 권한 오류 | `sudo docker ...` 또는 Docker 그룹에 사용자 추가 |
+
+## ☁️ Cloud Run 배포
+
+### 사전 요구사항
+- Google Cloud SDK (`gcloud`) 설치 및 인증
+- GCP 프로젝트 생성 및 Cloud Run API 활성화
+
+### 배포 방법
+
+```bash
+# 1. GCP 인증
+gcloud auth login
+gcloud config set project YOUR_PROJECT_ID
+
+# 2. 배포 스크립트 실행
+cd cloudrun
+chmod +x deploy_backend.sh
+./deploy_backend.sh
+```
+
+자세한 내용은 [`cloudrun/README.md`](cloudrun/README.md)를 참고하세요.
+
+## License
 
 MIT License

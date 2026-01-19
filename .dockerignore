@@ -1,0 +1,52 @@
+# Git
+.git
+.gitignore
+
+# Node.js
+node_modules
+npm-debug.log
+
+# Python
+__pycache__
+*.pyc
+*.pyo
+.pytest_cache
+.venv
+venv
+
+# IDE
+.vscode
+.idea
+.cursor
+
+# Documentation
+docs
+*.md
+!backend/README.md
+
+# Frontend (백엔드 전용 배포 시)
+src
+public
+index.html
+vite.config.js
+vitest.config.ts
+eslint.config.js
+package*.json
+
+# Archives and backups
+archive
+backups
+demo
+
+# Datasets (용량 최소화)
+datasets
+
+# Firebase
+.firebase
+firebase.json
+.firebaserc
+
+# Test files
+*.test.ts
+*.test.tsx
+*.spec.ts

@@ -154,6 +154,29 @@ python final_verification_test.py
 
 ---
 
+## 🐳 Docker 실행
+
+Python 환경 없이 Docker만으로 백엔드를 실행할 수 있습니다.
+
+### 빌드 및 실행
+
+```bash
+# Docker 이미지 빌드
+docker build -t abc-backend .
+
+# 컨테이너 실행
+docker run -p 8080:8080 abc-backend
+
+# 헬스체크
+curl http://localhost:8080/health
+```
+
+### API 문서 확인
+- Swagger UI: http://localhost:8080/docs
+- ReDoc: http://localhost:8080/redoc
+
+---
+
 ## 📚 문서
 
 - **프로젝트 README**: `README.md`
@@ -169,6 +192,29 @@ python final_verification_test.py
 - GDPR 준수
 - 환경 변수를 통한 민감 정보 관리
 - Rate Limiting 적용
+
+---
+
+## ☁️ Cloud Run 배포
+
+### 사전 요구사항
+- Google Cloud SDK (`gcloud`) 설치 및 인증
+- GCP 프로젝트 생성 및 Cloud Run API 활성화
+
+### 배포 방법
+
+```bash
+# 1. GCP 인증
+gcloud auth login
+gcloud config set project YOUR_PROJECT_ID
+
+# 2. 배포 스크립트 실행
+cd cloudrun
+chmod +x deploy_backend.sh
+./deploy_backend.sh
+```
+
+자세한 내용은 [`cloudrun/README.md`](cloudrun/README.md)를 참고하세요.
 
 ---
 

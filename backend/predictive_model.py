@@ -8,12 +8,13 @@
 - 성격 변화 예측
 - 이상 행동 감지
 """
-import numpy as np
-from typing import Dict, List, Optional, Tuple
+import json
 from datetime import datetime, timedelta
-import logging
+from typing import Any, Dict, List, Optional, Tuple
 
-logger = logging.getLogger(__name__)
+import numpy as np
+
+from logger_config import logger
 
 
 class PredictiveModel:
@@ -98,8 +99,8 @@ class PredictiveModel:
     
     def detect_stress_pattern(
         self,
-        history: List[Dict],
-        current_session: Dict
+        history: List[Dict[str, Any]],
+        current_session: Dict[str, Any]
     ) -> Dict:
         """
         스트레스/피로 패턴 감지
@@ -111,7 +112,7 @@ class PredictiveModel:
         Returns:
             스트레스 감지 결과
         """
-        if len(history) < 2:
+        if len(history) < 1:
             return {"status": "insufficient_data"}
         
         # 최근 3개 세션과 비교
@@ -119,33 +120,31 @@ class PredictiveModel:
         
         # 평균 의사결정 지연시간 계산
         avg_latencies = []
+        revision_history = []
+        efficiency_history = []
         for session in recent:
-            if 'raw_metrics' in session and session['raw_metrics']:
-                try:
-                    import json
-                    metrics = json.loads(session['raw_metrics']) if isinstance(session['raw_metrics'], str) else session['raw_metrics']
-                    latency = metrics.get('summary', {}).get('avgDecisionLatency', 0)
-                    if latency > 0:
-                        avg_latencies.append(latency)
-                except:
-                    pass
+            metrics = self._extract_session_metrics(session)
+            latency = metrics.get("avg_decision_latency")
+            if latency is not None and latency > 0:
+                avg_latencies.append(latency)
+            if "revision_rate" in metrics:
+                revision_history.append(metrics["revision_rate"])
+            if "path_efficiency" in metrics:
+                efficiency_history.append(metrics["path_efficiency"])
         
-        if len(avg_latencies) < 2:
+        if len(avg_latencies) < 1 and not revision_history and not efficiency_history:
             return {"status": "insufficient_data"}
         
         # 현재 세션의 지연시간
-        current_latency = 0
-        if 'raw_metrics' in current_session:
-            try:
-                import json
-                metrics = json.loads(current_session['raw_metrics']) if isinstance(current_session['raw_metrics'], str) else current_session['raw_metrics']
-                current_latency = metrics.get('summary', {}).get('avgDecisionLatency', 0)
-            except:
-                pass
+        current_metrics = self._extract_session_metrics(current_session)
+        current_latency = current_metrics.get("avg_decision_latency", 0)
         
         # 평균과 비교
         baseline_latency = np.mean(avg_latencies)
-        latency_increase = (current_latency - baseline_latency) / baseline_latency if baseline_latency > 0 else 0
+        if baseline_latency > 0 and current_latency > 0:
+            latency_increase = (current_latency - baseline_latency) / baseline_latency
+        else:
+            latency_increase = 0
         
         # 스트레스 지표
         stress_level = 0.0
@@ -156,16 +155,16 @@ class PredictiveModel:
             stress_indicators.append("의사결정 지연시간 증가")
         
         # 수정 빈도 증가도 스트레스 지표
-        if 'revision_rate' in current_session:
-            avg_revisions = np.mean([s.get('revision_rate', 0) for s in recent])
-            if current_session['revision_rate'] > avg_revisions * 1.5:
+        if "revision_rate" in current_metrics and revision_history:
+            avg_revisions = np.mean(revision_history)
+            if current_metrics["revision_rate"] > avg_revisions * 1.5:
                 stress_level += 0.3
                 stress_indicators.append("수정 빈도 증가")
         
         # 경로 효율성 감소
-        if 'path_efficiency' in current_session:
-            avg_efficiency = np.mean([s.get('path_efficiency', 1.0) for s in recent])
-            if current_session['path_efficiency'] < avg_efficiency * 0.8:
+        if "path_efficiency" in current_metrics and efficiency_history:
+            avg_efficiency = np.mean(efficiency_history)
+            if current_metrics["path_efficiency"] < avg_efficiency * 0.8:
                 stress_level += 0.3
                 stress_indicators.append("경로 효율성 감소")
         
@@ -179,6 +178,51 @@ class PredictiveModel:
             "latency_change": round(latency_increase * 100, 1),  # 퍼센트
             "recommendation": self._get_stress_recommendation(stress_level)
         }
+
+    def _extract_session_metrics(self, session: Dict[str, Any]) -> Dict[str, float]:
+        """
+        세션 데이터에서 스트레스 분석용 메트릭을 추출합니다.
+
+        Args:
+            session: raw_metrics 또는 평탄 키를 포함할 수 있는 세션 데이터
+
+        Returns:
+            avg_decision_latency, revision_rate, path_efficiency 키를 포함한 딕셔너리
+        """
+        metrics: Dict[str, float] = {}
+
+        raw_metrics = session.get("raw_metrics")
+        if raw_metrics:
+            try:
+                parsed = json.loads(raw_metrics) if isinstance(raw_metrics, str) else raw_metrics
+                summary = parsed.get("summary", {})
+                if "avgDecisionLatency" in summary:
+                    metrics["avg_decision_latency"] = float(summary.get("avgDecisionLatency", 0) or 0)
+                if "revisionRate" in summary:
+                    metrics["revision_rate"] = float(summary.get("revisionRate", 0) or 0)
+                if "pathEfficiency" in summary:
+                    metrics["path_efficiency"] = float(summary.get("pathEfficiency", 0) or 0)
+            except (json.JSONDecodeError, TypeError, ValueError) as exc:
+                logger.warning("Failed to parse raw_metrics for stress detection: %s", exc)
+
+        fallback_keys = {
+            "avg_decision_latency": ["avg_decision_latency", "avgDecisionLatency"],
+            "revision_rate": ["revision_rate", "revisionRate"],
+            "path_efficiency": ["path_efficiency", "pathEfficiency"],
+        }
+
+        for target_key, candidates in fallback_keys.items():
+            if target_key in metrics:
+                continue
+            for candidate in candidates:
+                if candidate in session:
+                    try:
+                        metrics[target_key] = float(session.get(candidate, 0) or 0)
+                    except (TypeError, ValueError) as exc:
+                        logger.warning("Invalid %s for stress detection: %s", candidate, exc)
+                    break
+
+        return metrics
     
     def _categorize_stress(self, level: float) -> str:
         """

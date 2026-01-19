@@ -6,7 +6,7 @@
 - gcloud CLI 설치
 - GCP 프로젝트 생성
 - 결제 계정 연결
- - `gcloud auth login` 또는 서비스 계정 인증
+- `gcloud auth login` 또는 서비스 계정 인증
 
 ## 환경 변수 설정
 `cloudrun/env.yaml`을 수정해 실제 값으로 변경하세요.

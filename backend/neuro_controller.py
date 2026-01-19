@@ -1,6 +1,7 @@
 import numpy as np
 import time
-import logging
+
+from logger_config import logger
 
 # Mock gRPC stubs for standalone testing
 # from proto import neuro_signal_pb2, neuro_signal_pb2_grpc

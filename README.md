@@ -119,13 +119,14 @@ ABC/
 
 ## Environment Variables
 
-환경 변수는 `.env.production` 파일 또는 시스템 환경 변수로 설정합니다.
+환경 변수는 `.env.local` 또는 `.env.production` 파일, 혹은 시스템 환경 변수로 설정합니다.
 
 ### 주요 환경 변수
 
 - `CORS_ORIGINS`: CORS 허용 오리진 (기본값: `http://localhost:5173,http://localhost:3000,http://localhost:5180`)
 - `LOG_LEVEL`: 로그 레벨 (기본값: `INFO`)
 - `PORT`: 백엔드 서버 포트 (기본값: `8000`)
+- `DB_PATH`: 사용자 프로필 DB 경로 (기본값: `backend/user_profiles.db`)
 - `VITE_API_URL`: 프론트엔드 API URL (기본값: `http://localhost:8000`)
 - `VITE_WS_URL`: WebSocket URL (기본값: `ws://localhost:8000`)
 
@@ -176,6 +177,6 @@ python final_verification_test.py
 npm run test
 ```
 
-##License
+## License
 
 MIT License

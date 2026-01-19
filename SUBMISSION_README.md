@@ -73,7 +73,13 @@ ABC/
 ```bash
 cd backend
 pip install -r requirements.txt
-python api_server.py
+python3 api_server.py
+```
+
+테스트 실행 시 추가 의존성을 설치하세요:
+
+```bash
+pip install -r requirements-dev.txt
 ```
 
 서버는 기본적으로 `http://localhost:8000`에서 실행됩니다.
@@ -83,6 +89,13 @@ python api_server.py
 ```bash
 npm install
 npm run dev
+```
+
+로컬 원클릭 실행 스크립트:
+
+```bash
+chmod +x run_local.sh test_local.sh
+./run_local.sh
 ```
 
 프론트엔드는 기본적으로 `http://localhost:5173`에서 실행됩니다.
@@ -145,7 +158,13 @@ PORT=8000
 ### Backend 테스트
 ```bash
 cd backend
-pytest tests/
+python3 -m pytest tests/
+```
+
+또는 스크립트 실행:
+
+```bash
+./test_local.sh
 ```
 
 ### 전체 시스템 테스트

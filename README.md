@@ -36,7 +36,13 @@ cd ABC
 npm install
 
 # Install backend dependencies
-pip install -r backend/requirements.txt
+python3 -m pip install -r backend/requirements.txt
+```
+
+로컬 테스트를 실행하려면 추가 의존성을 설치하세요:
+
+```bash
+python3 -m pip install -r backend/requirements-dev.txt
 ```
 
 ## 📊 Datasets
@@ -69,8 +75,14 @@ git add .gitattributes
 ## 🏃 Running
 
 ```bash
+# Make scripts executable (once)
+chmod +x run_local.sh test_local.sh
+
 # Development (Frontend + Backend)
 npm run dev
+
+# One-step local run script
+./run_local.sh
 
 # Frontend only
 npm run dev:frontend
@@ -168,13 +180,16 @@ ABC/
 ```bash
 # 백엔드 테스트 실행
 cd backend
-python -m pytest tests/
+python3 -m pytest tests/
 
 # 최종 검증 테스트 실행
 python final_verification_test.py
 
 # 프론트엔드 테스트 실행
 npm run test
+
+# One-step local test script
+./test_local.sh
 ```
 
 ## License

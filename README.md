@@ -98,6 +98,17 @@ The app runs at:
 - Frontend: `http://localhost:5173`
 - Backend: `http://localhost:8000`
 
+## ☁️ Cloud Run 배포 (Backend)
+
+Cloud Run에 백엔드를 배포하려면 `cloudrun/env.yaml`을 수정한 뒤 스크립트를 실행하세요. 프론트엔드는 별도 호스팅(Firebase Hosting, Vercel 등)을 권장합니다.
+
+```bash
+chmod +x cloudrun/deploy_backend.sh
+bash cloudrun/deploy_backend.sh <gcp-project-id> [region] [service-name]
+```
+
+참고: SQLite는 컨테이너 파일시스템에 저장되므로 재시작 시 데이터가 유실됩니다. 영구 저장이 필요하면 Cloud SQL 또는 Firestore를 사용하세요.
+
 ## 📁 Project Structure
 
 ```

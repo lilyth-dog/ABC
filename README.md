@@ -36,7 +36,13 @@ cd ABC
 npm install
 
 # Install backend dependencies
-pip install -r backend/requirements.txt
+python3 -m pip install -r backend/requirements.txt
+```
+
+로컬 테스트를 실행하려면 추가 의존성을 설치하세요:
+
+```bash
+python3 -m pip install -r backend/requirements-dev.txt
 ```
 
 ## 📊 Datasets
@@ -69,8 +75,14 @@ git add .gitattributes
 ## 🏃 Running
 
 ```bash
+# Make scripts executable (once)
+chmod +x run_local.sh test_local.sh
+
 # Development (Frontend + Backend)
 npm run dev
+
+# One-step local run script
+./run_local.sh
 
 # Frontend only
 npm run dev:frontend
@@ -85,6 +97,17 @@ npm run build
 The app runs at:
 - Frontend: `http://localhost:5173`
 - Backend: `http://localhost:8000`
+
+## ☁️ Cloud Run 배포 (Backend)
+
+Cloud Run에 백엔드를 배포하려면 `cloudrun/env.yaml`을 수정한 뒤 스크립트를 실행하세요. 프론트엔드는 별도 호스팅(Firebase Hosting, Vercel 등)을 권장합니다.
+
+```bash
+chmod +x cloudrun/deploy_backend.sh
+bash cloudrun/deploy_backend.sh <gcp-project-id> [region] [service-name]
+```
+
+참고: SQLite는 컨테이너 파일시스템에 저장되므로 재시작 시 데이터가 유실됩니다. 영구 저장이 필요하면 Cloud SQL 또는 Firestore를 사용하세요.
 
 ## 📁 Project Structure
 
@@ -119,13 +142,14 @@ ABC/
 
 ## Environment Variables
 
-환경 변수는 `.env.production` 파일 또는 시스템 환경 변수로 설정합니다.
+환경 변수는 `.env.local` 또는 `.env.production` 파일, 혹은 시스템 환경 변수로 설정합니다.
 
 ### 주요 환경 변수
 
 - `CORS_ORIGINS`: CORS 허용 오리진 (기본값: `http://localhost:5173,http://localhost:3000,http://localhost:5180`)
 - `LOG_LEVEL`: 로그 레벨 (기본값: `INFO`)
 - `PORT`: 백엔드 서버 포트 (기본값: `8000`)
+- `DB_PATH`: 사용자 프로필 DB 경로 (기본값: `backend/user_profiles.db`)
 - `VITE_API_URL`: 프론트엔드 API URL (기본값: `http://localhost:8000`)
 - `VITE_WS_URL`: WebSocket URL (기본값: `ws://localhost:8000`)
 
@@ -167,15 +191,18 @@ ABC/
 ```bash
 # 백엔드 테스트 실행
 cd backend
-python -m pytest tests/
+python3 -m pytest tests/
 
 # 최종 검증 테스트 실행
 python final_verification_test.py
 
 # 프론트엔드 테스트 실행
 npm run test
+
+# One-step local test script
+./test_local.sh
 ```
 
-##License
+## License
 
 MIT License

@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\"",
     "dev:frontend": "vite",
-    "dev:backend": "python -m uvicorn api_server:app --reload --app-dir backend --port 8000",
+    "dev:backend": "python3 -m uvicorn api_server:app --reload --app-dir backend --port 8000",
     "build": "vite build",
     "build:analyze": "vite build && npx vite-bundle-visualizer",
     "lint": "eslint .",
@@ -15,7 +15,7 @@
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
     "test:ui": "vitest --ui",
-    "test:backend": "cd backend && python -m pytest tests/ -v"
+    "test:backend": "cd backend && python3 -m pytest tests/ -v"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.7",
@@ -42,6 +42,7 @@
     "eslint-plugin-react-refresh": "^0.4.24",
     "globals": "^16.5.0",
     "jsdom": "^27.4.0",
+    "terser": "^5.46.0",
     "vite": "^7.2.4",
     "vitest": "^4.0.17"
   }

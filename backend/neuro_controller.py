@@ -1,6 +1,7 @@
 import numpy as np
 import time
-import logging
+
+from logger_config import logger
 
 # Mock gRPC stubs for standalone testing
 # from proto import neuro_signal_pb2, neuro_signal_pb2_grpc
@@ -519,6 +520,8 @@ class MagnonicController:
             theta_power=decoded["synthetic_theta"],
             beta_power=decoded["synthetic_beta"]
         )
+        result["synthetic_theta"] = decoded["synthetic_theta"]
+        result["synthetic_beta"] = decoded["synthetic_beta"]
         result["behavioral_traits"] = decoded["traits"]
         result["aesthetics"] = decoded["aesthetics"]
         

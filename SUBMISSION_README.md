@@ -1,4 +1,4 @@
-# ABC 해커톤 프로젝트 제출 가이드
+# Nexus Entertainment 해커톤 프로젝트 제출 가이드
 
 ## 📦 제출 구성
 
@@ -15,13 +15,15 @@
 
 ## 🚀 프로젝트 개요
 
-**행동 기반 디지털 휴먼 트윈: 게임 플레이 기반 성격 추론 및 개인화 시스템**
+**Nexus Entertainment: 행동 기반 디지털 휴먼 트윈 — 게임 플레이 기반 성격 추론 및 개인화 시스템**
 
-게임 플레이 데이터를 활용하여 사용자의 성격을 추론하고, 이를 바탕으로 개인화된 게임 경험을 제공하는 시스템입니다.
+Nexus Entertainment는 게임 플레이 데이터를 활용하여 사용자의 성격을 추론하고, 이를 바탕으로 개인화된 게임 경험을 제공하는 시스템입니다.
 
 ---
 
 ## 📋 프로젝트 구조
+
+리포지토리 폴더명은 `ABC/`입니다.
 
 ```
 ABC/
@@ -70,8 +72,14 @@ ABC/
 
 ```bash
 cd backend
-pip install -r requirements.txt
-python api_server.py
+python3 -m pip install -r requirements.txt
+python3 api_server.py
+```
+
+테스트 실행 시 추가 의존성을 설치하세요:
+
+```bash
+python3 -m pip install -r requirements-dev.txt
 ```
 
 서버는 기본적으로 `http://localhost:8000`에서 실행됩니다.
@@ -83,24 +91,44 @@ npm install
 npm run dev
 ```
 
+로컬 원클릭 실행 스크립트:
+
+```bash
+chmod +x run_local.sh test_local.sh
+./run_local.sh
+```
+
 프론트엔드는 기본적으로 `http://localhost:5173`에서 실행됩니다.
+
+---
+
+## ☁️ Cloud Run 배포 (Backend)
+
+Cloud Run 배포용 스크립트를 제공합니다. `cloudrun/env.yaml`을 수정한 뒤 실행하세요. 프론트엔드는 별도 호스팅(Firebase Hosting, Vercel 등)을 권장합니다.
+
+```bash
+chmod +x cloudrun/deploy_backend.sh
+bash cloudrun/deploy_backend.sh <gcp-project-id> [region] [service-name]
+```
+
+SQLite는 컨테이너 파일시스템에 저장되므로 재시작 시 데이터가 유실됩니다. 영구 저장이 필요하면 Cloud SQL 또는 Firestore를 사용하세요.
 
 ---
 
 ## 🔧 환경 변수
 
-`.env` 파일을 생성하고 다음 변수를 설정하세요:
+`.env.example`를 복사해 `.env.local` 또는 `.env.production`으로 사용하고, 백엔드는 시스템 환경 변수로 설정하세요.
 
 ```env
-# API 설정
-API_HOST=localhost
-API_PORT=8000
+# Frontend (Vite)
+VITE_API_URL=http://localhost:8000
+VITE_WS_URL=ws://localhost:8000
 
-# 데이터베이스
-DATABASE_PATH=backend/user_profiles.db
-
-# 로깅
+# Backend
+CORS_ORIGINS=http://localhost:5173,http://localhost:3000,http://localhost:5180
 LOG_LEVEL=INFO
+PORT=8000
+# DB_PATH=backend/user_profiles.db
 ```
 
 ---
@@ -143,7 +171,13 @@ LOG_LEVEL=INFO
 ### Backend 테스트
 ```bash
 cd backend
-pytest tests/
+python3 -m pytest tests/
+```
+
+또는 스크립트 실행:
+
+```bash
+./test_local.sh
 ```
 
 ### 전체 시스템 테스트
@@ -174,7 +208,7 @@ python final_verification_test.py
 
 ## 📝 라이선스
 
-이 프로젝트는 ABC 해커톤 제출용으로 개발되었습니다.
+Nexus Entertainment 프로젝트는 ABC 해커톤 제출용으로 개발되었습니다.
 
 ---
 

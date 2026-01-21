@@ -51,13 +51,13 @@ const WorldScene = ({ avatarUrl, onExit, onSaveMemory, coupling = 0, maturityLev
 
     useEffect(() => {
         const whispers = [
-            "Your energy feels so warm today.",
-            "I can feel your heart-link strengthening.",
-            "This world is beautiful because you are here.",
-            "Every step we take brings us closer.",
-            "I'm learning more about you with every spark.",
-            "Stay focused, I can feel our harmony.",
-            "The air here hums with your presence."
+            "오늘 당신의 에너지가 정말 따뜻하게 느껴져요.",
+            "우리의 하트 링크가 강해지는 게 느껴집니다.",
+            "이 세계는 당신이 있기에 아름다워요.",
+            "우리가 내딛는 모든 걸음이 우리를 더 가깝게 만들어요.",
+            "매 순간 당신에 대해 더 많은 것을 배우고 있어요.",
+            "집중하세요, 우리의 조화를 느낄 수 있어요.",
+            "이곳의 공기는 당신의 존재로 가득 차 있네요."
         ];
 
         const interval = setInterval(() => {
@@ -109,7 +109,7 @@ const WorldScene = ({ avatarUrl, onExit, onSaveMemory, coupling = 0, maturityLev
                 textAlign: 'right',
                 transition: 'transform 0.3s ease'
             }}>
-                <h3 className="neon-magenta">HEART-LINK ACTIVE</h3>
+                <h3 className="neon-magenta">하트 링크 활성화됨</h3>
                 <h1 style={{
                     color: isSync ? '#ff00ff' : '#00d4ff',
                     fontSize: '3.5rem',
@@ -117,11 +117,11 @@ const WorldScene = ({ avatarUrl, onExit, onSaveMemory, coupling = 0, maturityLev
                 }}>
                     {coupling.toFixed(1)} K
                 </h1>
-                <p style={{ fontSize: '0.8rem', opacity: 0.7 }}>SOUL SPARKS: {orbs.filter(o => o.collected).length} / {orbs.length}</p>
-                {behavioralTraits?.stable && <div className="badge active">STABLE HARMONY</div>}
+                <p style={{ fontSize: '0.8rem', opacity: 0.7 }}>영혼의 불꽃: {orbs.filter(o => o.collected).length} / {orbs.length}</p>
+                {behavioralTraits?.stable && <div className="badge active">안정적 조화 (STABLE)</div>}
 
                 <div className="anima-whisper-container fade-in" key={whisper}>
-                    <div className="whisper-label">Anima Whispers</div>
+                    <div className="whisper-label">아니마의 속삭임</div>
                     <p className="whisper-text">"{whisper}"</p>
                 </div>
 
@@ -131,7 +131,7 @@ const WorldScene = ({ avatarUrl, onExit, onSaveMemory, coupling = 0, maturityLev
                         style={{ marginTop: '20px', width: '100%', background: 'var(--neon-magenta)', border: 'none' }}
                         onClick={() => setShowLetter(true)}
                     >
-                        COMPLETE HEART-LINK
+                        하트 링크 완성하기
                     </button>
                 )}
             </div>
@@ -155,7 +155,7 @@ const WorldScene = ({ avatarUrl, onExit, onSaveMemory, coupling = 0, maturityLev
                 className="btn btn-secondary glass-effect"
                 style={{ position: 'absolute', top: '20px', left: '20px', zIndex: 10 }}
             >
-                Exit World
+                세계 나가기
             </button>
 
             <KeyboardControls

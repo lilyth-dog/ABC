@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Human Twin - Team CuBe | ABC 해커톤</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+        :root {
+            --primary: #3b82f6;
+            --primary-glow: rgba(59, 130, 246, 0.5);
+            --secondary: #a855f7;
+            --accent: #10b981;
+            --bg: #050505;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.08);
+            --text-main: #ffffff;
+            --text-dim: #a0a0a0;
+            --font-main: 'Outfit', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background: var(--bg);
+            color: var(--text-main);
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        /* Animated Background */
+        .bg-ambient {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at 50% 50%, #0a0a0a 0%, #000 100%);
+            overflow: hidden;
+        }
+
+        .blob {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--primary-glow) 0%, transparent 70%);
+            filter: blur(80px);
+            border-radius: 50%;
+            opacity: 0.15;
+            animation: move 20s infinite alternate;
+        }
+
+        .blob-2 {
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.3) 0%, transparent 70%);
+            left: 60%;
+            top: 40%;
+            animation-duration: 25s;
+            animation-delay: -5s;
+        }
+
+        @keyframes move {
+            from { transform: translate(-20%, -20%) scale(1); }
+            to { transform: translate(20%, 20%) scale(1.2); }
+        }
+
+        .slide {
+            display: none;
+            width: 100vw;
+            height: 100vh;
+            padding: 80px 120px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            flex-direction: column;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .slide.active {
+            display: flex;
+            opacity: 1;
+            z-index: 10;
+        }
+
+        .slide-content {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            transition-delay: 0.3s;
+        }
+
+        .slide.active .slide-content {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        h1 {
+            font-size: 5.5rem;
+            font-weight: 800;
+            margin-bottom: 24px;
+            letter-spacing: -3px;
+            line-height: 1;
+            background: linear-gradient(to bottom right, #fff 30%, rgba(255,255,255,0.5) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        h2 {
+            font-size: 3.2rem;
+            font-weight: 700;
+            margin-bottom: 40px;
+            letter-spacing: -1.5px;
+            color: #fff;
+        }
+
+        .subtitle {
+            font-size: 1.8rem;
+            color: var(--text-dim);
+            margin-bottom: 60px;
+            font-weight: 300;
+        }
+
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 40px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(59, 130, 246, 0.3);
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+            transition: 0.5s;
+        }
+
+        .card:hover::after {
+            left: 100%;
+        }
+
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+
+        .tag {
+            padding: 8px 20px;
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            color: var(--primary);
+            border-radius: 100px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-right: 12px;
+            transition: all 0.3s;
+        }
+
+        .tag:hover {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 0 20px var(--primary-glow);
+        }
+
+        .logo-icon {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 40px;
+            box-shadow: 0 0 40px var(--primary-glow);
+            animation: pulse 3s infinite ease-in-out;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 20px var(--primary-glow); }
+            50% { transform: scale(1.05); box-shadow: 0 0 50px var(--primary-glow); }
+        }
+
+        .navigation {
+            position: fixed;
+            bottom: 50px;
+            right: 80px;
+            display: flex;
+            gap: 16px;
+            z-index: 100;
+        }
+
+        .nav-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-btn:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+            transform: scale(1.1);
+        }
+
+        .progress-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: rgba(255,255,255,0.05);
+            z-index: 1000;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            width: 0%;
+            transition: width 0.4s ease;
+            box-shadow: 0 0 15px var(--primary-glow);
+        }
+
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff, var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .dimension-card {
+            background: rgba(255,255,255,0.02);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 16px;
+            border-left: 4px solid var(--primary);
+            transition: transform 0.3s;
+        }
+
+        .dimension-card:hover {
+            transform: translateX(10px);
+            background: rgba(255,255,255,0.05);
+        }
+
+        .big-quote {
+            font-size: 2.2rem;
+            font-weight: 600;
+            text-align: center;
+            padding: 60px;
+            border-radius: 30px;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(168, 85, 247, 0.1));
+            border: 1px solid rgba(255,255,255,0.1);
+            margin: 40px 0;
+            line-height: 1.4;
+        }
+
+        .author-info {
+            position: absolute;
+            bottom: 80px;
+            left: 120px;
+        }
+
+        .author-info h3 { font-size: 1.5rem; margin-top: 8px; }
+        .author-info p { color: var(--text-dim); }
+
+        .slide-num-indicator {
+            position: absolute;
+            top: 80px;
+            right: 120px;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-dim);
+            letter-spacing: 2px;
+        }
+
+        /* Flow Diagram */
+        .flow-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 60px 0;
+            position: relative;
+        }
+
+        .flow-step {
+            flex: 1;
+            text-align: center;
+            padding: 30px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            position: relative;
+            z-index: 2;
+        }
+
+        .flow-arrow {
+            width: 40px;
+            text-align: center;
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
+
+        /* Comparison Table Premium */
+        .premium-table {
+            width: 100%;
+            border-spacing: 0 12px;
+            border-collapse: separate;
+        }
+
+        .premium-table th {
+            padding: 20px;
+            text-align: left;
+            color: var(--text-dim);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.8rem;
+        }
+
+        .premium-table td {
+            padding: 24px;
+            background: rgba(255,255,255,0.02);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .premium-table td:first-child { border-left: 1px solid var(--border); border-radius: 16px 0 0 16px; font-weight: 700; color: white; }
+        .premium-table td:last-child { border-right: 1px solid var(--border); border-radius: 0 16px 16px 0; background: rgba(59, 130, 246, 0.05); color: var(--primary); font-weight: 600; }
+
+        .highlight-text {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        ul { list-style: none; }
+        ul li {
+            padding: 12px 0;
+            padding-left: 30px;
+            position: relative;
+            color: var(--text-dim);
+            font-size: 1.1rem;
+        }
+        ul li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: 900;
+        }
+
+        .center { text-align: center; display: flex; flex-direction: column; align-items: center; }
+
+        /* Code premium */
+        .code-block {
+            background: #000;
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+        }
+    </style>
+    </style>
+</head>
+<body>
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <div class="bg-ambient">
+        <div class="blob"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <!-- Slide 1: Title -->
+    <div class="slide active" id="slide1">
+        <div class="slide-num-indicator">01 / 10</div>
+        <div class="slide-content center">
+            <div class="logo-icon">CuBe</div>
+            <h1>Digital Human Twin</h1>
+            <p class="subtitle">차세대 성향 추론 및 개인화 시스템</p>
+            <div style="margin-top: 20px;">
+                <span class="tag">AI / Neural Engine</span>
+                <span class="tag">Behavioral Analytics</span>
+                <span class="tag">Privacy First</span>
+                <span class="tag">GDPR Ready</span>
+            </div>
+            <div class="author-info">
+                <p class="highlight-text">Team CuBe</p>
+                <h3>유준석 (Junseok Yoo)</h3>
+                <p>ABC 해커톤 2026</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 2: Problem -->
+    <div class="slide" id="slide2">
+        <div class="slide-num-indicator">02 / 10</div>
+        <div class="slide-content">
+            <p class="highlight-text" style="text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px;">THE CHALLENGE</p>
+            <h2>개인화의 한계.</h2>
+            <div class="grid-3">
+                <div class="card">
+                    <div class="stat-number" style="font-size: 1.5rem; margin-bottom: 20px; color: var(--primary);">01</div>
+                    <h3 style="margin-bottom: 15px;">정적 설문 조사</h3>
+                    <p>수동 입력에 의존하는 방식.</p>
+                    <p style="margin-top: 15px; color: var(--secondary); font-weight: 600;">#부정확함 #사용자_피로</p>
+                </div>
+                <div class="card">
+                    <div class="stat-number" style="font-size: 1.5rem; margin-bottom: 20px; color: var(--primary);">02</div>
+                    <h3 style="margin-bottom: 15px;">명시적 피드백</h3>
+                    <p>좋아요, 별점, 클릭 기반.</p>
+                    <p style="margin-top: 15px; color: var(--secondary); font-weight: 600;">#제한적_정보 #의견_편향</p>
+                </div>
+                <div class="card">
+                    <div class="stat-number" style="font-size: 1.5rem; margin-bottom: 20px; color: var(--primary);">03</div>
+                    <h3 style="margin-bottom: 15px;">일회성 프로파일링</h3>
+                    <p>사람은 변하지만 프로필은 그대로.</p>
+                    <p style="margin-top: 15px; color: var(--secondary); font-weight: 600;">#빠른_노후화 #실시간성_부재</p>
+                </div>
+            </div>
+            <div class="big-quote">
+                "유저에게 <span class="highlight-text">묻지 않고도</span>, 그들의 마음을 이해할 수 있다면?"
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 3: Solution -->
+    <div class="slide" id="slide3">
+        <div class="slide-num-indicator">03 / 10</div>
+        <div class="slide-content">
+            <p class="highlight-text" style="text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px;">THE SOLUTION</p>
+            <h2>비가시적 행동 데이터 수집</h2>
+            <div class="flow-container">
+                <div class="flow-step">
+                    <h3 style="color: var(--primary);">게임 플레이</h3>
+                    <p style="font-size: 0.9rem;">자연스러운 참여</p>
+                </div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">
+                    <h3 style="color: var(--secondary);">행동 로그</h3>
+                    <p style="font-size: 0.9rem;">미세 상호작용</p>
+                </div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">
+                    <h3 style="color: var(--accent);">인격 엔진</h3>
+                    <p style="font-size: 0.9rem;">뉴럴 추론</p>
+                </div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">
+                    <h3 style="color: white; background: var(--primary); border-radius: 12px;">디지털 트윈</h3>
+                    <p style="font-size: 0.9rem;">실행 가능한 프로필</p>
+                </div>
+            </div>
+            <div class="grid-2">
+                <div class="card">
+                    <h3 style="margin-bottom: 20px;">수집 벡터</h3>
+                    <ul>
+                        <li><span style="color: white;">의사결정 레이턴시</span> (직관 vs 신중)</li>
+                        <li><span style="color: white;">경로 최적화 성향</span> (효율 vs 탐험)</li>
+                        <li><span style="color: white;">반복 행동 패턴</span> (무작위 vs 계획)</li>
+                        <li><span style="color: white;">상호작용 밀도</span> (사회적 vs 개인)</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3 style="margin-bottom: 20px;">멀티 게임 에코시스템</h3>
+                    <p>하나의 핵심 프로필, 무한한 서비스 연결.</p>
+                    <div style="margin-top: 20px;">
+                        <span class="tag">마인크래프트</span>
+                        <span class="tag">스타듀 밸리</span>
+                        <span class="tag">커스텀 SDK</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 4: 4D Personality Model -->
+    <div class="slide" id="slide4">
+        <div class="slide-num-indicator">04 / 10</div>
+        <div class="slide-content">
+            <p class="highlight-text" style="text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px;">CORE ENGINE</p>
+            <h2>LIFC 아키텍처</h2>
+            <div class="grid-2">
+                <div>
+                    <div class="dimension-card">
+                        <h3 style="color: var(--primary);">Logic (논리)</h3>
+                        <p>분석적 깊이 및 전략적 계획 지표.</p>
+                    </div>
+                    <div class="dimension-card" style="border-left-color: var(--secondary);">
+                        <h3 style="color: var(--secondary);">Intuition (직관)</h3>
+                        <p>반응 속도 및 즉각적인 의사결정 성향.</p>
+                    </div>
+                    <div class="dimension-card" style="border-left-color: var(--accent);">
+                        <h3 style="color: var(--accent);">Fluidity (유연성)</h3>
+                        <p>움직임의 부드러움 및 환경 적응력.</p>
+                    </div>
+                    <div class="dimension-card" style="border-left-color: #f59e0b;">
+                        <h3 style="color: #f59e0b;">Complexity (복잡성)</h3>
+                        <p>구조적 창의성 및 실험적 행동 밀도.</p>
+                    </div>
+                </div>
+                <div class="center" style="background: rgba(255,255,255,0.02); border-radius: 30px; padding: 40px;">
+                    <!-- Radar SVG with better aesthetics -->
+                    <svg width="400" height="400" viewBox="0 0 400 400">
+                        <defs>
+                            <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:var(--primary);stop-opacity:0.6" />
+                                <stop offset="100%" style="stop-color:var(--secondary);stop-opacity:0.6" />
+                            </linearGradient>
+                        </defs>
+                        <!-- Grid -->
+                        <circle cx="200" cy="200" r="150" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1" />
+                        <circle cx="200" cy="200" r="100" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1" />
+                        <circle cx="200" cy="200" r="50" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1" />
+                        
+                        <line x1="200" y1="50" x2="200" y2="350" stroke="rgba(255,255,255,0.1)" />
+                        <line x1="50" y1="200" x2="350" y2="200" stroke="rgba(255,255,255,0.1)" />
+
+                        <!-- Data Area -->
+                        <polygon points="200,80 320,200 200,310 90,200" fill="url(#grad1)" stroke="var(--primary)" stroke-width="3" style="filter: drop-shadow(0 0 10px var(--primary-glow));" />
+                        
+                        <!-- Points -->
+                        <circle cx="200" cy="80" r="6" fill="white" />
+                        <circle cx="320" cy="200" r="6" fill="white" />
+                        <circle cx="200" cy="310" r="6" fill="white" />
+                        <circle cx="90" cy="200" r="6" fill="white" />
+
+                        <text x="200" y="35" text-anchor="middle" fill="var(--primary)" font-weight="800">논리</text>
+                        <text x="360" y="205" text-anchor="start" fill="var(--secondary)" font-weight="800">직관</text>
+                        <text x="200" y="375" text-anchor="middle" fill="var(--accent)" font-weight="800">유연성</text>
+                        <text x="40" y="205" text-anchor="end" fill="#f59e0b" font-weight="800">복잡성</text>
+                    </svg>
+                    <h3 style="margin-top: 20px;">주요 아키타입: <span class="highlight-text">선구적 탐험가</span></h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 5: EMA Learning -->
+    <div class="slide" id="slide5">
+        <div class="slide-num-indicator">05 / 10</div>
+        <div class="slide-content">
+            <p class="highlight-text" style="text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px;">THE ALGORITHM</p>
+            <h2>지속적 프로필 진화</h2>
+            <div class="grid-2">
+                <div class="center" style="justify-content: center;">
+                    <div class="code-block" style="text-align: left; width: 100%;">
+                        <span style="color: #6b7280;"># 적응형 EMA 모델</span><br>
+                        <span style="color: #f472b6;">def</span> <span style="color: #3b82f6;">update_digital_twin</span>(current, previous, alpha):<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #6b7280;"># 과거 데이터 감쇠, 최신 행동 우선순위 지정</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #f472b6;">return</span> (alpha * current) + ((1 - alpha) * previous)<br><br>
+                        <span style="color: #6b7280;"># 신뢰도 점수 진화</span><br>
+                        <span style="color: #10b981;">Confidence: 0.89 [High Fidelity]</span>
+                    </div>
+                </div>
+                <div>
+                    <div class="card" style="margin-bottom: 20px;">
+                        <h3 style="color: var(--primary);">자기 보정 (Self-Correcting)</h3>
+                        <p>실수나 일시적 이탈 행동(노이즈)을 자동으로 필터링하여 프로필 무결성 유지.</p>
+                    </div>
+                    <div class="card">
+                        <h3 style="color: var(--secondary);">장기 기억 (Long-term Memory)</h3>
+                        <p>역사적 데이터에 가중치를 두어 일시적 기분과 근본적 성향을 구분.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-3" style="margin-top: 40px;">
+                <div class="center">
+                    <div class="stat-number">20k+</div>
+                    <p>세션당 의사결정 포인트</p>
+                </div>
+                <div class="center">
+                    <div class="stat-number">98%</div>
+                    <p>일관성 유지율</p>
+                </div>
+                <div class="center">
+                    <div class="stat-number">&lt;1ms</div>
+                    <p>추론 지연 시간</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 6: Demo -->
+    <div class="slide" id="slide6">
+        <div class="slide-num-indicator">06 / 10</div>
+        <div class="slide-content">
+            <p class="highlight-text" style="text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px;">LIVE API</p>
+            <h2>실시간 합성 엔진</h2>
+            <div class="grid-2">
+                <div class="card">
+                    <h3 style="margin-bottom: 20px;">입력 벡터 (POST)</h3>
+                    <div class="code-block">
+                        {<br>
+                        &nbsp;&nbsp;<span style="color: #3b82f6;">"latency"</span>: 1200,<br>
+                        &nbsp;&nbsp;<span style="color: #3b82f6;">"exploration_index"</span>: 0.94,<br>
+                        &nbsp;&nbsp;<span style="color: #3b82f6;">"action_precision"</span>: 0.88<br>
+                        }
+                    </div>
+                </div>
+                <div class="card">
+                    <h3 style="margin-bottom: 20px;">트윈 응답 (JSON)</h3>
+                    <div class="code-block" style="border-color: var(--accent);">
+                        {<br>
+                        &nbsp;&nbsp;<span style="color: #10b981;">"status"</span>: <span style="color: #f59e0b;">"Synthesized"</span>,<br>
+                        &nbsp;&nbsp;<span style="color: #10b981;">"archetype"</span>: <span style="color: #f59e0b;">"Efficient Logistician"</span>,<br>
+                        &nbsp;&nbsp;<span style="color: #10b981;">"confidence"</span>: 0.96<br>
+                        }
+                    </div>
+                </div>
+            </div>
+            <p class="center" style="margin-top: 40px; color: var(--text-dim);">
+                상세 API 문서는 다음에서 확인 가능: <span class="highlight-text">/api/v1/docs</span>
+            </p>
+        </div>
+    </div>
+
+    <!-- Slide 7: Differentiation -->
+    <div class="slide" id="slide7">
+        <div class="slide-num-indicator">07 / 10</div>
+        <div class="slide-content">
+            <p class="highlight-text" style="text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px;">MARKET POSITION</p>
+            <h2>왜 CuBe 디지털 트윈인가?</h2>
+            <table class="premium-table">
+                <thead>
+                    <tr>
+                        <th>지표</th>
+                        <th>기존 시스템</th>
+                        <th>디지털 휴먼 트윈</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>유저 피로도</td>
+                        <td>높음 (설문/투표)</td>
+                        <td>제로 (비침습적 수집)</td>
+                    </tr>
+                    <tr>
+                        <td>데이터 신용도</td>
+                        <td>불투명 (사회적 편향)</td>
+                        <td>절대적 (행동 기반 진실)</td>
+                    </tr>
+                    <tr>
+                        <td>개인정보 보호</td>
+                        <td>메타데이터 공유</td>
+                        <td>완전 익명화 (GDPR)</td>
+                    </tr>
+                    <tr>
+                        <td>배포 방식</td>
+                        <td>단일 서비스 종속</td>
+                        <td>멀티 게임 SDK 지원</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Slide 8: Performance -->
+    <div class="slide" id="slide8">
+        <div class="slide-num-indicator">08 / 10</div>
+        <div class="slide-content">
+            <p class="highlight-text" style="text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px;">VERIFICATION</p>
+            <h2>산업적 신용성</h2>
+            <div class="grid-4">
+                <div class="card center">
+                    <div class="stat-number">REAL-TIME</div>
+                    <p style="font-size: 0.9rem;">행동 정밀 분석</p>
+                </div>
+                <div class="card center">
+                    <div class="stat-number">4.2ms</div>
+                    <p style="font-size: 0.9rem;">API 처리량</p>
+                </div>
+                <div class="card center">
+                    <div class="stat-number">100%</div>
+                    <p style="font-size: 0.9rem;">GDPR 준수</p>
+                </div>
+                <div class="card center">
+                    <div class="stat-number">5/5</div>
+                    <p style="font-size: 0.9rem;">E2E 테스트 통과</p>
+                </div>
+            </div>
+            <div class="card" style="margin-top: 30px;">
+                <h3 style="margin-bottom: 20px;">독자적 기술 스택</h3>
+                <div class="center" style="flex-direction: row; flex-wrap: wrap; gap: 10px; justify-content: center;">
+                    <span class="tag">FastAPI</span>
+                    <span class="tag">Docker</span>
+                    <span class="tag">PostgreSQL</span>
+                    <span class="tag">SciKit-Learn</span>
+                    <span class="tag">Cloud Run</span>
+                    <span class="tag">Redis</span>
+                    <span class="tag">React/Three.js</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 9: Vision -->
+    <div class="slide" id="slide9">
+        <div class="slide-num-indicator">09 / 10</div>
+        <div class="slide-content">
+            <p class="highlight-text" style="text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px;">FUTURE VISION</p>
+            <h2>Further Future</h2>
+            <div class="grid-2">
+                <div class="card">
+                    <h3 style="color: var(--primary);">적응형 난이도 조절</h3>
+                    <p>유저의 피로도와 집중력을 인지하여 실시간으로 게임 메커니즘을 최적화합니다.</p>
+                </div>
+                <div class="card">
+                    <h3 style="color: var(--secondary);">하이퍼 매치메이킹</h3>
+                    <p>단순 랭크가 아닌, 유저의 고유한 전략 스타일과 시너지를 낼 수 있는 팀원을 매칭합니다.</p>
+                </div>
+                <div class="card">
+                    <h3 style="color: var(--accent);">정신 건강 보호</h3>
+                    <p>디지털 트윈의 기준 행동에서 벗어난 패턴을 감지하여 번아웃이나 스트레스 징후를 조기에 발견합니다.</p>
+                </div>
+                <div class="card">
+                    <h3 style="color: #f59e0b;">브랜드 개인화</h3>
+                    <p>유저가 실제로 생각하는 방식에 기반하여 진정으로 "나를 위한" 콘텐츠와 마케팅을 제공합니다.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 10: Conclusion -->
+    <div class="slide" id="slide10">
+        <div class="slide-content center">
+            <div class="logo-icon">CuBe</div>
+            <h1>The Future is Personal.</h1>
+            <p class="subtitle">플레이어 너머의 '사람'을 이해합니다.</p>
+            
+            <div class="card" style="width: 100%; max-width: 600px; text-align: left;">
+                <p class="highlight-text">Team CuBe Presentation</p>
+                <h3>유준석 (Junseok Yoo)</h3>
+                <p>Lead Developer / Architect</p>
+                <p style="margin-top: 20px; font-weight: 700; font-size: 1.5rem; color: white;">감사합니다.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="navigation">
+        <button class="nav-btn" onclick="prevSlide()">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <button class="nav-btn" onclick="nextSlide()" style="background: var(--primary);">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+    </div>
+
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 10;
+
+        function showSlide(n) {
+            const previousSlide = document.querySelector('.slide.active');
+            if (previousSlide) {
+                previousSlide.style.opacity = '0';
+                setTimeout(() => {
+                    previousSlide.classList.remove('active');
+                    // Reset opacity for next time it becomes active
+                }, 400); // Wait for fade out
+            }
+
+            if (n > totalSlides) currentSlide = 1;
+            if (n < 1) currentSlide = totalSlides;
+
+            const nextSlide = document.getElementById('slide' + currentSlide);
+            setTimeout(() => {
+                nextSlide.classList.add('active');
+                // Trigger reflow for animation
+                nextSlide.offsetHeight;
+                nextSlide.style.opacity = '1';
+                updateProgress();
+            }, 400);
+        }
+
+        function updateProgress() {
+            const progress = (currentSlide / totalSlides) * 100;
+            const pb = document.getElementById('progressBar');
+            if(pb) pb.style.width = progress + '%';
+        }
+
+        function nextSlide() {
+            currentSlide++;
+            showSlide(currentSlide);
+        }
+
+        function prevSlide() {
+            currentSlide--;
+            showSlide(currentSlide);
+        }
+
+        // Background Blob Interaction
+        document.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth - 0.5) * 2;
+            const y = (e.clientY / window.innerHeight - 0.5) * 2;
+            
+            const blobs = document.querySelectorAll('.blob');
+            blobs.forEach((blob, index) => {
+                const speed = (index + 1) * 30;
+                blob.style.transform = `translate(${x * speed}px, ${y * speed}px)`;
+            });
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'Enter') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+
+        // Initial setup
+        updateProgress();
+    </script>
+</body>
+</html>

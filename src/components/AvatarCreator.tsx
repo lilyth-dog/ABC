@@ -48,15 +48,15 @@ const AvatarCreator = ({ onAvatarExported, onCancel }: AvatarCreatorProps) => {
         <div className="avatar-creator-overlay">
             <div className="avatar-creator-header">
                 <button onClick={onCancel} className="btn btn-secondary glass-effect" style={{ borderColor: '#ff0055', color: '#ff0055' }}>
-                    ABORT SEQUENCE
+                    시퀀스 중단 (ABORT)
                 </button>
             </div>
 
             {loading ? (
                 <div className="loading-container">
-                    <h2 className="glitch-text" style={{ fontSize: '2rem' }}>ESTABLISHING NEURAL LINK...</h2>
+                    <h2 className="glitch-text" style={{ fontSize: '2rem' }}>뉴럴 링크 설정 중...</h2>
                     <div className="scanner-line"></div>
-                    <p style={{ marginTop: '1rem', color: '#00f3ff', opacity: 0.7 }}>Encrypting Bio-Metric Data</p>
+                    <p style={{ marginTop: '1rem', color: '#00f3ff', opacity: 0.7 }}>생체 데이터 암호화 중</p>
                 </div>
             ) : (
                 <iframe

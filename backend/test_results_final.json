@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-01-16T14:36:07.306916",
+  "timestamp": "2026-01-21T10:20:01.923700",
   "tests": {
     "system_components": {
       "passed": 5,
@@ -80,18 +80,18 @@
       ]
     },
     "performance": {
-      "passed": 2,
+      "passed": 1,
       "total": 2,
       "results": [
         {
-          "name": "대량 이벤트 처리 (1000개)",
-          "status": "PASS",
-          "details": "0.84ms, 1186843 events/sec"
+          "name": "대량 이벤트 처리",
+          "status": "FAIL",
+          "details": "float division by zero"
         },
         {
           "name": "API 응답 시간 (/health)",
           "status": "PASS",
-          "details": "3.62ms"
+          "details": "6.11ms"
         }
       ]
     },
@@ -102,15 +102,15 @@
         {
           "name": "E2E 파이프라인 (게임 이벤트 → 성격 추론)",
           "status": "PASS",
-          "details": "신뢰도: 0.50"
+          "details": "신뢰도: 0.46"
         }
       ]
     }
   },
   "summary": {
     "total_tests": 15,
-    "total_passed": 15,
-    "overall_percentage": 100.0,
-    "status": "PASS"
+    "total_passed": 14,
+    "overall_percentage": 93.33333333333333,
+    "status": "PARTIAL"
   }
 }

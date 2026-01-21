@@ -29,9 +29,9 @@ const SignUpModal = ({ isOpen, onClose }: SignUpModalProps) => {
 
     const validate = (): boolean => {
         const newErrors: FormErrors = {};
-        if (!formData.email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) newErrors.email = 'Invalid email address';
-        if (formData.fullName.length < 2) newErrors.fullName = 'Name too short';
-        if (formData.password.length < 8) newErrors.password = 'Password must be at least 8 characters';
+        if (!formData.email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) newErrors.email = '유효한 이메일 주소를 입력해주세요.';
+        if (formData.fullName.length < 2) newErrors.fullName = '이름이 너무 짧습니다.';
+        if (formData.password.length < 8) newErrors.password = '비밀번호는 최소 8자 이상이어야 합니다.';
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
     };
@@ -72,8 +72,8 @@ const SignUpModal = ({ isOpen, onClose }: SignUpModalProps) => {
 
                 {step === 1 ? (
                     <>
-                        <h2 style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>Join the <span className="gradient-text">Elite</span></h2>
-                        <p style={{ color: 'var(--text-muted)', marginBottom: '2rem' }}>Start your 14-day free enterprise trial.</p>
+                        <h2 style={{ fontSize: '2rem', marginBottom: '0.5rem' }}><span className="gradient-text">넥서스</span>와 함께하세요</h2>
+                        <p style={{ color: 'var(--text-muted)', marginBottom: '2rem' }}>14일간의 무료 엔터프라이즈 체험을 시작하세요.</p>
 
                         <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem' }}>
                             <div className="input-group">
@@ -81,7 +81,7 @@ const SignUpModal = ({ isOpen, onClose }: SignUpModalProps) => {
                                     <User size={18} style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', color: 'var(--primary)' }} />
                                     <input
                                         type="text"
-                                        placeholder="Full Name"
+                                        placeholder="전체 이름 (Full Name)"
                                         style={{
                                             width: '100%', padding: '1rem 1rem 1rem 3rem', background: 'rgba(255,255,255,0.03)',
                                             border: '1px solid rgba(255,255,255,0.1)', borderRadius: '12px', color: 'white'
@@ -98,7 +98,7 @@ const SignUpModal = ({ isOpen, onClose }: SignUpModalProps) => {
                                     <Mail size={18} style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', color: 'var(--primary)' }} />
                                     <input
                                         type="email"
-                                        placeholder="Work Email"
+                                        placeholder="회사 이메일 (Work Email)"
                                         style={{
                                             width: '100%', padding: '1rem 1rem 1rem 3rem', background: 'rgba(255,255,255,0.03)',
                                             border: '1px solid rgba(255,255,255,0.1)', borderRadius: '12px', color: 'white'
@@ -115,7 +115,7 @@ const SignUpModal = ({ isOpen, onClose }: SignUpModalProps) => {
                                     <Lock size={18} style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', color: 'var(--primary)' }} />
                                     <input
                                         type="password"
-                                        placeholder="Create Password"
+                                        placeholder="비밀번호 설정"
                                         style={{
                                             width: '100%', padding: '1rem 1rem 1rem 3rem', background: 'rgba(255,255,255,0.03)',
                                             border: '1px solid rgba(255,255,255,0.1)', borderRadius: '12px', color: 'white'
@@ -128,7 +128,7 @@ const SignUpModal = ({ isOpen, onClose }: SignUpModalProps) => {
                             </div>
 
                             <button className="btn btn-primary" style={{ width: '100%', marginTop: '1rem', padding: '1rem' }} disabled={loading}>
-                                {loading ? 'Provisioning Account...' : 'Initialize Infrastructure'}
+                                {loading ? '계정 생성 중...' : '인프라 초기화'}
                             </button>
                         </form>
                     </>
@@ -137,10 +137,10 @@ const SignUpModal = ({ isOpen, onClose }: SignUpModalProps) => {
                         <div style={{ marginBottom: '1.5rem', color: 'var(--primary)' }}>
                             <CheckCircle size={80} strokeWidth={1} style={{ margin: '0 auto' }} />
                         </div>
-                        <h2 style={{ fontSize: '2rem', marginBottom: '1rem' }}>Welcome to Nexus</h2>
-                        <p style={{ color: 'var(--text-muted)', marginBottom: '2rem' }}>Your enterprise environment is being deployed. Check your email for access instructions.</p>
+                        <h2 style={{ fontSize: '2rem', marginBottom: '1rem' }}>넥서스에 오신 것을 환영합니다</h2>
+                        <p style={{ color: 'var(--text-muted)', marginBottom: '2rem' }}>엔터프라이즈 환경이 구축되고 있습니다. 액세스 안내를 위해 이메일을 확인해주세요.</p>
                         <button className="btn btn-primary" onClick={onClose} style={{ display: 'flex', alignItems: 'center', gap: '8px', margin: '0 auto' }}>
-                            Enter Console <ArrowRight size={18} />
+                            콘솔 입장 <ArrowRight size={18} />
                         </button>
                     </div>
                 )}

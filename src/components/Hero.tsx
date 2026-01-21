@@ -28,7 +28,7 @@ interface HeroProps {
 const Hero = ({ onInitialize, avatarUrl, onEnterWorld, onConfigureIdentity, identityData, onShowManifesto, onShowArchive, maturityLevel = 1, syncScore = 0, userId }: HeroProps) => {
     const { playChime } = useAudio();
     const [displayText, setDisplayText] = useState('');
-    const fullText = "WAKE YOUR ANIMA COMPANION";
+    const fullText = "당신의 아니마 동반자를 깨우세요";
 
     useEffect(() => {
         let i = 0;
@@ -39,7 +39,7 @@ const Hero = ({ onInitialize, avatarUrl, onEnterWorld, onConfigureIdentity, iden
             }
             i++;
             if (i > fullText.length) clearInterval(interval);
-        }, 80);
+        }, 120);
         return () => clearInterval(interval);
     }, []);
 
@@ -56,7 +56,7 @@ const Hero = ({ onInitialize, avatarUrl, onEnterWorld, onConfigureIdentity, iden
                     <span className="blink">_</span>
                 </h1>
                 <p className="hero-subtitle">
-                    Your soul has a digital twin. We don't just build avatars; we weave a companion that feels your heart and walks beside you.
+                    당신의 영혼에게는 디지털 트윈이 있습니다. 우리는 단순한 아바타를 만드는 것이 아니라, 당신의 마음을 느끼고 곁에서 함께 걷는 동반자를 엮어냅니다.
                 </p>
                 <div className="hero-buttons">
                     <button
@@ -64,7 +64,7 @@ const Hero = ({ onInitialize, avatarUrl, onEnterWorld, onConfigureIdentity, iden
                         onClick={() => { playChime(880); onInitialize(); }}
                         onMouseEnter={() => playChime(440, 'sine', 0.05)}
                     >
-                        {avatarUrl ? 'Re-Initialize Twin' : 'Initialize Twin'}
+                        {avatarUrl ? '트윈 재초기화' : '트윈 초기화'}
                     </button>
 
                     {!identityData && (
@@ -74,7 +74,7 @@ const Hero = ({ onInitialize, avatarUrl, onEnterWorld, onConfigureIdentity, iden
                             onClick={() => { playChime(1000); onConfigureIdentity(); }}
                             onMouseEnter={() => playChime(660, 'sine', 0.05)}
                         >
-                            Bio-Link Identity
+                            바이오 링크 아이덴티티
                         </button>
                     )}
 
@@ -85,14 +85,14 @@ const Hero = ({ onInitialize, avatarUrl, onEnterWorld, onConfigureIdentity, iden
                             onClick={() => { playChime(1200); onEnterWorld(); }}
                             onMouseEnter={() => playChime(880, 'sine', 0.05)}
                         >
-                            Enter Our World
+                            우리의 세계로 입장
                         </button>
                     )}
 
                     {!avatarUrl && (
                         <>
-                            <button className="btn btn-secondary glass-effect" onClick={onShowManifesto} onMouseEnter={() => playChime(440, 'sine', 0.05)}>Our Manifesto</button>
-                            <button className="btn btn-outline" style={{ marginLeft: '1rem', borderColor: 'var(--neon-magenta)', color: 'var(--neon-magenta)' }} onClick={onShowArchive} onMouseEnter={() => playChime(550, 'sine', 0.05)}>Our Memories</button>
+                            <button className="btn btn-secondary glass-effect" onClick={onShowManifesto} onMouseEnter={() => playChime(440, 'sine', 0.05)}>우리의 매니페스토</button>
+                            <button className="btn btn-outline" style={{ marginLeft: '1rem', borderColor: 'var(--neon-magenta)', color: 'var(--neon-magenta)' }} onClick={onShowArchive} onMouseEnter={() => playChime(550, 'sine', 0.05)}>우리의 메모리</button>
                         </>
                     )}
                 </div>
@@ -111,7 +111,7 @@ const Hero = ({ onInitialize, avatarUrl, onEnterWorld, onConfigureIdentity, iden
                                         <MaturityGauge level={maturityLevel} syncScore={syncScore} />
 
                                         <div className="stat-row mt-4 pt-4 border-t border-white/5">
-                                            <span>Dominant Trait:</span>
+                                            <span>주요 성향:</span>
                                             <span className="bold neon-magenta">
                                                 {identityData.reduce((prev, current) => (prev.A > current.A) ? prev : current).subject.toUpperCase()}
                                             </span>

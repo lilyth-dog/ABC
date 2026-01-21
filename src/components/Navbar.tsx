@@ -26,14 +26,14 @@ const Navbar = ({ onSignUp, onShowMemories }: NavbarProps) => {
 
             {/* Desktop Navigation */}
             <ul className="nav-links desktop-nav">
-                <li><a href="#features">Experience</a></li>
-                <li><a href="#" onClick={(e) => { e.preventDefault(); onShowMemories?.(); }}>Memories</a></li>
-                <li><a href="#pricing">Plan</a></li>
+                <li><a href="#features">체험하기</a></li>
+                <li><a href="#" onClick={(e) => { e.preventDefault(); onShowMemories?.(); }}>메모리</a></li>
+                <li><a href="#pricing">플랜</a></li>
             </ul>
 
             <div className="nav-cta desktop-nav">
-                <button className="btn btn-outline">Log In</button>
-                <button className="btn btn-primary" onClick={onSignUp}>Get Started</button>
+                <button className="btn btn-outline">로그인</button>
+                <button className="btn btn-primary" onClick={onSignUp}>시작하기</button>
             </div>
 
             {/* Mobile Hamburger Button */}
@@ -50,13 +50,13 @@ const Navbar = ({ onSignUp, onShowMemories }: NavbarProps) => {
                 <div className="mobile-menu-overlay" onClick={closeMenu}>
                     <div className="mobile-menu" onClick={(e) => e.stopPropagation()}>
                         <ul className="mobile-nav-links">
-                            <li><a href="#features" onClick={closeMenu}>Experience</a></li>
-                            <li><a href="#" onClick={(e) => { e.preventDefault(); closeMenu(); onShowMemories?.(); }}>Memories</a></li>
-                            <li><a href="#pricing" onClick={closeMenu}>Plan</a></li>
+                            <li><a href="#features" onClick={closeMenu}>체험하기</a></li>
+                            <li><a href="#" onClick={(e) => { e.preventDefault(); closeMenu(); onShowMemories?.(); }}>메모리</a></li>
+                            <li><a href="#pricing" onClick={closeMenu}>플랜</a></li>
                         </ul>
                         <div className="mobile-nav-cta">
-                            <button className="btn btn-outline" onClick={closeMenu}>Log In</button>
-                            <button className="btn btn-primary" onClick={() => { closeMenu(); onSignUp?.(); }}>Get Started</button>
+                            <button className="btn btn-outline" onClick={closeMenu}>로그인</button>
+                            <button className="btn btn-primary" onClick={() => { closeMenu(); onSignUp?.(); }}>시작하기</button>
                         </div>
                     </div>
                 </div>

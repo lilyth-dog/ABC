@@ -1,6 +1,6 @@
 # ABC 해커톤 프로젝트 제출 가이드
 
-## 📦 제출 구성
+## 제출 구성
 
 이 프로젝트는 **논문**과 **코드**로 구성되어 있습니다.
 
@@ -13,7 +13,33 @@
 
 ---
 
-## 🚀 프로젝트 개요
+## Quick Start (압축 파일 받은 경우)
+
+```bash
+# 1. 압축 해제 후 폴더로 이동
+cd ABC
+
+# 2. 프론트엔드 의존성 설치
+npm install
+
+# 3. 백엔드 의존성 설치
+pip install -r backend/requirements.txt
+
+# 4. 실행 (프론트엔드 + 백엔드 동시)
+npm run dev
+```
+
+**또는 Docker로 백엔드만 실행 (Python/Node.js 설치 불필요):**
+
+```bash
+docker build -t abc-backend .
+docker run -p 8080:8080 abc-backend
+# API 문서: http://localhost:8080/docs
+```
+
+---
+
+## 프로젝트 개요
 
 **행동 기반 디지털 휴먼 트윈: 게임 플레이 기반 성격 추론 및 개인화 시스템**
 
@@ -21,7 +47,7 @@
 
 ---
 
-## 📋 프로젝트 구조
+## 프로젝트 구조
 
 ```
 ABC/
@@ -43,7 +69,7 @@ ABC/
 
 ---
 
-## 🛠️ 기술 스택
+## 기술 스택
 
 ### Backend
 - **언어**: Python 3.10+
@@ -59,7 +85,7 @@ ABC/
 
 ---
 
-## 📦 설치 및 실행
+## 설치 및 실행
 
 ### 필수 요구사항
 - Python 3.10 이상
@@ -87,7 +113,7 @@ npm run dev
 
 ---
 
-## 🔧 환경 변수
+## 환경 변수
 
 `.env` 파일을 생성하고 다음 변수를 설정하세요:
 
@@ -105,7 +131,7 @@ LOG_LEVEL=INFO
 
 ---
 
-## 📊 주요 기능
+## 주요 기능
 
 ### 1. 게임 데이터 수집
 - 마인크래프트, 스타듀밸리, 두근두근타운 지원
@@ -123,7 +149,7 @@ LOG_LEVEL=INFO
 
 ---
 
-## 📈 성능 지표
+## 성능 지표
 
 ### 시스템 성능
 - **파싱 정확도**: 75.00%
@@ -138,7 +164,7 @@ LOG_LEVEL=INFO
 
 ---
 
-## 🧪 테스트
+## 테스트
 
 ### Backend 테스트
 ```bash
@@ -154,7 +180,7 @@ python final_verification_test.py
 
 ---
 
-## 🐳 Docker 실행
+## Docker 실행
 
 Python 환경 없이 Docker만으로 백엔드를 실행할 수 있습니다.
 
@@ -177,7 +203,7 @@ curl http://localhost:8080/health
 
 ---
 
-## 📚 문서
+## 문서
 
 - **프로젝트 README**: `README.md`
 - **개발자 가이드**: `docs/DEVELOPER_GUIDE.md`
@@ -186,7 +212,7 @@ curl http://localhost:8080/health
 
 ---
 
-## 🔒 보안 및 프라이버시
+## 보안 및 프라이버시
 
 - 사용자 데이터는 명시적 동의 후에만 수집
 - GDPR 준수
@@ -195,7 +221,7 @@ curl http://localhost:8080/health
 
 ---
 
-## ☁️ Cloud Run 배포
+## Cloud Run 배포
 
 ### 사전 요구사항
 - Google Cloud SDK (`gcloud`) 설치 및 인증
@@ -218,13 +244,13 @@ chmod +x deploy_backend.sh
 
 ---
 
-## 📝 라이선스
+## 라이선스
 
 이 프로젝트는 ABC 해커톤 제출용으로 개발되었습니다.
 
 ---
 
-## 👥 저자
+## 저자
 
 - **유준석** (Jun-seok Yoo)
 - 한신대학교 공공인재학부
@@ -232,11 +258,11 @@ chmod +x deploy_backend.sh
 
 ---
 
-## 📞 문의
+## 문의
 
 프로젝트 관련 문의사항이 있으시면 이메일로 연락주세요.
 
 ---
 
 **제출 일시**: 2026년 1월 16일  
-**프로젝트 상태**: ✅ 제출 준비 완료
+**프로젝트 상태**: 제출 준비 완료

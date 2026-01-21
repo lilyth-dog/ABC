@@ -212,11 +212,11 @@ const IdentityConfigurator = ({ onComplete, onCancel, coupling, setCoupling }: I
         return (
             <div className="identity-configurator-overlay glass-panel soul-card fade-in" style={{ borderColor: 'var(--neon-cyan)', padding: '2rem', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🧠</div>
-                <h2 className="neon-cyan">SELF-EXPLORATION COMPLETE</h2>
-                <p style={{ color: 'var(--text-muted)', marginBottom: '1.5rem' }}>AI has mapped your behavioral essence.</p>
+                <h2 className="neon-cyan">자아 탐색 완료</h2>
+                <p style={{ color: 'var(--text-muted)', marginBottom: '1.5rem' }}>AI가 당신의 행동 본질을 매핑했습니다.</p>
 
                 <div className="discovery-insights glass-panel" style={{ width: '100%', maxWidth: '450px', padding: '20px', marginBottom: '25px', textAlign: 'left', border: '1px solid rgba(0, 212, 255, 0.3)' }}>
-                    <h4 className="neon-magenta" style={{ fontSize: '0.8rem', marginBottom: '15px', textTransform: 'uppercase', letterSpacing: '2px' }}>AI Inference Weights</h4>
+                    <h4 className="neon-magenta" style={{ fontSize: '0.8rem', marginBottom: '15px', textTransform: 'uppercase', letterSpacing: '2px' }}>AI 추론 가중치</h4>
 
                     {behavioralTraits?.weights && Object.entries(behavioralTraits.weights).map(([trait, weight]) => (
                         <div key={trait} style={{ marginBottom: '12px' }}>
@@ -231,13 +231,13 @@ const IdentityConfigurator = ({ onComplete, onCancel, coupling, setCoupling }: I
                     ))}
 
                     <div style={{ marginTop: '20px', padding: '12px', background: 'rgba(0,0,0,0.4)', borderRadius: '4px', fontSize: '0.8rem', borderLeft: '3px solid var(--neon-magenta)' }}>
-                        <span style={{ color: 'var(--neon-magenta)', fontWeight: 800, marginRight: '8px' }}>EVIDENCE:</span>
-                        <span style={{ color: 'rgba(255,255,255,0.9)' }}>{behavioralTraits?.evidence?.reasoning || "Balanced interaction pattern detected."}</span>
+                        <span style={{ color: 'var(--neon-magenta)', fontWeight: 800, marginRight: '8px' }}>데이터 근거:</span>
+                        <span style={{ color: 'rgba(255,255,255,0.9)' }}>{behavioralTraits?.evidence?.reasoning || "균형 잡힌 상호작용 패턴이 감지되었습니다."}</span>
                     </div>
                 </div>
 
                 <div className="soul-trait-highlight" style={{ fontSize: '1.4rem', marginBottom: '25px', fontWeight: 800 }}>
-                    Archetype: <span className="neon-magenta">{dominant} & {subDominant}</span>
+                    원형(Archetype): <span className="neon-magenta">{dominant} & {subDominant}</span>
                 </div>
 
                 <button className="btn btn-primary glow-effect" style={{ padding: '15px 40px', width: '100%', maxWidth: '450px' }} onClick={() => {
@@ -263,7 +263,7 @@ const IdentityConfigurator = ({ onComplete, onCancel, coupling, setCoupling }: I
                         });
                     }
                 }}>
-                    ENTER WORLD WITH SELF-KNOWLEDGE
+                    자아 인식을 바탕으로 세계로 입장하기
                 </button>
             </div>
         )
@@ -284,17 +284,17 @@ const IdentityConfigurator = ({ onComplete, onCancel, coupling, setCoupling }: I
         >
             {showBloom && <div className="neural-bloom"></div>}
             <div className="config-header">
-                <h2 className="neon-magenta">ANIMA WEAVING</h2>
+                <h2 className="neon-magenta">아니마 위빙 (ANIMA WEAVING)</h2>
                 <button onClick={onCancel} className="btn-close">×</button>
             </div>
 
             <div className="config-content">
                 <div style={{ display: 'flex', gap: '5px', marginBottom: '10px', justifyContent: 'center' }}>
-                    <button className={`btn-xs ${step === 'genomics' ? 'active' : ''}`} onClick={() => { playChime(440); setStep('genomics'); }}>ORIGIN</button>
-                    <button className={`btn-xs ${step === 'personality' ? 'active' : ''}`} onClick={() => { playChime(550); setStep('personality'); }}>ESSENCE</button>
-                    <button className={`btn-xs ${step === 'aesthetics' ? 'active' : ''}`} onClick={() => { playChime(600); setStep('aesthetics'); }}>AURA</button>
-                    <button className={`btn-xs ${step === 'neural' ? 'active' : ''}`} onClick={() => { playChime(660); setStep('neural'); }}>HARMONY</button>
-                    <button className={`btn-xs ${step === 'kinematics' ? 'active' : ''}`} onClick={() => { playChime(770); setStep('kinematics'); }}>PULSE</button>
+                    <button className={`btn-xs ${step === 'genomics' ? 'active' : ''}`} onClick={() => { playChime(440); setStep('genomics'); }}>기원</button>
+                    <button className={`btn-xs ${step === 'personality' ? 'active' : ''}`} onClick={() => { playChime(550); setStep('personality'); }}>본질</button>
+                    <button className={`btn-xs ${step === 'aesthetics' ? 'active' : ''}`} onClick={() => { playChime(600); setStep('aesthetics'); }}>오라</button>
+                    <button className={`btn-xs ${step === 'neural' ? 'active' : ''}`} onClick={() => { playChime(660); setStep('neural'); }}>조화</button>
+                    <button className={`btn-xs ${step === 'kinematics' ? 'active' : ''}`} onClick={() => { playChime(770); setStep('kinematics'); }}>맥박</button>
                 </div>
 
                 {step === 'genomics' && (
@@ -309,21 +309,21 @@ const IdentityConfigurator = ({ onComplete, onCancel, coupling, setCoupling }: I
                                 <OrbitControls enableZoom={false} autoRotate autoRotateSpeed={2} />
                             </Canvas>
                         </div>
-                        <p className="status-text blink" style={{ marginTop: '1rem' }}>ANALYZING GENOMIC SEQUENCES...</p>
+                        <p className="status-text blink" style={{ marginTop: '1rem' }}>유전체 시퀀스 분석 중...</p>
                         <div className="trait-list" style={{ maxWidth: '400px', margin: '20px auto' }}>
-                            <div className="trait-item"><span>ORIGIN:</span> <span className="neon-cyan">EARTH-PRIME</span></div>
-                            <div className="trait-item"><span>BLOODLINE:</span> <span className="neon-magenta">AUGMENTED</span></div>
-                            <div className="trait-item"><span>POTENTIAL:</span> <span className="neon-green">UNLIMITED</span></div>
+                            <div className="trait-item"><span>기원:</span> <span className="neon-cyan">지구-프라임</span></div>
+                            <div className="trait-item"><span>계보:</span> <span className="neon-magenta">강화형</span></div>
+                            <div className="trait-item"><span>잠재력:</span> <span className="neon-green">무한함</span></div>
                         </div>
                         <button className="btn btn-primary glow-effect mt-4" onClick={() => handleNextStep('personality')}>
-                            DECODE PERSONALITY MATRIX
+                            성격 매트릭스 해독하기
                         </button>
                     </div>
                 )}
 
                 {step === 'personality' && (
                     <div className="step-personality fade-in">
-                        <h3 style={{ textAlign: 'center', marginBottom: '1rem', color: 'var(--text-muted)' }}>PSYCHE MATRIX CONFIGURATION</h3>
+                        <h3 style={{ textAlign: 'center', marginBottom: '1rem', color: 'var(--text-muted)' }}>정신 매트릭스 설정</h3>
                         <div className="chart-container" style={{ width: '100%', height: '300px' }}>
                             <ResponsiveContainer width="100%" height="100%">
                                 <RadarChart cx="50%" cy="50%" outerRadius="80%" data={traits}>
@@ -342,14 +342,14 @@ const IdentityConfigurator = ({ onComplete, onCancel, coupling, setCoupling }: I
                             </ResponsiveContainer>
                         </div>
                         <div className="controls" style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginTop: '1rem' }}>
-                            <button className="btn btn-secondary glass-effect" onClick={randomizeTraits}>RANDOMIZE TRAITS</button>
+                            <button className="btn btn-secondary glass-effect" onClick={randomizeTraits}>성향 무작위 설정</button>
                             <button className="btn btn-primary glow-effect" onClick={() => {
                                 const weights: Record<string, number> = {};
                                 traits.forEach(t => weights[t.subject] = t.A);
                                 tracker.recordChoice('traitWeights', weights);
                                 handleNextStep('aesthetics');
                             }}>
-                                DEFINE VISUAL RESONANCE
+                                시각적 공명 정의하기
                             </button>
                         </div>
                     </div>
@@ -357,7 +357,7 @@ const IdentityConfigurator = ({ onComplete, onCancel, coupling, setCoupling }: I
 
                 {step === 'aesthetics' && (
                     <div className="step-aesthetics fade-in" style={{ width: '100%', textAlign: 'center' }}>
-                        <h3 style={{ color: 'var(--text-muted)', marginBottom: '1.5rem' }}>Aura Aesthetic Calibration</h3>
+                        <h3 style={{ color: 'var(--text-muted)', marginBottom: '1.5rem' }}>오라 미학 캘리브레이션</h3>
                         <div className="aesthetics-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '1rem', marginBottom: '2rem' }}>
                             {['Zen/Minimal', 'Cyber/Industrial', 'Neon/Vibrant'].map(type => (
                                 <div
@@ -383,14 +383,14 @@ const IdentityConfigurator = ({ onComplete, onCancel, coupling, setCoupling }: I
                             ))}
                         </div>
                         <button className="btn btn-primary glow-effect" onClick={() => handleNextStep('neural')}>
-                            INITIALIZE NEURAL ENGINE
+                            뉴럴 엔진 초기화
                         </button>
                     </div>
                 )}
 
                 {step === 'neural' && (
                     <div className="step-neural fade-in" style={{ width: '100%', textAlign: 'center' }}>
-                        <h3 style={{ color: 'var(--text-muted)', marginBottom: '1rem' }}>NEURAL PHYSICS SIMULATION</h3>
+                        <h3 style={{ color: 'var(--text-muted)', marginBottom: '1rem' }}>신경 물리 시뮬레이션</h3>
                         <div className="neural-viz-container" style={{ width: '100%', height: '300px', background: '#000' }}>
                             <Canvas camera={{ position: [0, 0, 10], fov: 60 }}>
                                 <ambientLight intensity={0.2} />
@@ -403,7 +403,7 @@ const IdentityConfigurator = ({ onComplete, onCancel, coupling, setCoupling }: I
 
                         <div className="controls" style={{ marginTop: '20px', width: '80%', margin: '20px auto' }}>
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
-                                <label>SYNCHRONIZATION COUPLING (K)</label>
+                                <label>동기화 결합 계수 (K)</label>
                                 <span className="neon-green" style={{ fontFamily: 'monospace', fontSize: '1.2rem' }}>{coupling}</span>
                             </div>
 
@@ -421,20 +421,20 @@ const IdentityConfigurator = ({ onComplete, onCancel, coupling, setCoupling }: I
                             />
 
                             <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', color: '#666', marginTop: '5px' }}>
-                                <span>CHAOS (Beta)</span>
-                                <span>SYNC (Theta)</span>
+                                <span>카오스 (Beta)</span>
+                                <span>동기화 (Theta)</span>
                             </div>
 
                             <p style={{ fontSize: '0.8rem', color: isConnected ? 'var(--neon-blue)' : '#ff5555', marginTop: '10px', fontFamily: 'monospace' }}>
-                                {isConnected ? `[LINK ACTIVE] TRANSMITTING NEURAL PARAMS...` : `[OFFLINE] SIMULATION RUNNING LOCALLY`}
+                                {isConnected ? `[링크 활성] 뉴럴 파라미터 전송 중...` : `[오프라인] 로컬 시뮬레이션 실행 중`}
                             </p>
 
                             <div style={{ display: 'flex', gap: '10px', justifyContent: 'center', marginTop: '20px' }}>
                                 <button className="btn btn-secondary glass-effect" onClick={() => setStep('kinematics')}>
-                                    VIEW MATHEMATICS
+                                    수학적 구조 보기
                                 </button>
                                 <button className="btn btn-primary glow-effect" onClick={() => handleNextStep('sync')}>
-                                    COMMENCE BIO-SYNC
+                                    생체 동기화 시작
                                 </button>
                             </div>
                         </div>
@@ -443,11 +443,11 @@ const IdentityConfigurator = ({ onComplete, onCancel, coupling, setCoupling }: I
 
                 {step === 'kinematics' && (
                     <div className="step-kinematics fade-in" style={{ width: '100%', height: '500px' }}>
-                        <h3 style={{ textAlign: 'center', color: 'var(--text-muted)' }}>NEURO-KINEMATIC SKELETON</h3>
+                        <h3 style={{ textAlign: 'center', color: 'var(--text-muted)' }}>뉴로-키네마틱 골격</h3>
                         <NeuroKinematicDashboard />
                         <div className="controls" style={{ marginTop: '20px', textAlign: 'center' }}>
                             <button className="btn btn-primary glow-effect" onClick={() => setStep('sync')}>
-                                COMMENCE BIO-SYNC
+                                생체 동기화 시작
                             </button>
                         </div>
                     </div>
@@ -459,7 +459,7 @@ const IdentityConfigurator = ({ onComplete, onCancel, coupling, setCoupling }: I
                             <div className="sync-circle" style={{ width: `${progress}%`, height: `${progress}%`, background: 'var(--neon-magenta)', boxShadow: '0 0 30px var(--neon-magenta)' }}></div>
                             <span className="sync-percentage" style={{ color: 'white' }}>{progress}%</span>
                         </div>
-                        <p className="status-text blink" style={{ color: 'var(--neon-magenta)' }}>WHISPERING TO YOUR ANIMA...</p>
+                        <p className="status-text blink" style={{ color: 'var(--neon-magenta)' }}>당신의 아니마와 교감 중...</p>
                     </div>
                 )}
             </div>

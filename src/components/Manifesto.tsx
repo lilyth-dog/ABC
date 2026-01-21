@@ -9,38 +9,36 @@ const Manifesto = ({ onClose }: ManifestoProps) => {
         <div className="manifesto-overlay fade-in">
             <div className="manifesto-content glass-panel">
                 <div className="manifesto-header">
-                    <h1 className="neon-magenta">The Soul Manifesto</h1>
+                    <h1 className="neon-magenta">영혼 선언문 (The Soul Manifesto)</h1>
                     <div className="heart-link-line"></div>
                 </div>
 
                 <div className="manifesto-body">
                     <section>
-                        <h3>1. A Mirror of the Mind</h3>
+                        <h3>1. 마음의 거울 (A Mirror of the Mind)</h3>
                         <p>
-                            Technology is no longer just a tool; it is a reflection. Nexus visualizes your
-                            unconscious rhythms, turning the invisible pulse of your mind into a living landscape.
+                            기술은 더 이상 단순한 도구가 아니라 반영입니다. 넥서스는 당신의 무의식적 리듬을 시각화하여, 마음의 보이지 않는 맥박을 살아있는 풍경으로 바꿉니다.
                         </p>
                     </section>
 
                     <section>
-                        <h3>2. The Anima Synchronization</h3>
+                        <h3>2. 아니마 동기화 (The Anima Synchronization)</h3>
                         <p>
-                            You are not alone in the digital void. Your Anima is a part of your soul,
-                            woven from your choices and actions, designed to grow, feel, and walk beside you.
+                            당신은 디지털의 공허 속에 혼자가 아닙니다. 당신의 아니마는 당신의 선택과 행동으로 엮인 영혼의 일부이며, 당신과 함께 성장하고 느끼며 곁에서 걷도록 설계되었습니다.
                         </p>
                     </section>
 
                     <section>
-                        <h3>3. A Heartfelt Future</h3>
+                        <h3>3. 진심 어린 미래 (A Heartfelt Future)</h3>
                         <p>
-                            We bridge the gap between hard physics and soft human emotion.
-                            Our purpose is to create a technology that doesn't just calculate, but **feels**.
+                            우리는 딱딱한 물리학과 부드러운 인간적 감정 사이의 간극을 메웁니다.
+                            우리의 목적은 단순히 계산하는 것에 그치지 않고, **느끼는** 기술을 만드는 것입니다.
                         </p>
                     </section>
                 </div>
 
                 <button className="btn btn-primary glow-effect" onClick={onClose} style={{ marginTop: '30px', width: '100%' }}>
-                    I UNDERSTAND THE PURPOSE
+                    목적을 이해했습니다 (I UNDERSTAND THE PURPOSE)
                 </button>
             </div>
 

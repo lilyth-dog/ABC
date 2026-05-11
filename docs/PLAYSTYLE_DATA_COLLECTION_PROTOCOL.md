@@ -63,10 +63,30 @@ This writes:
 ```text
 datasets/validation/playstyle_annotation_packet.json
 datasets/validation/real_playstyle_sessions_unlabeled.json
+datasets/validation/playstyle_annotation_form.csv
 ```
 
 Give `playstyle_annotation_packet.json` to annotators. It intentionally omits
-model predictions. After labels are returned, copy the labels into
+model predictions. Annotators can either fill `playstyle_annotation_form.csv`
+or return JSON annotations.
+
+Recommended CSV flow:
+
+```csv
+session_id,user_id,game_id,annotator_id,primary_playstyle,secondary_playstyles,confidence,evidence
+public_full_pipeline_minecraft,public_sample_minecraft_user,minecraft,annotator_1,planner,resource_diversifier,0.8,clear preparation before first build
+```
+
+Merge completed CSV labels into a validator-ready dataset:
+
+```bash
+PYTHONPATH=backend python3 backend/apply_playstyle_annotation_csv.py \
+  --dataset datasets/validation/real_playstyle_sessions_unlabeled.json \
+  --csv datasets/validation/playstyle_annotation_form.csv \
+  --output datasets/validation/real_playstyle_sessions.json
+```
+
+If annotators return JSON directly, copy labels into
 `real_playstyle_sessions_unlabeled.json` as `annotations[]`, or create a new
 `real_playstyle_sessions.json` with the same schema.
 

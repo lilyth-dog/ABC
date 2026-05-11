@@ -192,6 +192,7 @@ PYTHONPATH=backend python3 backend/prepare_playstyle_annotation_packet.py
 
 - `datasets/validation/playstyle_annotation_packet.json` - 라벨러가 읽을 이벤트 요약
 - `datasets/validation/real_playstyle_sessions_unlabeled.json` - 라벨을 채워 넣을 검증 데이터셋
+- `datasets/validation/playstyle_annotation_form.csv` - 스프레드시트로 채울 수 있는 빈 라벨 양식
 
 ### 2. 라벨 카테고리 선택
 
@@ -206,7 +207,34 @@ PYTHONPATH=backend python3 backend/prepare_playstyle_annotation_packet.py
 | `resource_diversifier` | 다양한 아이템/블록/자원을 사용함 |
 | `risk_taker` | 낮은 높이, 낮은 조도 등 위험 신호가 많음 |
 
-### 3. `annotations[]`에 라벨 입력
+### 3. 라벨 입력
+
+권장 방식은 CSV 양식을 채운 뒤 데이터셋으로 병합하는 것입니다.
+
+`datasets/validation/playstyle_annotation_form.csv` 예시:
+
+```csv
+session_id,user_id,game_id,annotator_id,primary_playstyle,secondary_playstyles,confidence,evidence
+public_full_pipeline_minecraft,public_sample_minecraft_user,minecraft,annotator_1,planner,resource_diversifier,0.8,첫 건축 전 준비 행동이 뚜렷함
+```
+
+CSV 작성 규칙:
+
+- `primary_playstyle`: 위 6개 카테고리 중 하나
+- `secondary_playstyles`: 선택 사항, 여러 개면 `;` 또는 `,`로 구분
+- `confidence`: 0~1 사이 숫자
+- `evidence`: 라벨 판단 근거
+
+CSV 작성 후 아래 명령으로 `annotations[]`를 채운 데이터셋을 만듭니다.
+
+```bash
+PYTHONPATH=backend python3 backend/apply_playstyle_annotation_csv.py \
+  --dataset datasets/validation/real_playstyle_sessions_unlabeled.json \
+  --csv datasets/validation/playstyle_annotation_form.csv \
+  --output datasets/validation/real_playstyle_sessions.json
+```
+
+직접 JSON을 편집하려면 아래처럼 `annotations[]`를 채워도 됩니다.
 
 `datasets/validation/real_playstyle_sessions_unlabeled.json`에서 각 세션의 `annotations` 배열을 채웁니다. 최소 3명의 독립 라벨러를 권장합니다.
 
@@ -242,7 +270,7 @@ PYTHONPATH=backend python3 backend/prepare_playstyle_annotation_packet.py
 
 ```bash
 PYTHONPATH=backend python3 backend/validate_playstyle_categories.py \
-  --dataset datasets/validation/real_playstyle_sessions_unlabeled.json \
+  --dataset datasets/validation/real_playstyle_sessions.json \
   --output datasets/public/real_playstyle_validation_report.json
 ```
 

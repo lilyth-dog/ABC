@@ -2,7 +2,7 @@
   "metadata": {
     "packet_name": "playstyle_annotation_packet",
     "packet_type": "annotation_packet",
-    "generated_at": "2026-05-11T02:06:53.812612Z",
+    "generated_at": "2026-05-11T02:17:07.800281Z",
     "claim_boundary": "Human annotators label observable playstyle categories, not personality traits.",
     "instructions": [
       "Review event summaries without model predictions.",

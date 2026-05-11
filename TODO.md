@@ -14,8 +14,12 @@
   - Protocol path: `docs/PLAYSTYLE_DATA_COLLECTION_PROTOCOL.md`
 - [x] Prepare annotation packet and unlabeled validator-ready dataset from committed public samples.
   - Annotation packet: `datasets/validation/playstyle_annotation_packet.json`
+  - CSV form: `datasets/validation/playstyle_annotation_form.csv`
   - Unlabeled dataset: `datasets/validation/real_playstyle_sessions_unlabeled.json`
   - Unlabeled report: `datasets/public/real_playstyle_unlabeled_validation_report.json`
+- [x] Add CSV-to-annotations merge workflow.
+  - Merge script: `backend/apply_playstyle_annotation_csv.py`
+  - Output dataset: `datasets/validation/real_playstyle_sessions.json`
 - [ ] Expand real-game validation beyond the current committed samples.
   - Current OpenDota artifact has 12 converted events.
   - Current full pipeline artifact has 8 raw events.
@@ -44,7 +48,7 @@
 - [x] Add regression tests for the chosen `planning_time` semantics after the definition is fixed.
 - [x] Add a small, labeled benchmark dataset with expected playstyle categories.
 - [ ] Add a real labeled benchmark dataset with observed playstyle categories from human annotators or player self-reports.
-  - Next manual step: fill `annotations[]` in `real_playstyle_sessions_unlabeled.json` or create `real_playstyle_sessions.json`.
+  - Next manual step: fill `playstyle_annotation_form.csv`, run `apply_playstyle_annotation_csv.py`, then validate `real_playstyle_sessions.json`.
 
 ## Documentation updates still needed
 

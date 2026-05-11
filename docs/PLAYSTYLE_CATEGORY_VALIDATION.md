@@ -30,6 +30,7 @@ The current validation target is:
 - Real-data template: `datasets/validation/real_playstyle_sessions_template.json`
 - Annotation packet: `datasets/validation/playstyle_annotation_packet.json`
 - Annotation-ready unlabeled dataset: `datasets/validation/real_playstyle_sessions_unlabeled.json`
+- CSV annotation form: `datasets/validation/playstyle_annotation_form.csv`
 
 Because the fixture is synthetic, it validates scoring mechanics and reporting
 format only. It is not evidence that the categories generalize to real users.
@@ -63,6 +64,15 @@ For annotation preparation from committed samples:
 
 ```bash
 PYTHONPATH=backend python3 backend/prepare_playstyle_annotation_packet.py
+```
+
+For completed CSV labels:
+
+```bash
+PYTHONPATH=backend python3 backend/apply_playstyle_annotation_csv.py \
+  --dataset datasets/validation/real_playstyle_sessions_unlabeled.json \
+  --csv datasets/validation/playstyle_annotation_form.csv \
+  --output datasets/validation/real_playstyle_sessions.json
 ```
 
 For the unlabeled dataset before annotators return labels:

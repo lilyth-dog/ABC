@@ -1,0 +1,4 @@
+session_id,user_id,game_id,annotator_id,primary_playstyle,secondary_playstyles,confidence,evidence
+public_full_pipeline_minecraft,public_sample_minecraft_user,minecraft,annotator_1,,,,
+public_full_pipeline_minecraft,public_sample_minecraft_user,minecraft,annotator_2,,,,
+public_full_pipeline_minecraft,public_sample_minecraft_user,minecraft,annotator_3,,,,

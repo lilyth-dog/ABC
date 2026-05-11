@@ -15,9 +15,10 @@
 \section{분석 목표와 범위}
 본 보고서는 Nexus Entertainment 디지털 휴먼 트윈 프로젝트의 현재 구현을 대상으로,
 행동 데이터 파이프라인이 실행 가능하고 재현 가능한지, 공개 샘플 데이터와 무작위 반례에서
-안정적으로 동작하는지, 그리고 기존 문서의 성능/정확도 주장이 현재 코드와 일치하는지를
-검증한다. 분석은 새로 추가한 \texttt{backend/empirical\_analysis.py}와 기존 테스트/검증
-스크립트를 함께 사용했다.
+안정적으로 동작하는지, 그리고 사전에 정의한 플레이 스타일 카테고리를 일관되게 산출하는지를
+검증한다. 여기서 분석 대상은 사람의 실제 성격이 아니라 관찰 가능한 플레이 스타일과 행동
+카테고리다. 분석은 새로 추가한 \texttt{backend/empirical\_analysis.py},
+\texttt{backend/validate\_playstyle\_categories.py}, 기존 테스트/검증 스크립트를 함께 사용했다.
 
 \section{사전 기대치와 이론적 최선}
 실험 전 이론적 최선은 다음과 같이 정의했다. 단위 테스트와 프론트엔드 테스트는 100\% 통과,
@@ -52,6 +53,13 @@
 \texttt{backend/final\_verification\_test.py}로 API, 게임 파이프라인, 성능, E2E 통합을
 검증했다. 성능 분석은 이벤트 수만 바꾸는 단일 변수 실험으로 구성했으며, 각 이벤트 수에 대해
 30회 반복 후 median과 p95 latency를 기록했다.
+
+\subsection{플레이 스타일 카테고리 검증}
+\texttt{datasets/validation/labeled\_playstyle\_sessions.json}에 synthetic calibration fixture를
+추가했다. 이 fixture는 실제 사용자 성격 라벨이 아니라, 검증 스크립트가 사전 정의된 카테고리를
+재현 가능하게 산출하는지 확인하기 위한 규칙 기반 예시다. 카테고리는 \texttt{planner},
+\texttt{iterative\_refiner}, \texttt{route\_optimizer}, \texttt{complex\_builder},
+\texttt{resource\_diversifier}, \texttt{risk\_taker}로 정의했다.
 
 \section{결과}
 \subsection{테스트 실행 결과}
@@ -134,6 +142,25 @@ shuffle\_order & 40 & 40 & 0 \\
 \texttt{docs/figures/empirical\_robustness.svg}에 생성했다. 첫 번째 그림은 이벤트 수 증가에
 따른 median/p95 latency를 보여주며, 두 번째 그림은 무작위 단일 변형별 성공률을 보여준다.
 
+\subsection{플레이 스타일 카테고리 결과}
+\begin{table}[h]
+\centering
+\begin{tabular}{lr}
+\toprule
+지표 & 결과 \\
+\midrule
+Synthetic labeled sessions & 6 \\
+Correct primary category predictions & 6 \\
+Fixture accuracy & 100.00\% \\
+Failures & 0 \\
+\bottomrule
+\end{tabular}
+\caption{\texttt{validate\_playstyle\_categories.py} 결과}
+\end{table}
+
+이 결과는 카테고리 scoring mechanics의 재현성 검증이다. 실제 사용자 플레이 스타일 일반화
+성능을 주장하려면 사람이 라벨링한 실제 세션 데이터가 필요하다.
+
 \section{공개 데이터 점검}
 저장소에 포함된 공개 데이터는 \texttt{opendota\_real\_match\_8650963582.json}
 (converted event 12개)와 \texttt{full\_pipeline\_result.json}(raw event 8개)로 확인됐다.
@@ -147,17 +174,19 @@ shuffle\_order & 40 & 40 & 0 \\
   \item 파서의 기본 예외 안전성은 무작위 반례 탐색에서 양호했다.
   \item 성능은 1000 이벤트 p95 7.765ms, 5000 이벤트 p95 144.462ms로, 일반적인 수백~천 단위 세션에는 충분해 보인다.
   \item 계획 시간 정의는 첫 준비 행동부터 첫 건축 행동까지로 고정됐고 회귀 테스트가 추가됐다.
-  \item 실제 데이터 표본이 매우 작고, 생체신호 대용량 데이터가 없어 성격 추론 타당도나 사용자 수준 외적 타당도는 아직 입증되지 않았다.
+  \item synthetic playstyle fixture 6개는 모두 올바르게 분류됐다. 그러나 이는 실제 사용자 일반화 성능이 아니라 scoring mechanics 검증이다.
+  \item 실제 데이터 표본이 매우 작고, 생체신호 대용량 데이터가 없어 사용자 수준 외적 타당도는 아직 입증되지 않았다.
   \item MuMax3 바이너리는 현재 환경에 없어 pre-computed pattern으로 대체됐다. 물리 시뮬레이션 성능 주장은 별도 환경에서 검증해야 한다.
 \end{itemize}
 
 \section{결론}
 현재 프로젝트는 테스트와 기본 파이프라인 실행성 측면에서 재현 가능한 상태로 정리되었다.
-그러나 ``성격 추론이 실제 행동 특성을 정확히 반영한다''는 강한 주장은 아직 데이터와 평가 설계가
-부족하다. 이번 실증분석에서 확실히 말할 수 있는 결론은 다음이다:
+그러나 ``실제 사용자 플레이 스타일을 일반화해서 정확히 분류한다''는 강한 주장은 아직 데이터와
+평가 설계가 부족하다. 이번 실증분석에서 확실히 말할 수 있는 결론은 다음이다:
 (1) 수정 후 구현은 백엔드/프론트엔드 테스트를 모두 통과한다,
 (2) 공개 샘플과 무작위 단일 변형 입력에서 파이프라인은 안정적으로 실행된다,
-(3) 계획 시간 지표의 평가/구현 정의 충돌은 해소됐지만, 실제 사용자 행동 라벨에 대한 타당도 검증은 아직 필요하다.
+(3) 계획 시간 지표의 평가/구현 정의 충돌은 해소됐다,
+(4) synthetic fixture 기준 플레이 스타일 카테고리 scoring은 재현 가능하지만, 실제 라벨 데이터 검증은 아직 필요하다.
 
 \section{재현 명령}
 \begin{verbatim}
@@ -166,6 +195,7 @@ npm run test
 PYTHONPATH=backend python3 backend/comprehensive_test.py
 PYTHONPATH=backend python3 backend/final_verification_test.py
 PYTHONPATH=backend python3 backend/empirical_analysis.py
+PYTHONPATH=backend python3 backend/validate_playstyle_categories.py
 \end{verbatim}
 
 \end{document}

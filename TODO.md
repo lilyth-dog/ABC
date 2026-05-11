@@ -5,12 +5,16 @@
 - [x] Decide and document the operational definition of `planning_time`.
   - Selected definition: first preparation action before a build to the first build action.
   - Regression tests cover the selected definition and unordered event arrival.
+- [x] Add a small synthetic labeled playstyle calibration fixture.
+  - Fixture path: `datasets/validation/labeled_playstyle_sessions.json`
+  - Report path: `datasets/public/playstyle_validation_report.json`
+  - Scope: scoring mechanics only, not real-user generalization.
 - [ ] Expand real-game validation beyond the current committed samples.
   - Current OpenDota artifact has 12 converted events.
   - Current full pipeline artifact has 8 raw events.
 - [ ] Add TESS and workout/motion datasets to the evaluation environment or provide reproducible download/setup steps.
-- [ ] Validate personality inference against labeled human/user outcomes.
-  - Current tests verify execution and invariants, not psychological construct validity.
+- [ ] Validate playstyle category analysis against real labeled user sessions.
+  - Current fixture verifies execution and scoring mechanics, not real-user generalization.
 - [ ] Run MuMax3-backed simulation on an environment with the MuMax3 binary installed.
   - Current environment falls back to pre-computed patterns.
 - [ ] Add confidence intervals across independent machines or CI runners for latency measurements.
@@ -30,10 +34,12 @@
   - first planning action to last planning action
   - weighted preparation span with inactivity threshold
 - [x] Add regression tests for the chosen `planning_time` semantics after the definition is fixed.
-- [ ] Add a small, labeled benchmark dataset with expected behavioral metrics and personality weights.
+- [x] Add a small, labeled benchmark dataset with expected playstyle categories.
+- [ ] Add a real labeled benchmark dataset with observed playstyle categories from human annotators or player self-reports.
 
 ## Documentation updates still needed
 
 - [x] Update `docs/COMPREHENSIVE_EVALUATION.md` to reflect the current parsing accuracy and edge-case result.
 - [x] Link `report.tex` and `datasets/public/empirical_analysis_report.json` from `docs/README.md`.
 - [x] Document that empirical robustness results are not evidence of external validity.
+- [x] Document playstyle category validation boundaries in `docs/PLAYSTYLE_CATEGORY_VALIDATION.md`.

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-11T01:35:57.956317Z",
+  "generated_at": "2026-05-11T01:49:48.267349Z",
   "random_seed": 20260511,
   "theoretical_best_case": {
     "unit_test_pass_rate": 1.0,
@@ -9,14 +9,14 @@
     "randomized_robustness_success_rate": 1.0
   },
   "tier_1_execution": {
-    "backend_tests": "33/33 passed",
+    "backend_tests": "36/36 passed",
     "frontend_tests": "31/31 passed",
-    "backend_coverage": "57.24%"
+    "backend_coverage": "60.29%"
   },
   "tier_2_component_analysis": {
     "legacy_comprehensive_summary": {
       "parsing_accuracy": "100.00%",
-      "performance": "99914 events/sec",
+      "performance": "99627 events/sec",
       "consistency": "✓",
       "edge_cases_handled": 4,
       "real_data_files": 2
@@ -104,44 +104,44 @@
       {
         "event_count": 10,
         "repetitions": 30,
-        "median_ms": 0.050561007810756564,
-        "p95_ms": 0.0641347753116861,
-        "median_events_per_second": 197780.8677672868
+        "median_ms": 0.050653499783948064,
+        "p95_ms": 0.07214901270344855,
+        "median_events_per_second": 197419.72504669795
       },
       {
         "event_count": 50,
         "repetitions": 30,
-        "median_ms": 0.17243149341084063,
-        "p95_ms": 0.18920392321888357,
-        "median_events_per_second": 289970.2311390904
+        "median_ms": 0.17173902597278357,
+        "p95_ms": 0.1845628023147583,
+        "median_events_per_second": 291139.41759471595
       },
       {
         "event_count": 100,
         "repetitions": 30,
-        "median_ms": 0.3461470187176019,
-        "p95_ms": 0.36446935846470296,
-        "median_events_per_second": 288894.58696041314
+        "median_ms": 0.34514552680775523,
+        "p95_ms": 0.38041784428060055,
+        "median_events_per_second": 289732.85826676706
       },
       {
         "event_count": 500,
         "repetitions": 30,
-        "median_ms": 2.5980450154747814,
-        "p95_ms": 2.685232085059397,
-        "median_events_per_second": 192452.4005634395
+        "median_ms": 2.6097334921360016,
+        "p95_ms": 2.951141385710798,
+        "median_events_per_second": 191590.44458243225
       },
       {
         "event_count": 1000,
         "repetitions": 30,
-        "median_ms": 7.579163502668962,
-        "p95_ms": 7.765460168593563,
-        "median_events_per_second": 131940.68179791284
+        "median_ms": 7.647270511370152,
+        "p95_ms": 13.195068357163109,
+        "median_events_per_second": 130765.61088210167
       },
       {
         "event_count": 5000,
         "repetitions": 30,
-        "median_ms": 138.2694969943259,
-        "p95_ms": 144.46202155086212,
-        "median_events_per_second": 36161.26556246301
+        "median_ms": 139.0690279949922,
+        "p95_ms": 148.90736073139124,
+        "median_events_per_second": 35953.36842492382
       }
     ],
     "real_data_summary": {

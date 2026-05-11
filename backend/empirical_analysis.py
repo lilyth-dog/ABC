@@ -14,7 +14,7 @@ import math
 import random
 import statistics
 import time
-from datetime import datetime
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Sequence, Tuple
 
@@ -481,7 +481,7 @@ def run_empirical_analysis() -> Dict[str, Any]:
     final_verification = _load_json_if_exists(REPO_ROOT / "test_results_final.json")
 
     payload: Dict[str, Any] = {
-        "generated_at": datetime.utcnow().isoformat() + "Z",
+        "generated_at": datetime.now(UTC).isoformat().replace("+00:00", "Z"),
         "random_seed": RANDOM_SEED,
         "theoretical_best_case": {
             "unit_test_pass_rate": 1.0,

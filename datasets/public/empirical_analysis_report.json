@@ -1,0 +1,178 @@
+{
+  "generated_at": "2026-05-11T01:24:03.335908Z",
+  "random_seed": 20260511,
+  "theoretical_best_case": {
+    "unit_test_pass_rate": 1.0,
+    "frontend_test_pass_rate": 1.0,
+    "parser_accuracy": 1.0,
+    "edge_case_success_rate": 1.0,
+    "randomized_robustness_success_rate": 1.0
+  },
+  "tier_1_execution": {
+    "backend_tests": "31/31 passed",
+    "frontend_tests": "31/31 passed",
+    "backend_coverage": "53.62%"
+  },
+  "tier_2_component_analysis": {
+    "legacy_comprehensive_summary": {
+      "parsing_accuracy": "66.67%",
+      "performance": "99679 events/sec",
+      "consistency": "✓",
+      "edge_cases_handled": 4,
+      "real_data_files": 2
+    },
+    "planning_time_counterexample": {
+      "events": [
+        {
+          "type": "inventory_change",
+          "timestamp": 1000,
+          "items": [
+            "stone"
+          ]
+        },
+        {
+          "type": "inventory_change",
+          "timestamp": 2000,
+          "items": [
+            "dirt"
+          ]
+        },
+        {
+          "type": "block_place",
+          "timestamp": 5000,
+          "position": {
+            "x": 0,
+            "y": 64,
+            "z": 0
+          }
+        }
+      ],
+      "observed_planning_time_ms": 1000,
+      "expected_first_prep_to_build_ms": 4000,
+      "expected_prep_action_span_ms": 1000,
+      "interpretation": "The implementation measures the span between planning actions, while the legacy evaluation expects first preparation to first build.",
+      "passes_current_implementation_semantics": true,
+      "passes_legacy_evaluation_semantics": false
+    },
+    "randomized_robustness": {
+      "seed": 20260511,
+      "trials": 200,
+      "successes": 200,
+      "success_rate": 1.0,
+      "by_mutation": {
+        "drop_timestamp": {
+          "trials": 40,
+          "successes": 40,
+          "failures": 0,
+          "violations": []
+        },
+        "drop_position": {
+          "trials": 40,
+          "successes": 40,
+          "failures": 0,
+          "violations": []
+        },
+        "unknown_type": {
+          "trials": 40,
+          "successes": 40,
+          "failures": 0,
+          "violations": []
+        },
+        "negative_timestamp": {
+          "trials": 40,
+          "successes": 40,
+          "failures": 0,
+          "violations": []
+        },
+        "shuffle_order": {
+          "trials": 40,
+          "successes": 40,
+          "failures": 0,
+          "violations": []
+        }
+      }
+    }
+  },
+  "tier_3_full_evaluation": {
+    "final_verification_summary": {
+      "total_tests": 15,
+      "total_passed": 15,
+      "overall_percentage": 100.0,
+      "status": "PASS"
+    },
+    "performance_benchmark": [
+      {
+        "event_count": 10,
+        "repetitions": 30,
+        "median_ms": 0.0493219995405525,
+        "p95_ms": 0.0604252825723961,
+        "median_events_per_second": 202749.28212871845
+      },
+      {
+        "event_count": 50,
+        "repetitions": 30,
+        "median_ms": 0.16840596799738705,
+        "p95_ms": 0.1899349590530619,
+        "median_events_per_second": 296901.59199569334
+      },
+      {
+        "event_count": 100,
+        "repetitions": 30,
+        "median_ms": 0.34208051511086524,
+        "p95_ms": 0.3587240062188357,
+        "median_events_per_second": 292328.8395060762
+      },
+      {
+        "event_count": 500,
+        "repetitions": 30,
+        "median_ms": 2.5891289988067,
+        "p95_ms": 2.6987896038917825,
+        "median_events_per_second": 193115.13649201885
+      },
+      {
+        "event_count": 1000,
+        "repetitions": 30,
+        "median_ms": 7.637286966200918,
+        "p95_ms": 8.148151997011155,
+        "median_events_per_second": 130936.54912085079
+      },
+      {
+        "event_count": 5000,
+        "repetitions": 30,
+        "median_ms": 140.2347825060133,
+        "p95_ms": 150.21342584805097,
+        "median_events_per_second": 35654.492492157566
+      }
+    ],
+    "real_data_summary": {
+      "opendota_real_match_8650963582.json": {
+        "status": "exists",
+        "size_bytes": 20606,
+        "top_level_keys": [
+          "match_id",
+          "match_detail",
+          "converted_events"
+        ],
+        "raw_event_count": 0,
+        "converted_event_count": 12
+      },
+      "full_pipeline_result.json": {
+        "status": "exists",
+        "size_bytes": 2113,
+        "top_level_keys": [
+          "raw_events",
+          "parsed_metrics",
+          "behavioral_profile",
+          "personality_weights"
+        ],
+        "raw_event_count": 8,
+        "converted_event_count": 0
+      }
+    }
+  },
+  "artifacts": {
+    "performance_svg": "docs/figures/empirical_performance.svg",
+    "robustness_svg": "docs/figures/empirical_robustness.svg",
+    "json_report": "datasets/public/empirical_analysis_report.json"
+  }
+}

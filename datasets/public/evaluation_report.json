@@ -1,5 +1,5 @@
 {
-  "test_date": "2026-01-16T13:46:23.429982",
+  "test_date": "2026-05-11T01:21:23.342207",
   "tests": {
     "parsing_accuracy": {
       "overall_accuracy": 0.6666666666666666,
@@ -63,38 +63,38 @@
     "performance": [
       {
         "event_count": 10,
-        "parse_time": 0.0,
-        "process_time": 0.0,
-        "total_time": 0.0,
-        "events_per_second": Infinity
+        "parse_time": 0.0001518726348876953,
+        "process_time": 3.981590270996094e-05,
+        "total_time": 0.00019168853759765625,
+        "events_per_second": 52167.96019900498
       },
       {
         "event_count": 50,
-        "parse_time": 0.0,
-        "process_time": 0.0,
-        "total_time": 0.0,
-        "events_per_second": Infinity
+        "parse_time": 0.0001010894775390625,
+        "process_time": 1.71661376953125e-05,
+        "total_time": 0.000118255615234375,
+        "events_per_second": 422812.9032258064
       },
       {
         "event_count": 100,
-        "parse_time": 0.0,
-        "process_time": 0.0,
-        "total_time": 0.0,
-        "events_per_second": Infinity
+        "parse_time": 0.0001933574676513672,
+        "process_time": 1.0728836059570312e-05,
+        "total_time": 0.0002040863037109375,
+        "events_per_second": 489988.78504672897
       },
       {
         "event_count": 500,
-        "parse_time": 0.0060253143310546875,
-        "process_time": 0.0,
-        "total_time": 0.0060253143310546875,
-        "events_per_second": 82983.22253877809
+        "parse_time": 0.002693653106689453,
+        "process_time": 1.2159347534179688e-05,
+        "total_time": 0.002705812454223633,
+        "events_per_second": 184787.3821482069
       },
       {
         "event_count": 1000,
-        "parse_time": 0.015937328338623047,
-        "process_time": 0.0,
-        "total_time": 0.015937328338623047,
-        "events_per_second": 62745.77386829429
+        "parse_time": 0.01001882553100586,
+        "process_time": 1.33514404296875e-05,
+        "total_time": 0.010032176971435547,
+        "events_per_second": 99679.26232235372
       }
     ],
     "consistency": {
@@ -138,8 +138,20 @@
       },
       {
         "case": "타임스탬프 없음",
-        "status": "error",
-        "error": "'timestamp'"
+        "status": "success",
+        "profile": {
+          "pathEfficiency": 0.79,
+          "avgDecisionLatency": 0,
+          "revisionRate": 0,
+          "jitterIndex": 0.20999999999999996,
+          "intensity": 0.0,
+          "gameId": "minecraft",
+          "gameSpecific": {
+            "buildComplexity": 0.5,
+            "explorationRange": 0.5,
+            "resourceDiversity": 0.5
+          }
+        }
       },
       {
         "case": "위치 정보 없음",
@@ -163,7 +175,7 @@
       {
         "file": "datasets/public/opendota_real_match_8650963582.json",
         "status": "exists",
-        "size": 21518,
+        "size": 20606,
         "keys": [
           "match_id",
           "match_detail",
@@ -173,7 +185,7 @@
       {
         "file": "datasets/public/full_pipeline_result.json",
         "status": "exists",
-        "size": 2227,
+        "size": 2113,
         "keys": [
           "raw_events",
           "parsed_metrics",
@@ -185,9 +197,9 @@
   },
   "summary": {
     "parsing_accuracy": "66.67%",
-    "performance": "62746 events/sec",
+    "performance": "99679 events/sec",
     "consistency": "✓",
-    "edge_cases_handled": 3,
+    "edge_cases_handled": 4,
     "real_data_files": 2
   }
 }

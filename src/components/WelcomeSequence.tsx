@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 import { useAudio } from './AudioManager';
 
 interface WelcomeSequenceProps {
@@ -11,10 +11,19 @@ const WELCOME_MESSAGES = [
     "디지털 트윈이 깨어납니다",
     "Your Digital Twin Awakens"
 ];
+const TYPING_INTERVAL_MS = 60;
+const PHASE_PAUSE_MS = 1500;
+const COMPLETION_PAUSE_MS = 2000;
+const TOTAL_WELCOME_DURATION_MS = WELCOME_MESSAGES.reduce(
+    (total, message) => total + (message.length + 2) * TYPING_INTERVAL_MS + PHASE_PAUSE_MS,
+    COMPLETION_PAUSE_MS
+);
 
 const WelcomeSequence = ({ onComplete }: WelcomeSequenceProps) => {
     const { playChime } = useAudio();
     const playChimeRef = useRef(playChime);
+    const onCompleteRef = useRef(onComplete);
+    const completedRef = useRef(false);
     const [phase, setPhase] = useState(0);
     const [displayText, setDisplayText] = useState('');
     const [showParticles, setShowParticles] = useState(false);
@@ -23,11 +32,32 @@ const WelcomeSequence = ({ onComplete }: WelcomeSequenceProps) => {
         playChimeRef.current = playChime;
     }, [playChime]);
 
+    useEffect(() => {
+        onCompleteRef.current = onComplete;
+    }, [onComplete]);
+
+    const completeOnce = useCallback(() => {
+        if (completedRef.current) {
+            return;
+        }
+        completedRef.current = true;
+        onCompleteRef.current();
+    }, []);
+
+    useEffect(() => {
+        const fallbackTimeout = window.setTimeout(() => {
+            setShowParticles(true);
+            completeOnce();
+        }, TOTAL_WELCOME_DURATION_MS);
+
+        return () => window.clearTimeout(fallbackTimeout);
+    }, [completeOnce]);
+
     // Typing animation effect
     useEffect(() => {
         if (phase >= WELCOME_MESSAGES.length) {
             setShowParticles(true);
-            const completeTimeout = window.setTimeout(onComplete, 2000);
+            const completeTimeout = window.setTimeout(completeOnce, COMPLETION_PAUSE_MS);
             return () => window.clearTimeout(completeTimeout);
         }
 
@@ -45,9 +75,9 @@ const WelcomeSequence = ({ onComplete }: WelcomeSequenceProps) => {
                 charIndex++;
             } else {
                 window.clearInterval(interval);
-                phaseTimeout = window.setTimeout(() => setPhase(p => p + 1), 1500);
+                phaseTimeout = window.setTimeout(() => setPhase(p => p + 1), PHASE_PAUSE_MS);
             }
-        }, 60);
+        }, TYPING_INTERVAL_MS);
 
         return () => {
             window.clearInterval(interval);
@@ -55,7 +85,7 @@ const WelcomeSequence = ({ onComplete }: WelcomeSequenceProps) => {
                 window.clearTimeout(phaseTimeout);
             }
         };
-    }, [phase, onComplete]);
+    }, [phase, completeOnce]);
 
     return (
         <div className="welcome-overlay">

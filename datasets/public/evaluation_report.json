@@ -1,13 +1,13 @@
 {
-  "test_date": "2026-05-11T01:21:23.342207",
+  "test_date": "2026-05-11T01:34:20.394695",
   "tests": {
     "parsing_accuracy": {
-      "overall_accuracy": 0.6666666666666666,
+      "overall_accuracy": 1.0,
       "details": [
         {
           "test_name": "계획 시간 테스트",
           "metrics": {
-            "planning_time": 1000,
+            "planning_time": 4000,
             "revision_count": 0,
             "complexity": 0.0,
             "path_efficiency": 1.0,
@@ -18,9 +18,9 @@
             "planning_time": 4000
           },
           "accuracy": {
-            "planning_time": 0.0
+            "planning_time": 1.0
           },
-          "avg_accuracy": 0.0
+          "avg_accuracy": 1.0
         },
         {
           "test_name": "수정 빈도 테스트",
@@ -63,38 +63,38 @@
     "performance": [
       {
         "event_count": 10,
-        "parse_time": 0.0001518726348876953,
-        "process_time": 3.981590270996094e-05,
-        "total_time": 0.00019168853759765625,
-        "events_per_second": 52167.96019900498
+        "parse_time": 0.00015997886657714844,
+        "process_time": 3.838539123535156e-05,
+        "total_time": 0.0001983642578125,
+        "events_per_second": 50412.307692307695
       },
       {
         "event_count": 50,
-        "parse_time": 0.0001010894775390625,
-        "process_time": 1.71661376953125e-05,
-        "total_time": 0.000118255615234375,
-        "events_per_second": 422812.9032258064
+        "parse_time": 0.00010442733764648438,
+        "process_time": 1.621246337890625e-05,
+        "total_time": 0.00012063980102539062,
+        "events_per_second": 414456.9169960474
       },
       {
         "event_count": 100,
-        "parse_time": 0.0001933574676513672,
-        "process_time": 1.0728836059570312e-05,
-        "total_time": 0.0002040863037109375,
-        "events_per_second": 489988.78504672897
+        "parse_time": 0.00020647048950195312,
+        "process_time": 1.049041748046875e-05,
+        "total_time": 0.00021696090698242188,
+        "events_per_second": 460912.52747252746
       },
       {
         "event_count": 500,
-        "parse_time": 0.002693653106689453,
-        "process_time": 1.2159347534179688e-05,
-        "total_time": 0.002705812454223633,
-        "events_per_second": 184787.3821482069
+        "parse_time": 0.0027136802673339844,
+        "process_time": 1.1205673217773438e-05,
+        "total_time": 0.002724885940551758,
+        "events_per_second": 183493.91897803833
       },
       {
         "event_count": 1000,
-        "parse_time": 0.01001882553100586,
-        "process_time": 1.33514404296875e-05,
-        "total_time": 0.010032176971435547,
-        "events_per_second": 99679.26232235372
+        "parse_time": 0.009998083114624023,
+        "process_time": 1.049041748046875e-05,
+        "total_time": 0.010008573532104492,
+        "events_per_second": 99914.33812144167
       }
     ],
     "consistency": {
@@ -196,8 +196,8 @@
     ]
   },
   "summary": {
-    "parsing_accuracy": "66.67%",
-    "performance": "99679 events/sec",
+    "parsing_accuracy": "100.00%",
+    "performance": "99914 events/sec",
     "consistency": "✓",
     "edge_cases_handled": 4,
     "real_data_files": 2

@@ -72,6 +72,8 @@
 - **[FINAL_VERIFICATION_REPORT.md](FINAL_VERIFICATION_REPORT.md)** - 최종 검증 리포트 (15/15 통과)
 - **[FINAL_STATUS_REPORT.md](FINAL_STATUS_REPORT.md)** - 최종 상태 리포트
 - **[COMPREHENSIVE_EVALUATION.md](COMPREHENSIVE_EVALUATION.md)** - 종합 평가 리포트
+- **[../report.tex](../report.tex)** - 실증분석 LaTeX 보고서
+- **[../datasets/public/empirical_analysis_report.json](../datasets/public/empirical_analysis_report.json)** - 실증분석 JSON 산출물
 
 #### 개선 리포트
 - **[CODE_QUALITY_IMPROVEMENTS.md](CODE_QUALITY_IMPROVEMENTS.md)** - 코드 품질 개선 리포트

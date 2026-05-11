@@ -491,9 +491,9 @@ def run_empirical_analysis() -> Dict[str, Any]:
             "randomized_robustness_success_rate": 1.0,
         },
         "tier_1_execution": {
-            "backend_tests": "31/31 passed",
+            "backend_tests": "33/33 passed",
             "frontend_tests": "31/31 passed",
-            "backend_coverage": "53.62%",
+            "backend_coverage": "57.24%",
         },
         "tier_2_component_analysis": {
             "legacy_comprehensive_summary": legacy_evaluation.get("summary", {}),

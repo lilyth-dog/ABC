@@ -1,0 +1,110 @@
+{
+  "metadata": {
+    "dataset_name": "labeled_playstyle_sessions",
+    "dataset_type": "synthetic_calibration_fixture",
+    "version": "0.1.0",
+    "created_at": "2026-05-11",
+    "label_source": "rule-designed examples for pipeline validation, not human personality labels",
+    "purpose": "Validate that playstyle category scoring is reproducible before collecting real labeled sessions.",
+    "categories": {
+      "planner": "Preparation actions before the first build action.",
+      "iterative_refiner": "Frequent placement revisions at the same location.",
+      "route_optimizer": "Efficient movement path across multiple movement events.",
+      "complex_builder": "High spatial spread and vertical variation in build events.",
+      "resource_diversifier": "Broad variety of inventory and block resources.",
+      "risk_taker": "Actions in low-height or low-light positions."
+    }
+  },
+  "sessions": [
+    {
+      "user_id": "synthetic_planner_001",
+      "session_id": "planner_session_001",
+      "game_id": "minecraft",
+      "labels": {
+        "primary_playstyle": "planner",
+        "notes": "Long preparation span before first build."
+      },
+      "raw_events": [
+        {"type": "inventory_change", "timestamp": 1000, "items": ["stone", "glass"]},
+        {"type": "item_craft", "timestamp": 3000, "item": "minecraft:planks"},
+        {"type": "player_move", "timestamp": 5000, "from": {"x": 0, "y": 64, "z": 0}, "to": {"x": 1, "y": 64, "z": 1}},
+        {"type": "block_place", "timestamp": 7000, "position": {"x": 0, "y": 64, "z": 0}, "block_type": "minecraft:stone"}
+      ]
+    },
+    {
+      "user_id": "synthetic_refiner_001",
+      "session_id": "refiner_session_001",
+      "game_id": "minecraft",
+      "labels": {
+        "primary_playstyle": "iterative_refiner",
+        "notes": "Repeated build-break cycles at placed positions."
+      },
+      "raw_events": [
+        {"type": "block_place", "timestamp": 1000, "position": {"x": 0, "y": 64, "z": 0}, "block_type": "minecraft:stone"},
+        {"type": "block_break", "timestamp": 1200, "position": {"x": 0, "y": 64, "z": 0}},
+        {"type": "block_place", "timestamp": 1400, "position": {"x": 1, "y": 64, "z": 0}, "block_type": "minecraft:glass"},
+        {"type": "block_break", "timestamp": 1600, "position": {"x": 1, "y": 64, "z": 0}},
+        {"type": "block_place", "timestamp": 1800, "position": {"x": 2, "y": 64, "z": 0}, "block_type": "minecraft:wood"},
+        {"type": "block_break", "timestamp": 2000, "position": {"x": 2, "y": 64, "z": 0}}
+      ]
+    },
+    {
+      "user_id": "synthetic_route_001",
+      "session_id": "route_session_001",
+      "game_id": "minecraft",
+      "labels": {
+        "primary_playstyle": "route_optimizer",
+        "notes": "Multiple movement events along a nearly straight path."
+      },
+      "raw_events": [
+        {"type": "player_move", "timestamp": 1000, "from": {"x": 0, "y": 64, "z": 0}, "to": {"x": 10, "y": 64, "z": 0}},
+        {"type": "player_move", "timestamp": 2000, "from": {"x": 10, "y": 64, "z": 0}, "to": {"x": 20, "y": 64, "z": 0}},
+        {"type": "player_move", "timestamp": 3000, "from": {"x": 20, "y": 64, "z": 0}, "to": {"x": 30, "y": 64, "z": 0}}
+      ]
+    },
+    {
+      "user_id": "synthetic_complex_001",
+      "session_id": "complex_session_001",
+      "game_id": "minecraft",
+      "labels": {
+        "primary_playstyle": "complex_builder",
+        "notes": "Large area and vertical variation in block placements."
+      },
+      "raw_events": [
+        {"type": "block_place", "timestamp": 1000, "position": {"x": 0, "y": 40, "z": 0}, "block_type": "minecraft:stone"},
+        {"type": "block_place", "timestamp": 1100, "position": {"x": 100, "y": 64, "z": 0}, "block_type": "minecraft:glass"},
+        {"type": "block_place", "timestamp": 1200, "position": {"x": 0, "y": 90, "z": 100}, "block_type": "minecraft:wood"},
+        {"type": "block_place", "timestamp": 1300, "position": {"x": 100, "y": 120, "z": 100}, "block_type": "minecraft:brick"}
+      ]
+    },
+    {
+      "user_id": "synthetic_diverse_001",
+      "session_id": "diverse_session_001",
+      "game_id": "minecraft",
+      "labels": {
+        "primary_playstyle": "resource_diversifier",
+        "notes": "Broad resource inventory and block-type variety."
+      },
+      "raw_events": [
+        {"type": "inventory_change", "timestamp": 1000, "items": ["stone", "glass", "wood", "brick", "sand", "dirt", "gold", "iron", "coal", "redstone"]},
+        {"type": "inventory_change", "timestamp": 1100, "items": ["lapis", "diamond", "emerald", "copper", "clay", "quartz", "wool", "leaves", "obsidian", "ice"]},
+        {"type": "block_place", "timestamp": 1200, "position": {"x": 0, "y": 64, "z": 0}, "block_type": "minecraft:stone"}
+      ]
+    },
+    {
+      "user_id": "synthetic_risk_001",
+      "session_id": "risk_session_001",
+      "game_id": "minecraft",
+      "labels": {
+        "primary_playstyle": "risk_taker",
+        "notes": "Most actions occur in low-height or low-light positions."
+      },
+      "raw_events": [
+        {"type": "block_place", "timestamp": 1000, "position": {"x": 0, "y": 20, "z": 0}, "block_type": "minecraft:stone", "light_level": 4},
+        {"type": "block_place", "timestamp": 1100, "position": {"x": 1, "y": 25, "z": 0}, "block_type": "minecraft:glass", "light_level": 3},
+        {"type": "block_place", "timestamp": 1200, "position": {"x": 2, "y": 30, "z": 0}, "block_type": "minecraft:wood", "light_level": 2},
+        {"type": "inventory_change", "timestamp": 1300, "items": ["torch"]}
+      ]
+    }
+  ]
+}

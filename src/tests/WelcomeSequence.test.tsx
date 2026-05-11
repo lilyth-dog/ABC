@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
-import { render, screen, waitFor, act } from '@testing-library/react'
+import { render, screen, act } from '@testing-library/react'
 import WelcomeSequence from '../components/WelcomeSequence'
 
 // Mock AudioManager context
@@ -71,8 +71,6 @@ describe('WelcomeSequence Component', () => {
             }
         })
 
-        await waitFor(() => {
-            expect(mockOnComplete).toHaveBeenCalled()
-        }, { timeout: 10000 })
+        expect(mockOnComplete).toHaveBeenCalled()
     })
 })

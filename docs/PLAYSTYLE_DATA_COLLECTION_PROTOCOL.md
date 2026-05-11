@@ -52,6 +52,34 @@ vote over `annotations[].primary_playstyle`.
 
 ## Validation command
 
+To prepare an annotation packet from committed public samples:
+
+```bash
+PYTHONPATH=backend python3 backend/prepare_playstyle_annotation_packet.py
+```
+
+This writes:
+
+```text
+datasets/validation/playstyle_annotation_packet.json
+datasets/validation/real_playstyle_sessions_unlabeled.json
+```
+
+Give `playstyle_annotation_packet.json` to annotators. It intentionally omits
+model predictions. After labels are returned, copy the labels into
+`real_playstyle_sessions_unlabeled.json` as `annotations[]`, or create a new
+`real_playstyle_sessions.json` with the same schema.
+
+Before labels are added, this command is expected to produce `accuracy: null`:
+
+```bash
+PYTHONPATH=backend python3 backend/validate_playstyle_categories.py \
+  --dataset datasets/validation/real_playstyle_sessions_unlabeled.json \
+  --output datasets/public/real_playstyle_unlabeled_validation_report.json
+```
+
+After labels are added:
+
 ```bash
 PYTHONPATH=backend python3 backend/validate_playstyle_categories.py \
   --dataset datasets/validation/real_playstyle_sessions.json \

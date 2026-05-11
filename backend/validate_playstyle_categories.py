@@ -515,10 +515,13 @@ def main() -> None:
 
     summary = report["summary"]
     print("Playstyle category validation complete")
-    print(
-        f"- labeled accuracy: {summary['correct_predictions']}/"
-        f"{summary['labeled_sessions']} ({summary['accuracy']:.2%})"
-    )
+    if summary["accuracy"] is None:
+        print(f"- labeled accuracy: n/a ({summary['labeled_sessions']} labeled sessions)")
+    else:
+        print(
+            f"- labeled accuracy: {summary['correct_predictions']}/"
+            f"{summary['labeled_sessions']} ({summary['accuracy']:.2%})"
+        )
     print(f"- failures: {len(summary['failures'])}")
     print(f"- report: {args.output}")
 

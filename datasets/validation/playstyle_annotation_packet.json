@@ -1,0 +1,217 @@
+{
+  "metadata": {
+    "packet_name": "playstyle_annotation_packet",
+    "packet_type": "annotation_packet",
+    "generated_at": "2026-05-11T02:05:39.657426Z",
+    "claim_boundary": "Human annotators label observable playstyle categories, not personality traits.",
+    "instructions": [
+      "Review event summaries without model predictions.",
+      "Choose one primary_playstyle from the fixed category set.",
+      "Optionally add secondary_playstyles, confidence, and evidence.",
+      "Use at least three independent annotators per session for real validation."
+    ],
+    "categories": {
+      "planner": {
+        "description": "Preparation actions before the first build action.",
+        "minimum_signal": "At least one preparation action and one build action."
+      },
+      "iterative_refiner": {
+        "description": "Frequent placement revisions at the same location.",
+        "minimum_signal": "At least one block_place followed by a matching block_break."
+      },
+      "route_optimizer": {
+        "description": "Efficient movement path across multiple movement events.",
+        "minimum_signal": "At least two player_move events."
+      },
+      "complex_builder": {
+        "description": "High spatial spread and vertical variation in build events.",
+        "minimum_signal": "At least two block_place events with positions."
+      },
+      "resource_diversifier": {
+        "description": "Broad variety of inventory and block resources.",
+        "minimum_signal": "Inventory or block type diversity."
+      },
+      "risk_taker": {
+        "description": "Actions in low-height or low-light positions.",
+        "minimum_signal": "Positioned actions with y < 40 or light_level < 7."
+      }
+    }
+  },
+  "sessions": [
+    {
+      "session_id": "public_full_pipeline_minecraft",
+      "user_id": "public_sample_minecraft_user",
+      "game_id": "minecraft",
+      "source_file": "datasets/public/full_pipeline_result.json",
+      "event_count": 8,
+      "event_type_counts": {
+        "inventory_change": 2,
+        "block_place": 3,
+        "block_break": 1,
+        "player_move": 2
+      },
+      "timeline_preview": [
+        {
+          "type": "inventory_change",
+          "timestamp": 1000,
+          "items": [
+            "minecraft:stone",
+            "minecraft:dirt",
+            "minecraft:wood"
+          ]
+        },
+        {
+          "type": "inventory_change",
+          "timestamp": 2000,
+          "items": [
+            "minecraft:stone",
+            "minecraft:dirt"
+          ]
+        },
+        {
+          "type": "block_place",
+          "timestamp": 5000,
+          "position": {
+            "x": 0,
+            "y": 64,
+            "z": 0
+          },
+          "block_type": "minecraft:stone"
+        },
+        {
+          "type": "block_place",
+          "timestamp": 6000,
+          "position": {
+            "x": 1,
+            "y": 64,
+            "z": 0
+          },
+          "block_type": "minecraft:stone"
+        },
+        {
+          "type": "block_place",
+          "timestamp": 7000,
+          "position": {
+            "x": 2,
+            "y": 64,
+            "z": 0
+          },
+          "block_type": "minecraft:stone"
+        },
+        {
+          "type": "block_break",
+          "timestamp": 8000,
+          "position": {
+            "x": 0,
+            "y": 64,
+            "z": 0
+          }
+        },
+        {
+          "type": "player_move",
+          "timestamp": 10000,
+          "from": {
+            "x": 0,
+            "y": 64,
+            "z": 0
+          },
+          "to": {
+            "x": 10,
+            "y": 64,
+            "z": 10
+          }
+        },
+        {
+          "type": "player_move",
+          "timestamp": 11000,
+          "from": {
+            "x": 10,
+            "y": 64,
+            "z": 10
+          },
+          "to": {
+            "x": 20,
+            "y": 64,
+            "z": 20
+          }
+        }
+      ],
+      "notes": "",
+      "annotation_form": {
+        "primary_playstyle": "",
+        "secondary_playstyles": [],
+        "confidence": "",
+        "evidence": ""
+      }
+    },
+    {
+      "session_id": "public_opendota_8650963582",
+      "user_id": "public_sample_opendota_match",
+      "game_id": "opendota",
+      "source_file": "datasets/public/opendota_real_match_8650963582.json",
+      "event_count": 12,
+      "event_type_counts": {
+        "match_start": 1,
+        "player_action": 10,
+        "match_end": 1
+      },
+      "timeline_preview": [
+        {
+          "type": "match_start",
+          "timestamp": 1768538109000
+        },
+        {
+          "type": "player_action",
+          "timestamp": 1768538109000
+        },
+        {
+          "type": "player_action",
+          "timestamp": 1768538109000
+        },
+        {
+          "type": "player_action",
+          "timestamp": 1768538109000
+        },
+        {
+          "type": "player_action",
+          "timestamp": 1768538109000
+        },
+        {
+          "type": "player_action",
+          "timestamp": 1768538109000
+        },
+        {
+          "type": "player_action",
+          "timestamp": 1768538109000
+        },
+        {
+          "type": "player_action",
+          "timestamp": 1768538109000
+        },
+        {
+          "type": "player_action",
+          "timestamp": 1768538109000
+        },
+        {
+          "type": "player_action",
+          "timestamp": 1768538109000
+        },
+        {
+          "type": "player_action",
+          "timestamp": 1768538109000
+        },
+        {
+          "type": "match_end",
+          "timestamp": 1768538109000
+        }
+      ],
+      "notes": "Included for annotator review only. Current playstyle validator categories are calibrated for Minecraft-like event metrics.",
+      "annotation_form": {
+        "primary_playstyle": "",
+        "secondary_playstyles": [],
+        "confidence": "",
+        "evidence": ""
+      }
+    }
+  ]
+}

@@ -12,6 +12,10 @@
 - [x] Add a real labeled playstyle session collection template and protocol.
   - Template path: `datasets/validation/real_playstyle_sessions_template.json`
   - Protocol path: `docs/PLAYSTYLE_DATA_COLLECTION_PROTOCOL.md`
+- [x] Prepare annotation packet and unlabeled validator-ready dataset from committed public samples.
+  - Annotation packet: `datasets/validation/playstyle_annotation_packet.json`
+  - Unlabeled dataset: `datasets/validation/real_playstyle_sessions_unlabeled.json`
+  - Unlabeled report: `datasets/public/real_playstyle_unlabeled_validation_report.json`
 - [ ] Expand real-game validation beyond the current committed samples.
   - Current OpenDota artifact has 12 converted events.
   - Current full pipeline artifact has 8 raw events.
@@ -40,6 +44,7 @@
 - [x] Add regression tests for the chosen `planning_time` semantics after the definition is fixed.
 - [x] Add a small, labeled benchmark dataset with expected playstyle categories.
 - [ ] Add a real labeled benchmark dataset with observed playstyle categories from human annotators or player self-reports.
+  - Next manual step: fill `annotations[]` in `real_playstyle_sessions_unlabeled.json` or create `real_playstyle_sessions.json`.
 
 ## Documentation updates still needed
 
@@ -48,3 +53,4 @@
 - [x] Document that empirical robustness results are not evidence of external validity.
 - [x] Document playstyle category validation boundaries in `docs/PLAYSTYLE_CATEGORY_VALIDATION.md`.
 - [x] Document real playstyle data collection protocol.
+- [x] Document annotation packet preparation and unlabeled validation flow.

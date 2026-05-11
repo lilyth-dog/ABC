@@ -28,6 +28,8 @@ The current validation target is:
 - Label source: rule-designed examples
 - Current size: 6 labeled sessions, one per category
 - Real-data template: `datasets/validation/real_playstyle_sessions_template.json`
+- Annotation packet: `datasets/validation/playstyle_annotation_packet.json`
+- Annotation-ready unlabeled dataset: `datasets/validation/real_playstyle_sessions_unlabeled.json`
 
 Because the fixture is synthetic, it validates scoring mechanics and reporting
 format only. It is not evidence that the categories generalize to real users.
@@ -56,6 +58,22 @@ PYTHONPATH=backend python3 backend/validate_playstyle_categories.py \
   --dataset datasets/validation/real_playstyle_sessions.json \
   --output datasets/public/real_playstyle_validation_report.json
 ```
+
+For annotation preparation from committed samples:
+
+```bash
+PYTHONPATH=backend python3 backend/prepare_playstyle_annotation_packet.py
+```
+
+For the unlabeled dataset before annotators return labels:
+
+```bash
+PYTHONPATH=backend python3 backend/validate_playstyle_categories.py \
+  --dataset datasets/validation/real_playstyle_sessions_unlabeled.json \
+  --output datasets/public/real_playstyle_unlabeled_validation_report.json
+```
+
+This should report `accuracy: null` until labels are added.
 
 ## Current result
 

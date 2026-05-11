@@ -126,3 +126,34 @@ class TestPlaystyleCategoryValidation:
         assert report["summary"]["annotated_sessions"] == 1
         assert report["summary"]["mean_pairwise_annotation_agreement"] == 0.3333
         assert report["sessions"][0]["expected_label_source"] == "annotation_majority"
+
+    def test_unlabeled_dataset_is_allowed_for_annotation_prep(self, tmp_path):
+        """Unlabeled datasets should be analyzable before human labels arrive."""
+        dataset_path = tmp_path / "unlabeled_playstyle_sessions.json"
+        output_path = tmp_path / "unlabeled_playstyle_report.json"
+        dataset_path.write_text(
+            """
+{
+  "metadata": {"dataset_type": "annotation_prep"},
+  "sessions": [
+    {
+      "user_id": "unlabeled_player_001",
+      "session_id": "unlabeled_session_001",
+      "game_id": "minecraft",
+      "raw_events": [
+        {"type": "inventory_change", "timestamp": 1000, "items": ["stone"]},
+        {"type": "block_place", "timestamp": 3000, "position": {"x": 0, "y": 64, "z": 0}, "block_type": "minecraft:stone"}
+      ]
+    }
+  ]
+}
+""",
+            encoding="utf-8",
+        )
+
+        report = validate_playstyle_categories(dataset_path, output_path)
+
+        assert report["summary"]["labeled_sessions"] == 0
+        assert report["summary"]["accuracy"] is None
+        assert report["sessions"][0]["expected_label_source"] == "unlabeled"
+        assert report["sessions"][0]["predicted_primary_playstyle"] == "planner"

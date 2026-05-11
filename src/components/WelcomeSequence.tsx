@@ -1,50 +1,61 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useAudio } from './AudioManager';
 
 interface WelcomeSequenceProps {
     onComplete: () => void;
 }
 
+const WELCOME_MESSAGES = [
+    "당신의 영혼을 기다려왔습니다...",
+    "We've been waiting for your soul...",
+    "디지털 트윈이 깨어납니다",
+    "Your Digital Twin Awakens"
+];
+
 const WelcomeSequence = ({ onComplete }: WelcomeSequenceProps) => {
     const { playChime } = useAudio();
+    const playChimeRef = useRef(playChime);
     const [phase, setPhase] = useState(0);
     const [displayText, setDisplayText] = useState('');
     const [showParticles, setShowParticles] = useState(false);
 
-    const messages = [
-        "당신의 영혼을 기다려왔습니다...",
-        "We've been waiting for your soul...",
-        "디지털 트윈이 깨어납니다",
-        "Your Digital Twin Awakens"
-    ];
+    useEffect(() => {
+        playChimeRef.current = playChime;
+    }, [playChime]);
 
     // Typing animation effect
     useEffect(() => {
-        if (phase >= messages.length) {
+        if (phase >= WELCOME_MESSAGES.length) {
             setShowParticles(true);
-            setTimeout(onComplete, 2000);
-            return;
+            const completeTimeout = window.setTimeout(onComplete, 2000);
+            return () => window.clearTimeout(completeTimeout);
         }
 
-        const message = messages[phase];
+        const message = WELCOME_MESSAGES[phase];
         let charIndex = 0;
+        let phaseTimeout: number | undefined;
         setDisplayText('');
 
-        const interval = setInterval(() => {
+        const interval = window.setInterval(() => {
             if (charIndex <= message.length) {
                 setDisplayText(message.slice(0, charIndex));
                 if (charIndex > 0 && message[charIndex - 1] !== ' ') {
-                    playChime(800 + Math.random() * 400, 'sine', 0.03);
+                    playChimeRef.current(800 + Math.random() * 400, 'sine', 0.03);
                 }
                 charIndex++;
             } else {
-                clearInterval(interval);
-                setTimeout(() => setPhase(p => p + 1), 1500);
+                window.clearInterval(interval);
+                phaseTimeout = window.setTimeout(() => setPhase(p => p + 1), 1500);
             }
         }, 60);
 
-        return () => clearInterval(interval);
-    }, [phase, playChime, onComplete]);
+        return () => {
+            window.clearInterval(interval);
+            if (phaseTimeout) {
+                window.clearTimeout(phaseTimeout);
+            }
+        };
+    }, [phase, onComplete]);
 
     return (
         <div className="welcome-overlay">
@@ -82,7 +93,7 @@ const WelcomeSequence = ({ onComplete }: WelcomeSequenceProps) => {
 
                 {/* Progress indicator */}
                 <div className="welcome-progress">
-                    {messages.map((_, i) => (
+                    {WELCOME_MESSAGES.map((_, i) => (
                         <div
                             key={i}
                             className={`progress-dot ${i <= phase ? 'active' : ''}`}

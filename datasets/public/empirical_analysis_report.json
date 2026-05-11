@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-11T01:49:48.267349Z",
+  "generated_at": "2026-05-11T01:53:53.564161Z",
   "random_seed": 20260511,
   "theoretical_best_case": {
     "unit_test_pass_rate": 1.0,
@@ -16,7 +16,7 @@
   "tier_2_component_analysis": {
     "legacy_comprehensive_summary": {
       "parsing_accuracy": "100.00%",
-      "performance": "99627 events/sec",
+      "performance": "99109 events/sec",
       "consistency": "✓",
       "edge_cases_handled": 4,
       "real_data_files": 2
@@ -104,44 +104,44 @@
       {
         "event_count": 10,
         "repetitions": 30,
-        "median_ms": 0.050653499783948064,
-        "p95_ms": 0.07214901270344855,
-        "median_events_per_second": 197419.72504669795
+        "median_ms": 0.05218497244641185,
+        "p95_ms": 0.06610762793570757,
+        "median_events_per_second": 191626.04733132484
       },
       {
         "event_count": 50,
         "repetitions": 30,
-        "median_ms": 0.17173902597278357,
-        "p95_ms": 0.1845628023147583,
-        "median_events_per_second": 291139.41759471595
+        "median_ms": 0.16911502461880445,
+        "p95_ms": 0.1849512365879491,
+        "median_events_per_second": 295656.75854468305
       },
       {
         "event_count": 100,
         "repetitions": 30,
-        "median_ms": 0.34514552680775523,
-        "p95_ms": 0.38041784428060055,
-        "median_events_per_second": 289732.85826676706
+        "median_ms": 0.3459275176282972,
+        "p95_ms": 0.3680615045595914,
+        "median_events_per_second": 289077.89899342746
       },
       {
         "event_count": 500,
         "repetitions": 30,
-        "median_ms": 2.6097334921360016,
-        "p95_ms": 2.951141385710798,
-        "median_events_per_second": 191590.44458243225
+        "median_ms": 2.6098170201294124,
+        "p95_ms": 2.689556425320916,
+        "median_events_per_second": 191584.3126715476
       },
       {
         "event_count": 1000,
         "repetitions": 30,
-        "median_ms": 7.647270511370152,
-        "p95_ms": 13.195068357163109,
-        "median_events_per_second": 130765.61088210167
+        "median_ms": 7.6828430173918605,
+        "p95_ms": 7.833696762099862,
+        "median_events_per_second": 130160.1500559458
       },
       {
         "event_count": 5000,
         "repetitions": 30,
-        "median_ms": 139.0690279949922,
-        "p95_ms": 148.90736073139124,
-        "median_events_per_second": 35953.36842492382
+        "median_ms": 140.3608500258997,
+        "p95_ms": 148.36737287114374,
+        "median_events_per_second": 35622.468794378125
       }
     ],
     "real_data_summary": {

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-11T01:47:59.029763Z",
+  "generated_at": "2026-05-11T01:53:27.151795Z",
   "dataset_path": "datasets/validation/labeled_playstyle_sessions.json",
   "dataset_metadata": {
     "dataset_name": "labeled_playstyle_sessions",
@@ -48,6 +48,8 @@
     "labeled_sessions": 6,
     "correct_predictions": 6,
     "accuracy": 1.0,
+    "annotated_sessions": 0,
+    "mean_pairwise_annotation_agreement": null,
     "confusion": {
       "planner": {
         "planner": 1
@@ -76,6 +78,9 @@
       "session_id": "planner_session_001",
       "game_id": "minecraft",
       "expected_primary_playstyle": "planner",
+      "expected_label_source": "labels.primary_playstyle",
+      "annotation_vote_counts": {},
+      "annotation_pairwise_agreement": null,
       "predicted_primary_playstyle": "planner",
       "is_correct": true,
       "category_scores": {
@@ -108,6 +113,9 @@
       "session_id": "refiner_session_001",
       "game_id": "minecraft",
       "expected_primary_playstyle": "iterative_refiner",
+      "expected_label_source": "labels.primary_playstyle",
+      "annotation_vote_counts": {},
+      "annotation_pairwise_agreement": null,
       "predicted_primary_playstyle": "iterative_refiner",
       "is_correct": true,
       "category_scores": {
@@ -140,6 +148,9 @@
       "session_id": "route_session_001",
       "game_id": "minecraft",
       "expected_primary_playstyle": "route_optimizer",
+      "expected_label_source": "labels.primary_playstyle",
+      "annotation_vote_counts": {},
+      "annotation_pairwise_agreement": null,
       "predicted_primary_playstyle": "route_optimizer",
       "is_correct": true,
       "category_scores": {
@@ -172,6 +183,9 @@
       "session_id": "complex_session_001",
       "game_id": "minecraft",
       "expected_primary_playstyle": "complex_builder",
+      "expected_label_source": "labels.primary_playstyle",
+      "annotation_vote_counts": {},
+      "annotation_pairwise_agreement": null,
       "predicted_primary_playstyle": "complex_builder",
       "is_correct": true,
       "category_scores": {
@@ -204,6 +218,9 @@
       "session_id": "diverse_session_001",
       "game_id": "minecraft",
       "expected_primary_playstyle": "resource_diversifier",
+      "expected_label_source": "labels.primary_playstyle",
+      "annotation_vote_counts": {},
+      "annotation_pairwise_agreement": null,
       "predicted_primary_playstyle": "resource_diversifier",
       "is_correct": true,
       "category_scores": {
@@ -236,6 +253,9 @@
       "session_id": "risk_session_001",
       "game_id": "minecraft",
       "expected_primary_playstyle": "risk_taker",
+      "expected_label_source": "labels.primary_playstyle",
+      "annotation_vote_counts": {},
+      "annotation_pairwise_agreement": null,
       "predicted_primary_playstyle": "risk_taker",
       "is_correct": true,
       "category_scores": {

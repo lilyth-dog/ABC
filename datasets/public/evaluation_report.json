@@ -1,5 +1,5 @@
 {
-  "test_date": "2026-05-11T01:47:51.694598",
+  "test_date": "2026-05-11T01:53:46.330210",
   "tests": {
     "parsing_accuracy": {
       "overall_accuracy": 1.0,
@@ -63,38 +63,38 @@
     "performance": [
       {
         "event_count": 10,
-        "parse_time": 0.00016546249389648438,
-        "process_time": 3.9577484130859375e-05,
-        "total_time": 0.00020503997802734375,
-        "events_per_second": 48770.976744186046
+        "parse_time": 0.0001621246337890625,
+        "process_time": 3.2901763916015625e-05,
+        "total_time": 0.00019502639770507812,
+        "events_per_second": 51275.11002444988
       },
       {
         "event_count": 50,
-        "parse_time": 0.00010251998901367188,
-        "process_time": 1.6450881958007812e-05,
-        "total_time": 0.00011897087097167969,
-        "events_per_second": 420270.94188376755
+        "parse_time": 0.00010347366333007812,
+        "process_time": 1.5974044799804688e-05,
+        "total_time": 0.00011944770812988281,
+        "events_per_second": 418593.2135728543
       },
       {
         "event_count": 100,
-        "parse_time": 0.00019788742065429688,
-        "process_time": 1.0728836059570312e-05,
-        "total_time": 0.0002086162567138672,
-        "events_per_second": 479349.02857142856
+        "parse_time": 0.00019049644470214844,
+        "process_time": 1.0251998901367188e-05,
+        "total_time": 0.00020074844360351562,
+        "events_per_second": 498135.8669833729
       },
       {
         "event_count": 500,
-        "parse_time": 0.0026633739471435547,
-        "process_time": 9.059906005859375e-06,
-        "total_time": 0.002672433853149414,
-        "events_per_second": 187095.36979213133
+        "parse_time": 0.0027375221252441406,
+        "process_time": 1.0013580322265625e-05,
+        "total_time": 0.0027475357055664062,
+        "events_per_second": 181981.2565081569
       },
       {
         "event_count": 1000,
-        "parse_time": 0.010025262832641602,
-        "process_time": 1.2159347534179688e-05,
-        "total_time": 0.010037422180175781,
-        "events_per_second": 99627.17339667458
+        "parse_time": 0.010073661804199219,
+        "process_time": 1.621246337890625e-05,
+        "total_time": 0.010089874267578125,
+        "events_per_second": 99109.26275992439
       }
     ],
     "consistency": {
@@ -197,7 +197,7 @@
   },
   "summary": {
     "parsing_accuracy": "100.00%",
-    "performance": "99627 events/sec",
+    "performance": "99109 events/sec",
     "consistency": "✓",
     "edge_cases_handled": 4,
     "real_data_files": 2

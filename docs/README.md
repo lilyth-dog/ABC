@@ -72,6 +72,14 @@
 - **[FINAL_VERIFICATION_REPORT.md](FINAL_VERIFICATION_REPORT.md)** - 최종 검증 리포트 (15/15 통과)
 - **[FINAL_STATUS_REPORT.md](FINAL_STATUS_REPORT.md)** - 최종 상태 리포트
 - **[COMPREHENSIVE_EVALUATION.md](COMPREHENSIVE_EVALUATION.md)** - 종합 평가 리포트
+- **[PLAYSTYLE_CATEGORY_VALIDATION.md](PLAYSTYLE_CATEGORY_VALIDATION.md)** - 플레이 스타일 카테고리 검증
+- **[PLAYSTYLE_DATA_COLLECTION_PROTOCOL.md](PLAYSTYLE_DATA_COLLECTION_PROTOCOL.md)** - 실제 플레이 스타일 라벨 데이터 수집 프로토콜
+- **[../report.tex](../report.tex)** - 실증분석 LaTeX 보고서
+- **[../datasets/public/empirical_analysis_report.json](../datasets/public/empirical_analysis_report.json)** - 실증분석 JSON 산출물
+- **[../datasets/public/playstyle_validation_report.json](../datasets/public/playstyle_validation_report.json)** - 플레이 스타일 검증 JSON 산출물
+- **[../datasets/validation/playstyle_annotation_packet.json](../datasets/validation/playstyle_annotation_packet.json)** - 라벨러 전달용 플레이 스타일 annotation packet
+- **[../datasets/validation/playstyle_annotation_form.csv](../datasets/validation/playstyle_annotation_form.csv)** - 라벨러 입력용 CSV 양식
+- **[../datasets/validation/real_playstyle_sessions_unlabeled.json](../datasets/validation/real_playstyle_sessions_unlabeled.json)** - 라벨 입력 전 실제 검증 데이터셋 초안
 
 #### 개선 리포트
 - **[CODE_QUALITY_IMPROVEMENTS.md](CODE_QUALITY_IMPROVEMENTS.md)** - 코드 품질 개선 리포트

@@ -1,0 +1,178 @@
+{
+  "generated_at": "2026-05-11T02:08:20.425538Z",
+  "random_seed": 20260511,
+  "theoretical_best_case": {
+    "unit_test_pass_rate": 1.0,
+    "frontend_test_pass_rate": 1.0,
+    "parser_accuracy": 1.0,
+    "edge_case_success_rate": 1.0,
+    "randomized_robustness_success_rate": 1.0
+  },
+  "tier_1_execution": {
+    "backend_tests": "42/42 passed",
+    "frontend_tests": "31/31 passed",
+    "backend_coverage": "62.06%"
+  },
+  "tier_2_component_analysis": {
+    "legacy_comprehensive_summary": {
+      "parsing_accuracy": "100.00%",
+      "performance": "98824 events/sec",
+      "consistency": "✓",
+      "edge_cases_handled": 4,
+      "real_data_files": 2
+    },
+    "planning_time_semantics_check": {
+      "events": [
+        {
+          "type": "inventory_change",
+          "timestamp": 1000,
+          "items": [
+            "stone"
+          ]
+        },
+        {
+          "type": "inventory_change",
+          "timestamp": 2000,
+          "items": [
+            "dirt"
+          ]
+        },
+        {
+          "type": "block_place",
+          "timestamp": 5000,
+          "position": {
+            "x": 0,
+            "y": 64,
+            "z": 0
+          }
+        }
+      ],
+      "observed_planning_time_ms": 4000,
+      "expected_first_prep_to_build_ms": 4000,
+      "expected_prep_action_span_ms": 1000,
+      "interpretation": "The implementation measures planning time from the first preparation action before a build to the first build action.",
+      "passes_selected_semantics": true,
+      "would_pass_action_span_semantics": false
+    },
+    "randomized_robustness": {
+      "seed": 20260511,
+      "trials": 200,
+      "successes": 200,
+      "success_rate": 1.0,
+      "by_mutation": {
+        "drop_timestamp": {
+          "trials": 40,
+          "successes": 40,
+          "failures": 0,
+          "violations": []
+        },
+        "drop_position": {
+          "trials": 40,
+          "successes": 40,
+          "failures": 0,
+          "violations": []
+        },
+        "unknown_type": {
+          "trials": 40,
+          "successes": 40,
+          "failures": 0,
+          "violations": []
+        },
+        "negative_timestamp": {
+          "trials": 40,
+          "successes": 40,
+          "failures": 0,
+          "violations": []
+        },
+        "shuffle_order": {
+          "trials": 40,
+          "successes": 40,
+          "failures": 0,
+          "violations": []
+        }
+      }
+    }
+  },
+  "tier_3_full_evaluation": {
+    "final_verification_summary": {
+      "total_tests": 15,
+      "total_passed": 15,
+      "overall_percentage": 100.0,
+      "status": "PASS"
+    },
+    "performance_benchmark": [
+      {
+        "event_count": 10,
+        "repetitions": 30,
+        "median_ms": 0.07333149551413953,
+        "p95_ms": 0.10371694515924901,
+        "median_events_per_second": 136367.05388166854
+      },
+      {
+        "event_count": 50,
+        "repetitions": 30,
+        "median_ms": 0.28183148242533207,
+        "p95_ms": 0.2920950122643262,
+        "median_events_per_second": 177410.98180274063
+      },
+      {
+        "event_count": 100,
+        "repetitions": 30,
+        "median_ms": 0.5764479865320027,
+        "p95_ms": 0.5988537945086136,
+        "median_events_per_second": 173476.18924235465
+      },
+      {
+        "event_count": 500,
+        "repetitions": 30,
+        "median_ms": 2.6021590165328234,
+        "p95_ms": 4.396748074213974,
+        "median_events_per_second": 192148.1342313244
+      },
+      {
+        "event_count": 1000,
+        "repetitions": 30,
+        "median_ms": 7.586593506857753,
+        "p95_ms": 7.820091745816171,
+        "median_events_per_second": 131811.46440705826
+      },
+      {
+        "event_count": 5000,
+        "repetitions": 30,
+        "median_ms": 138.47819899092428,
+        "p95_ms": 145.28636351169553,
+        "median_events_per_second": 36106.766526676845
+      }
+    ],
+    "real_data_summary": {
+      "opendota_real_match_8650963582.json": {
+        "status": "exists",
+        "size_bytes": 20606,
+        "top_level_keys": [
+          "match_id",
+          "match_detail",
+          "converted_events"
+        ],
+        "raw_event_count": 0,
+        "converted_event_count": 12
+      },
+      "full_pipeline_result.json": {
+        "status": "exists",
+        "size_bytes": 2113,
+        "top_level_keys": [
+          "raw_events",
+          "parsed_metrics",
+          "behavioral_profile",
+          "personality_weights"
+        ],
+        "raw_event_count": 8,
+        "converted_event_count": 0
+      }
+    }
+  },
+  "artifacts": {
+    "performance_svg": "docs/figures/empirical_performance.svg",
+    "robustness_svg": "docs/figures/empirical_robustness.svg",
+    "json_report": "datasets/public/empirical_analysis_report.json"
+  }
+}

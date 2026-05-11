@@ -1,13 +1,13 @@
 {
-  "test_date": "2026-01-16T13:46:23.429982",
+  "test_date": "2026-05-11T02:07:14.948737",
   "tests": {
     "parsing_accuracy": {
-      "overall_accuracy": 0.6666666666666666,
+      "overall_accuracy": 1.0,
       "details": [
         {
           "test_name": "계획 시간 테스트",
           "metrics": {
-            "planning_time": 1000,
+            "planning_time": 4000,
             "revision_count": 0,
             "complexity": 0.0,
             "path_efficiency": 1.0,
@@ -18,9 +18,9 @@
             "planning_time": 4000
           },
           "accuracy": {
-            "planning_time": 0.0
+            "planning_time": 1.0
           },
-          "avg_accuracy": 0.0
+          "avg_accuracy": 1.0
         },
         {
           "test_name": "수정 빈도 테스트",
@@ -63,38 +63,38 @@
     "performance": [
       {
         "event_count": 10,
-        "parse_time": 0.0,
-        "process_time": 0.0,
-        "total_time": 0.0,
-        "events_per_second": Infinity
+        "parse_time": 0.0001590251922607422,
+        "process_time": 4.124641418457031e-05,
+        "total_time": 0.0002002716064453125,
+        "events_per_second": 49932.19047619047
       },
       {
         "event_count": 50,
-        "parse_time": 0.0,
-        "process_time": 0.0,
-        "total_time": 0.0,
-        "events_per_second": Infinity
+        "parse_time": 0.00010967254638671875,
+        "process_time": 1.7881393432617188e-05,
+        "total_time": 0.00012755393981933594,
+        "events_per_second": 391991.02803738316
       },
       {
         "event_count": 100,
-        "parse_time": 0.0,
-        "process_time": 0.0,
-        "total_time": 0.0,
-        "events_per_second": Infinity
+        "parse_time": 0.00019407272338867188,
+        "process_time": 1.0251998901367188e-05,
+        "total_time": 0.00020432472229003906,
+        "events_per_second": 489417.03617269546
       },
       {
         "event_count": 500,
-        "parse_time": 0.0060253143310546875,
-        "process_time": 0.0,
-        "total_time": 0.0060253143310546875,
-        "events_per_second": 82983.22253877809
+        "parse_time": 0.002702474594116211,
+        "process_time": 1.049041748046875e-05,
+        "total_time": 0.0027129650115966797,
+        "events_per_second": 184300.20212672467
       },
       {
         "event_count": 1000,
-        "parse_time": 0.015937328338623047,
-        "process_time": 0.0,
-        "total_time": 0.015937328338623047,
-        "events_per_second": 62745.77386829429
+        "parse_time": 0.01010584831237793,
+        "process_time": 1.3113021850585938e-05,
+        "total_time": 0.010118961334228516,
+        "events_per_second": 98824.37208425616
       }
     ],
     "consistency": {
@@ -138,8 +138,20 @@
       },
       {
         "case": "타임스탬프 없음",
-        "status": "error",
-        "error": "'timestamp'"
+        "status": "success",
+        "profile": {
+          "pathEfficiency": 0.79,
+          "avgDecisionLatency": 0,
+          "revisionRate": 0,
+          "jitterIndex": 0.20999999999999996,
+          "intensity": 0.0,
+          "gameId": "minecraft",
+          "gameSpecific": {
+            "buildComplexity": 0.5,
+            "explorationRange": 0.5,
+            "resourceDiversity": 0.5
+          }
+        }
       },
       {
         "case": "위치 정보 없음",
@@ -163,7 +175,7 @@
       {
         "file": "datasets/public/opendota_real_match_8650963582.json",
         "status": "exists",
-        "size": 21518,
+        "size": 20606,
         "keys": [
           "match_id",
           "match_detail",
@@ -173,7 +185,7 @@
       {
         "file": "datasets/public/full_pipeline_result.json",
         "status": "exists",
-        "size": 2227,
+        "size": 2113,
         "keys": [
           "raw_events",
           "parsed_metrics",
@@ -184,10 +196,10 @@
     ]
   },
   "summary": {
-    "parsing_accuracy": "66.67%",
-    "performance": "62746 events/sec",
+    "parsing_accuracy": "100.00%",
+    "performance": "98824 events/sec",
     "consistency": "✓",
-    "edge_cases_handled": 3,
+    "edge_cases_handled": 4,
     "real_data_files": 2
   }
 }

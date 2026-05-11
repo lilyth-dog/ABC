@@ -1,50 +1,91 @@
-import { useState, useEffect } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 import { useAudio } from './AudioManager';
 
 interface WelcomeSequenceProps {
     onComplete: () => void;
 }
 
+const WELCOME_MESSAGES = [
+    "당신의 영혼을 기다려왔습니다...",
+    "We've been waiting for your soul...",
+    "디지털 트윈이 깨어납니다",
+    "Your Digital Twin Awakens"
+];
+const TYPING_INTERVAL_MS = 60;
+const PHASE_PAUSE_MS = 1500;
+const COMPLETION_PAUSE_MS = 2000;
+const TOTAL_WELCOME_DURATION_MS = WELCOME_MESSAGES.reduce(
+    (total, message) => total + (message.length + 2) * TYPING_INTERVAL_MS + PHASE_PAUSE_MS,
+    COMPLETION_PAUSE_MS
+);
+
 const WelcomeSequence = ({ onComplete }: WelcomeSequenceProps) => {
     const { playChime } = useAudio();
+    const playChimeRef = useRef(playChime);
+    const onCompleteRef = useRef(onComplete);
+    const completedRef = useRef(false);
     const [phase, setPhase] = useState(0);
     const [displayText, setDisplayText] = useState('');
     const [showParticles, setShowParticles] = useState(false);
 
-    const messages = [
-        "당신의 영혼을 기다려왔습니다...",
-        "We've been waiting for your soul...",
-        "디지털 트윈이 깨어납니다",
-        "Your Digital Twin Awakens"
-    ];
+    useEffect(() => {
+        playChimeRef.current = playChime;
+    }, [playChime]);
+
+    useEffect(() => {
+        onCompleteRef.current = onComplete;
+    }, [onComplete]);
+
+    const completeOnce = useCallback(() => {
+        if (completedRef.current) {
+            return;
+        }
+        completedRef.current = true;
+        onCompleteRef.current();
+    }, []);
+
+    useEffect(() => {
+        const fallbackTimeout = window.setTimeout(() => {
+            setShowParticles(true);
+            completeOnce();
+        }, TOTAL_WELCOME_DURATION_MS);
+
+        return () => window.clearTimeout(fallbackTimeout);
+    }, [completeOnce]);
 
     // Typing animation effect
     useEffect(() => {
-        if (phase >= messages.length) {
+        if (phase >= WELCOME_MESSAGES.length) {
             setShowParticles(true);
-            setTimeout(onComplete, 2000);
-            return;
+            const completeTimeout = window.setTimeout(completeOnce, COMPLETION_PAUSE_MS);
+            return () => window.clearTimeout(completeTimeout);
         }
 
-        const message = messages[phase];
+        const message = WELCOME_MESSAGES[phase];
         let charIndex = 0;
+        let phaseTimeout: number | undefined;
         setDisplayText('');
 
-        const interval = setInterval(() => {
+        const interval = window.setInterval(() => {
             if (charIndex <= message.length) {
                 setDisplayText(message.slice(0, charIndex));
                 if (charIndex > 0 && message[charIndex - 1] !== ' ') {
-                    playChime(800 + Math.random() * 400, 'sine', 0.03);
+                    playChimeRef.current(800 + Math.random() * 400, 'sine', 0.03);
                 }
                 charIndex++;
             } else {
-                clearInterval(interval);
-                setTimeout(() => setPhase(p => p + 1), 1500);
+                window.clearInterval(interval);
+                phaseTimeout = window.setTimeout(() => setPhase(p => p + 1), PHASE_PAUSE_MS);
             }
-        }, 60);
+        }, TYPING_INTERVAL_MS);
 
-        return () => clearInterval(interval);
-    }, [phase, playChime, onComplete]);
+        return () => {
+            window.clearInterval(interval);
+            if (phaseTimeout) {
+                window.clearTimeout(phaseTimeout);
+            }
+        };
+    }, [phase, completeOnce]);
 
     return (
         <div className="welcome-overlay">
@@ -82,7 +123,7 @@ const WelcomeSequence = ({ onComplete }: WelcomeSequenceProps) => {
 
                 {/* Progress indicator */}
                 <div className="welcome-progress">
-                    {messages.map((_, i) => (
+                    {WELCOME_MESSAGES.map((_, i) => (
                         <div
                             key={i}
                             className={`progress-dot ${i <= phase ? 'active' : ''}`}

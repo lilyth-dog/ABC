@@ -20,7 +20,7 @@ export interface InteractionMetrics {
     };
 }
 
-class BehaviorTracker {
+export class BehaviorTracker {
     private metrics: InteractionMetrics = {
         lastMoveTime: Date.now(),
         mousePathLength: 0,
@@ -35,6 +35,7 @@ class BehaviorTracker {
     };
 
     private lastPos: { x: number; y: number } | null = null;
+    private firstPos: { x: number; y: number } | null = null;
 
     /**
      * Start/Reset tracking for a specific session
@@ -49,9 +50,11 @@ class BehaviorTracker {
             decisionLatencies: [],
             velocityPeaks: [],
             revisionCount: 0,
-            jitterSum: 0
+            jitterSum: 0,
+            contextualChoices: {}
         };
         this.lastPos = null;
+        this.firstPos = null;
     }
 
     /**
@@ -65,6 +68,13 @@ class BehaviorTracker {
     }
 
     /**
+     * Backward-compatible alias for tests and older UI integrations.
+     */
+    public recordDecision() {
+        this.recordStepCompletion();
+    }
+
+    /**
      * Call this whenever a user changes a previously made choice
      */
     public recordRevision() {
@@ -74,7 +84,7 @@ class BehaviorTracker {
     /**
      * Record a specific contextual choice
      */
-    public recordChoice(key: keyof InteractionMetrics['contextualChoices'], value: any) {
+    public recordChoice(key: keyof InteractionMetrics['contextualChoices'], value: unknown) {
         this.metrics.contextualChoices[key] = value;
     }
 
@@ -83,6 +93,10 @@ class BehaviorTracker {
      */
     public trackMovement(x: number, y: number) {
         const now = Date.now();
+        if (!this.firstPos) {
+            this.firstPos = { x, y };
+        }
+
         if (this.lastPos) {
             const dx = x - this.lastPos.x;
             const dy = y - this.lastPos.y;
@@ -107,6 +121,13 @@ class BehaviorTracker {
         this.metrics.lastMoveTime = now;
     }
 
+    /**
+     * Backward-compatible alias for tests and older UI integrations.
+     */
+    public recordMouseMove(x: number, y: number) {
+        this.trackMovement(x, y);
+    }
+
     public recordClick() {
         this.metrics.clickCount++;
     }
@@ -115,13 +136,21 @@ class BehaviorTracker {
      * Summarize data for backend consumption
      */
     public getBehavioralProfile() {
-        const totalTime = Date.now() - this.metrics.startTime;
         const avgLatency = this.metrics.decisionLatencies.length > 0
             ? this.metrics.decisionLatencies.reduce((a, b) => a + b, 0) / this.metrics.decisionLatencies.length
             : 0;
+        const directDistance = this.firstPos && this.lastPos
+            ? Math.sqrt(
+                (this.lastPos.x - this.firstPos.x) ** 2 +
+                (this.lastPos.y - this.firstPos.y) ** 2
+            )
+            : 0;
+        const pathEfficiency = this.metrics.mousePathLength > 0
+            ? Math.min(1, directDistance / this.metrics.mousePathLength)
+            : 0;
 
         return {
-            pathEfficiency: this.metrics.mousePathLength / (totalTime || 1),
+            pathEfficiency,
             avgDecisionLatency: avgLatency,
             revisionRate: this.metrics.revisionCount,
             jitterIndex: this.metrics.jitterSum / (this.metrics.mousePathLength || 1),

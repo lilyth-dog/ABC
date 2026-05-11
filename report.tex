@@ -1,0 +1,215 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{kotex}
+\usepackage[margin=1in]{geometry}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{array}
+
+\title{Nexus Entertainment 프로젝트 실증분석 보고서}
+\author{ABC Project}
+\date{2026년 5월 11일}
+
+\begin{document}
+\maketitle
+
+\section{분석 목표와 범위}
+본 보고서는 Nexus Entertainment 디지털 휴먼 트윈 프로젝트의 현재 구현을 대상으로,
+행동 데이터 파이프라인이 실행 가능하고 재현 가능한지, 공개 샘플 데이터와 무작위 반례에서
+안정적으로 동작하는지, 그리고 사전에 정의한 플레이 스타일 카테고리를 일관되게 산출하는지를
+검증한다. 여기서 분석 대상은 사람의 실제 성격이 아니라 관찰 가능한 플레이 스타일과 행동
+카테고리다. 분석은 새로 추가한 \texttt{backend/empirical\_analysis.py},
+\texttt{backend/validate\_playstyle\_categories.py}, 기존 테스트/검증 스크립트를 함께 사용했다.
+
+\section{사전 기대치와 이론적 최선}
+실험 전 이론적 최선은 다음과 같이 정의했다. 단위 테스트와 프론트엔드 테스트는 100\% 통과,
+파서 정확도와 엣지 케이스 처리율은 100\%, 무작위 강건성 탐색은 모든 trial에서 예외 없이
+메트릭 불변식을 만족하는 상태를 최선으로 보았다. 이 기준은 실제 결과를 과대평가하지 않기 위한
+상한선이며, 데이터셋 규모나 실제 사용자 다양성까지 보장하는 기준은 아니다.
+
+\section{방법론}
+\subsection{1단계: 실행 가능성 검증}
+먼저 백엔드 pytest와 프론트엔드 Vitest를 실행했다. 초기 실행에서는 백엔드 3개 테스트와
+프론트엔드 7개 테스트가 실패했다. 이후 후속 작업에서 planning time 정의 불일치도 추가로
+수정했다. 주요 원인은 (1) \texttt{/api/behavior} 응답에서
+\texttt{synthetic\_theta}, \texttt{synthetic\_beta}가 누락된 API 계약 회귀,
+(2) 스트레스 감지 함수가 평탄화된 세션 메트릭을 읽지 못하는 문제,
+(3) \texttt{BehaviorTracker}의 named export/호환 메서드 부재,
+(4) fake timer 기반 welcome animation 테스트의 비결정성,
+(5) \texttt{planning\_time}이 평가 정의와 다른 준비 행동 내부 span을 반환한 문제다.
+해당 결함을 수정한 후 동일 명령을 재실행했다.
+
+\subsection{2단계: 하위 컴포넌트와 반례 탐색}
+기존 \texttt{backend/comprehensive\_test.py}를 재실행해 이벤트 파싱 정확도, 성능,
+일관성, 엣지 케이스, 공개 데이터 파일 존재 여부를 확인했다. 또한
+\texttt{backend/empirical\_analysis.py}에서 고정 seed \texttt{20260511}을 사용해
+200개의 무작위 trial을 수행했다. 각 trial에서는 단 하나의 변형만 적용했다:
+\texttt{drop\_timestamp}, \texttt{drop\_position}, \texttt{unknown\_type},
+\texttt{negative\_timestamp}, \texttt{shuffle\_order}. 성공 기준은 파서가 예외 없이
+동작하고, \texttt{complexity}, \texttt{path\_efficiency}, \texttt{risk\_taking},
+\texttt{diversity}가 모두 [0, 1] 범위에 있으며, 결과가 \texttt{GameBehaviorProcessor}까지
+전달되는 것이다.
+
+\subsection{3단계: 전체 평가와 성능 분포}
+\texttt{backend/final\_verification\_test.py}로 API, 게임 파이프라인, 성능, E2E 통합을
+검증했다. 성능 분석은 이벤트 수만 바꾸는 단일 변수 실험으로 구성했으며, 각 이벤트 수에 대해
+30회 반복 후 median과 p95 latency를 기록했다.
+
+\subsection{플레이 스타일 카테고리 검증}
+\texttt{datasets/validation/labeled\_playstyle\_sessions.json}에 synthetic calibration fixture를
+추가했다. 이 fixture는 실제 사용자 성격 라벨이 아니라, 검증 스크립트가 사전 정의된 카테고리를
+재현 가능하게 산출하는지 확인하기 위한 규칙 기반 예시다. 카테고리는 \texttt{planner},
+\texttt{iterative\_refiner}, \texttt{route\_optimizer}, \texttt{complex\_builder},
+\texttt{resource\_diversifier}, \texttt{risk\_taker}로 정의했다. 후속 실제 데이터 검증을 위해
+\texttt{datasets/validation/real\_playstyle\_sessions\_template.json}와
+\texttt{docs/PLAYSTYLE\_DATA\_COLLECTION\_PROTOCOL.md}도 추가했다. 실제 데이터셋에서는
+\texttt{annotations[]}의 다중 annotator 라벨을 majority vote로 집계하고 pairwise agreement를
+함께 보고한다. 또한 저장소에 있는 공개 샘플을 바탕으로
+\texttt{datasets/validation/playstyle\_annotation\_packet.json}과
+\texttt{datasets/validation/real\_playstyle\_sessions\_unlabeled.json}을 생성했다.
+annotation packet은 라벨러 편향을 줄이기 위해 모델 예측을 포함하지 않는다.
+
+\section{결과}
+\subsection{테스트 실행 결과}
+\begin{table}[h]
+\centering
+\begin{tabular}{lrrl}
+\toprule
+항목 & 통과 & 전체 & 비고 \\
+\midrule
+백엔드 pytest & 42 & 42 & coverage 62.06\% \\
+프론트엔드 Vitest & 31 & 31 & 5개 test file 통과 \\
+최종 검증 스크립트 & 15 & 15 & PASS \\
+\bottomrule
+\end{tabular}
+\caption{1단계 및 최종 검증 결과}
+\end{table}
+
+\subsection{기존 종합 평가 재현}
+\begin{table}[h]
+\centering
+\begin{tabular}{ll}
+\toprule
+지표 & 결과 \\
+\midrule
+파싱 정확도 & 100.00\% \\
+성능 요약 & 98,824 events/sec \\
+일관성 & 통과 \\
+엣지 케이스 처리 & 4/4 \\
+실제 데이터 파일 & 2개 \\
+\bottomrule
+\end{tabular}
+\caption{\texttt{comprehensive\_test.py} 재실행 요약}
+\end{table}
+
+이전 분석에서 발견된 계획 시간 반례는 수정됐다. 이벤트가
+\texttt{inventory\_change(1000ms)}, \texttt{inventory\_change(2000ms)},
+\texttt{block\_place(5000ms)}일 때 현재 구현은 첫 준비 행동부터 첫 건축까지의 4000ms를
+반환한다. 이 정의는 평가 스크립트와 회귀 테스트에 고정했으며, 이벤트 순서가 뒤섞여도 timestamp
+기준의 첫 건축 이벤트를 사용한다.
+
+\subsection{무작위 반례 탐색}
+\begin{table}[h]
+\centering
+\begin{tabular}{lrrr}
+\toprule
+변형 & trial & 성공 & 실패 \\
+\midrule
+drop\_timestamp & 40 & 40 & 0 \\
+drop\_position & 40 & 40 & 0 \\
+unknown\_type & 40 & 40 & 0 \\
+negative\_timestamp & 40 & 40 & 0 \\
+shuffle\_order & 40 & 40 & 0 \\
+\bottomrule
+\end{tabular}
+\caption{고정 seed 기반 무작위 강건성 탐색 결과}
+\end{table}
+
+총 200/200 trial이 성공했다. 다만 이 결과는 파서의 예외 안전성과 기본 불변식 유지에 대한
+증거일 뿐, 실제 사용자 행동 분포나 성격 추론 타당도를 입증하지는 않는다.
+
+\subsection{성능 벤치마크}
+\begin{table}[h]
+\centering
+\begin{tabular}{rrrr}
+\toprule
+이벤트 수 & 반복 & median ms & p95 ms \\
+\midrule
+10 & 30 & 0.073 & 0.104 \\
+50 & 30 & 0.282 & 0.292 \\
+100 & 30 & 0.576 & 0.599 \\
+500 & 30 & 2.602 & 4.397 \\
+1000 & 30 & 7.587 & 7.820 \\
+5000 & 30 & 138.478 & 145.286 \\
+\bottomrule
+\end{tabular}
+\caption{이벤트 수 단일 변수 성능 실험}
+\end{table}
+
+시각화 자료는 \texttt{docs/figures/empirical\_performance.svg}와
+\texttt{docs/figures/empirical\_robustness.svg}에 생성했다. 첫 번째 그림은 이벤트 수 증가에
+따른 median/p95 latency를 보여주며, 두 번째 그림은 무작위 단일 변형별 성공률을 보여준다.
+
+\subsection{플레이 스타일 카테고리 결과}
+\begin{table}[h]
+\centering
+\begin{tabular}{lr}
+\toprule
+지표 & 결과 \\
+\midrule
+Synthetic labeled sessions & 6 \\
+Correct primary category predictions & 6 \\
+Fixture accuracy & 100.00\% \\
+Failures & 0 \\
+\bottomrule
+\end{tabular}
+\caption{\texttt{validate\_playstyle\_categories.py} 결과}
+\end{table}
+
+이 결과는 카테고리 scoring mechanics의 재현성 검증이다. 실제 사용자 플레이 스타일 일반화
+성능을 주장하려면 사람이 라벨링한 실제 세션 데이터가 필요하다. 검증 스크립트는 실제 데이터가
+제공될 경우 annotator majority label, confusion table, failure examples, pairwise agreement를
+동일한 JSON 형식으로 산출한다.
+
+추가로, 공개 Minecraft 샘플을 라벨링 전 데이터셋으로 변환해 검증 스크립트에 통과시켰다.
+이 경우 라벨이 없으므로 accuracy는 \texttt{null}이며, 이는 의도된 동작이다. 라벨러가
+\texttt{annotations[]}를 채운 뒤 같은 명령을 실행하면 실제 라벨 기준 정확도와 합의도가 산출된다.
+
+\section{공개 데이터 점검}
+저장소에 포함된 공개 데이터는 \texttt{opendota\_real\_match\_8650963582.json}
+(converted event 12개)와 \texttt{full\_pipeline\_result.json}(raw event 8개)로 확인됐다.
+두 파일 모두 파이프라인 예시로는 유용하지만, 표본 수가 작아 일반화 성능을 주장하기에는
+부족하다. 또한 README에 명시된 TESS와 workout video 대용량 데이터는 현재 저장소에 없으므로
+오디오/모션 기반 분석은 이번 실증분석 범위에서 제외했다.
+
+\section{분석과 리스크}
+\begin{itemize}
+  \item 실행 가능성은 개선 후 확인됐다. 백엔드와 프론트엔드 테스트가 모두 통과한다.
+  \item 파서의 기본 예외 안전성은 무작위 반례 탐색에서 양호했다.
+  \item 성능은 1000 이벤트 p95 7.820ms, 5000 이벤트 p95 145.286ms로, 일반적인 수백~천 단위 세션에는 충분해 보인다.
+  \item 계획 시간 정의는 첫 준비 행동부터 첫 건축 행동까지로 고정됐고 회귀 테스트가 추가됐다.
+  \item synthetic playstyle fixture 6개는 모두 올바르게 분류됐다. 그러나 이는 실제 사용자 일반화 성능이 아니라 scoring mechanics 검증이다.
+  \item 실제 데이터 표본이 매우 작고, 생체신호 대용량 데이터가 없어 사용자 수준 외적 타당도는 아직 입증되지 않았다.
+  \item MuMax3 바이너리는 현재 환경에 없어 pre-computed pattern으로 대체됐다. 물리 시뮬레이션 성능 주장은 별도 환경에서 검증해야 한다.
+\end{itemize}
+
+\section{결론}
+현재 프로젝트는 테스트와 기본 파이프라인 실행성 측면에서 재현 가능한 상태로 정리되었다.
+그러나 ``실제 사용자 플레이 스타일을 일반화해서 정확히 분류한다''는 강한 주장은 아직 데이터와
+평가 설계가 부족하다. 이번 실증분석에서 확실히 말할 수 있는 결론은 다음이다:
+(1) 수정 후 구현은 백엔드/프론트엔드 테스트를 모두 통과한다,
+(2) 공개 샘플과 무작위 단일 변형 입력에서 파이프라인은 안정적으로 실행된다,
+(3) 계획 시간 지표의 평가/구현 정의 충돌은 해소됐다,
+(4) synthetic fixture 기준 플레이 스타일 카테고리 scoring은 재현 가능하지만, 실제 라벨 데이터 검증은 아직 필요하다.
+
+\section{재현 명령}
+\begin{verbatim}
+python3 -m pytest backend/tests/ -v
+npm run test
+PYTHONPATH=backend python3 backend/comprehensive_test.py
+PYTHONPATH=backend python3 backend/final_verification_test.py
+PYTHONPATH=backend python3 backend/empirical_analysis.py
+PYTHONPATH=backend python3 backend/validate_playstyle_categories.py
+PYTHONPATH=backend python3 backend/prepare_playstyle_annotation_packet.py
+\end{verbatim}
+
+\end{document}

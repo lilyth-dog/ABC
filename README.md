@@ -11,8 +11,8 @@
 - **3D World** - Three.js 기반 인터랙티브 월드
 - **Analytics Dashboard** - 실시간 분석 대시보드
 - **Neuro Controller** - 뉴럴 커플링 시스템
-- **Game Data Pipeline** - 게임 플레이 데이터를 통한 성격 추론 (3단계 파이프라인)
-- **Behavioral Analysis** - 행동 기반 디지털 휴먼 트윈 생성 및 진화
+- **Game Data Pipeline** - 게임 플레이 데이터를 통한 플레이 스타일 카테고리 분석 (3단계 파이프라인)
+- **Behavioral Analysis** - 행동 패턴 기반 디지털 휴먼 트윈 생성 및 진화
 - **Continuous Learning** - 세션 간 지속적 학습 및 프로필 업데이트
 
 ## 🛠 Tech Stack
@@ -98,7 +98,7 @@ ABC/
 │   └── utils/          # 유틸리티 함수
 ├── backend/
 │   ├── api_server.py           # FastAPI 서버
-│   ├── neuro_controller.py    # 신경 제어 및 성격 추론
+│   ├── neuro_controller.py    # 신경 제어 및 행동 분석
 │   ├── game_event_parser.py    # 게임 이벤트 파서
 │   ├── game_behavior_processor.py  # 게임 행동 처리
 │   ├── user_profiles.py        # 사용자 프로필 관리 (GDPR)
@@ -143,7 +143,7 @@ ABC/
 - `GET /health` - 서버 상태 확인
 - `POST /api/game/events` - 게임 원시 이벤트 처리
 - `POST /api/game/session` - 게임 세션 데이터 처리
-- `POST /api/behavior` - 행동 프로필 처리 및 성격 추론
+- `POST /api/behavior` - 행동 프로필 처리 및 플레이 스타일/행동 분석
 - `POST /api/user/{id}/consent` - 사용자 동의 저장
 - `GET /api/user/{id}/export` - GDPR 데이터 내보내기
 - `DELETE /api/user/{id}` - 사용자 데이터 삭제
@@ -175,6 +175,115 @@ python final_verification_test.py
 # 프론트엔드 테스트 실행
 npm run test
 ```
+
+## 🏷️ 플레이 스타일 라벨링 방법
+
+이 프로젝트의 검증 목표는 “사람의 성격을 정확히 추론한다”가 아니라, 게임 이벤트에서 관찰 가능한 **플레이 스타일 카테고리**를 일관되게 분석하는 것입니다.
+
+### 1. 라벨링 패킷 생성
+
+라벨러에게 전달할 패킷을 생성합니다. 이 파일에는 모델 예측값이 들어가지 않아 라벨링 편향을 줄입니다.
+
+```bash
+PYTHONPATH=backend python3 backend/prepare_playstyle_annotation_packet.py
+```
+
+생성 파일:
+
+- `datasets/validation/playstyle_annotation_packet.json` - 라벨러가 읽을 이벤트 요약
+- `datasets/validation/real_playstyle_sessions_unlabeled.json` - 라벨을 채워 넣을 검증 데이터셋
+- `datasets/validation/playstyle_annotation_form.csv` - 스프레드시트로 채울 수 있는 빈 라벨 양식
+
+### 2. 라벨 카테고리 선택
+
+각 세션마다 아래 중 하나를 `primary_playstyle`로 선택합니다.
+
+| Category | 라벨링 기준 |
+|----------|-------------|
+| `planner` | 첫 건축/행동 전 준비 행동이 뚜렷함 |
+| `iterative_refiner` | 배치 후 제거/수정/반복 개선이 많음 |
+| `route_optimizer` | 이동 경로가 직접적이고 효율적임 |
+| `complex_builder` | 건축 위치·높이·공간 구성이 복잡함 |
+| `resource_diversifier` | 다양한 아이템/블록/자원을 사용함 |
+| `risk_taker` | 낮은 높이, 낮은 조도 등 위험 신호가 많음 |
+
+### 3. 라벨 입력
+
+권장 방식은 CSV 양식을 채운 뒤 데이터셋으로 병합하는 것입니다.
+
+`datasets/validation/playstyle_annotation_form.csv` 예시:
+
+```csv
+session_id,user_id,game_id,annotator_id,primary_playstyle,secondary_playstyles,confidence,evidence
+public_full_pipeline_minecraft,public_sample_minecraft_user,minecraft,annotator_1,planner,resource_diversifier,0.8,첫 건축 전 준비 행동이 뚜렷함
+```
+
+CSV 작성 규칙:
+
+- `primary_playstyle`: 위 6개 카테고리 중 하나
+- `secondary_playstyles`: 선택 사항, 여러 개면 `;` 또는 `,`로 구분
+- `confidence`: 0~1 사이 숫자
+- `evidence`: 라벨 판단 근거
+
+CSV 작성 후 아래 명령으로 `annotations[]`를 채운 데이터셋을 만듭니다.
+
+```bash
+PYTHONPATH=backend python3 backend/apply_playstyle_annotation_csv.py \
+  --dataset datasets/validation/real_playstyle_sessions_unlabeled.json \
+  --csv datasets/validation/playstyle_annotation_form.csv \
+  --output datasets/validation/real_playstyle_sessions.json
+```
+
+직접 JSON을 편집하려면 아래처럼 `annotations[]`를 채워도 됩니다.
+
+`datasets/validation/real_playstyle_sessions_unlabeled.json`에서 각 세션의 `annotations` 배열을 채웁니다. 최소 3명의 독립 라벨러를 권장합니다.
+
+```json
+"annotations": [
+  {
+    "annotator_id": "annotator_a",
+    "primary_playstyle": "planner",
+    "secondary_playstyles": ["resource_diversifier"],
+    "confidence": 0.8,
+    "evidence": "첫 block_place 전에 inventory_change와 item_craft가 선행됨"
+  },
+  {
+    "annotator_id": "annotator_b",
+    "primary_playstyle": "planner",
+    "secondary_playstyles": [],
+    "confidence": 0.7,
+    "evidence": "건축 시작 전 준비 구간이 뚜렷함"
+  },
+  {
+    "annotator_id": "annotator_c",
+    "primary_playstyle": "route_optimizer",
+    "secondary_playstyles": ["planner"],
+    "confidence": 0.6,
+    "evidence": "이동 경로가 직선적이고 효율적으로 보임"
+  }
+]
+```
+
+`labels.primary_playstyle`가 없으면 검증 스크립트는 `annotations[].primary_playstyle`의 majority vote를 기준 라벨로 사용하고, 라벨러 간 pairwise agreement도 계산합니다.
+
+### 4. 라벨 기준 검증 실행
+
+```bash
+PYTHONPATH=backend python3 backend/validate_playstyle_categories.py \
+  --dataset datasets/validation/real_playstyle_sessions.json \
+  --output datasets/public/real_playstyle_validation_report.json
+```
+
+결과에는 다음이 포함됩니다.
+
+- 라벨 기준 정확도
+- confusion table
+- 실패 사례
+- 카테고리별 점수
+- annotator vote count
+- pairwise annotator agreement
+
+자세한 수집 프로토콜은 [`docs/PLAYSTYLE_DATA_COLLECTION_PROTOCOL.md`](docs/PLAYSTYLE_DATA_COLLECTION_PROTOCOL.md)를 참고하세요.
 
 ## 🐳 Docker 실행
 

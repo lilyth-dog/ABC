@@ -1,0 +1,88 @@
+{
+  "generated_at": "2026-05-11T02:17:07.889459Z",
+  "dataset_path": "datasets/validation/real_playstyle_sessions_unlabeled.json",
+  "dataset_metadata": {
+    "dataset_name": "real_playstyle_sessions_unlabeled",
+    "dataset_type": "annotation_ready_unlabeled",
+    "generated_at": "2026-05-11T02:17:07.800337Z",
+    "purpose": "Holds raw sessions awaiting human playstyle annotations.",
+    "label_status": "unlabeled",
+    "notes": [
+      "This file is safe to run through the validator before labels arrive.",
+      "Accuracy will be n/a until labels.primary_playstyle or annotations[] are added."
+    ]
+  },
+  "claim_boundary": "This validates observable playstyle category scoring. It does not validate claims about inferring a user's true personality.",
+  "category_definitions": {
+    "planner": {
+      "description": "Preparation actions before the first build action.",
+      "minimum_signal": "At least one preparation action and one build action."
+    },
+    "iterative_refiner": {
+      "description": "Frequent placement revisions at the same location.",
+      "minimum_signal": "At least one block_place followed by a matching block_break."
+    },
+    "route_optimizer": {
+      "description": "Efficient movement path across multiple movement events.",
+      "minimum_signal": "At least two player_move events."
+    },
+    "complex_builder": {
+      "description": "High spatial spread and vertical variation in build events.",
+      "minimum_signal": "At least two block_place events with positions."
+    },
+    "resource_diversifier": {
+      "description": "Broad variety of inventory and block resources.",
+      "minimum_signal": "Inventory or block type diversity."
+    },
+    "risk_taker": {
+      "description": "Actions in low-height or low-light positions.",
+      "minimum_signal": "Positioned actions with y < 40 or light_level < 7."
+    }
+  },
+  "summary": {
+    "labeled_sessions": 0,
+    "correct_predictions": 0,
+    "accuracy": null,
+    "annotated_sessions": 0,
+    "mean_pairwise_annotation_agreement": null,
+    "confusion": {},
+    "failures": []
+  },
+  "sessions": [
+    {
+      "user_id": "public_sample_minecraft_user",
+      "session_id": "public_full_pipeline_minecraft",
+      "game_id": "minecraft",
+      "expected_primary_playstyle": null,
+      "expected_label_source": "unlabeled",
+      "annotation_vote_counts": {},
+      "annotation_pairwise_agreement": null,
+      "predicted_primary_playstyle": "route_optimizer",
+      "is_correct": null,
+      "category_scores": {
+        "planner": 0.8,
+        "iterative_refiner": 0.3333,
+        "route_optimizer": 1.0,
+        "complex_builder": 0.0,
+        "resource_diversifier": 0.15,
+        "risk_taker": 0.0
+      },
+      "parsed_metrics": {
+        "planning_time": 4000,
+        "revision_count": 1,
+        "complexity": 0.0,
+        "path_efficiency": 1.0,
+        "risk_taking": 0.0,
+        "diversity": 0.15
+      },
+      "event_features": {
+        "event_count": 8,
+        "preparation_count": 4,
+        "build_count": 3,
+        "move_count": 2,
+        "resource_type_count": 3,
+        "risky_event_count": 0
+      }
+    }
+  ]
+}

@@ -1,0 +1,111 @@
+{
+  "metadata": {
+    "dataset_name": "real_playstyle_sessions_unlabeled",
+    "dataset_type": "annotation_ready_unlabeled",
+    "generated_at": "2026-05-11T02:17:07.800337Z",
+    "purpose": "Holds raw sessions awaiting human playstyle annotations.",
+    "label_status": "unlabeled",
+    "notes": [
+      "This file is safe to run through the validator before labels arrive.",
+      "Accuracy will be n/a until labels.primary_playstyle or annotations[] are added."
+    ]
+  },
+  "sessions": [
+    {
+      "user_id": "public_sample_minecraft_user",
+      "session_id": "public_full_pipeline_minecraft",
+      "game_id": "minecraft",
+      "collection_context": {
+        "data_source": "datasets/public/full_pipeline_result.json",
+        "scenario": "public_committed_sample"
+      },
+      "annotations": [],
+      "raw_events": [
+        {
+          "type": "inventory_change",
+          "timestamp": 1000,
+          "items": [
+            "minecraft:stone",
+            "minecraft:dirt",
+            "minecraft:wood"
+          ]
+        },
+        {
+          "type": "inventory_change",
+          "timestamp": 2000,
+          "items": [
+            "minecraft:stone",
+            "minecraft:dirt"
+          ]
+        },
+        {
+          "type": "block_place",
+          "timestamp": 5000,
+          "position": {
+            "x": 0,
+            "y": 64,
+            "z": 0
+          },
+          "block_type": "minecraft:stone"
+        },
+        {
+          "type": "block_place",
+          "timestamp": 6000,
+          "position": {
+            "x": 1,
+            "y": 64,
+            "z": 0
+          },
+          "block_type": "minecraft:stone"
+        },
+        {
+          "type": "block_place",
+          "timestamp": 7000,
+          "position": {
+            "x": 2,
+            "y": 64,
+            "z": 0
+          },
+          "block_type": "minecraft:stone"
+        },
+        {
+          "type": "block_break",
+          "timestamp": 8000,
+          "position": {
+            "x": 0,
+            "y": 64,
+            "z": 0
+          }
+        },
+        {
+          "type": "player_move",
+          "timestamp": 10000,
+          "from": {
+            "x": 0,
+            "y": 64,
+            "z": 0
+          },
+          "to": {
+            "x": 10,
+            "y": 64,
+            "z": 10
+          }
+        },
+        {
+          "type": "player_move",
+          "timestamp": 11000,
+          "from": {
+            "x": 10,
+            "y": 64,
+            "z": 10
+          },
+          "to": {
+            "x": 20,
+            "y": 64,
+            "z": 20
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -53,7 +53,10 @@ class GameEventParser:
         
         # 건축 패턴 분석
         build_events = [e for e in raw_events if e.get('type') == 'block_place']
-        build_start_time = build_events[0]['timestamp'] if build_events else None
+        build_start_time = min(
+            (e.get('timestamp', 0) for e in build_events),
+            default=None
+        )
         
         # 계획 시간 계산
         planning_time = self._calculate_planning_time(raw_events, build_start_time)
@@ -201,10 +204,9 @@ class GameEventParser:
             first_event_time = pre_build_events[0].get('timestamp', 0)
             return max(0, build_start_time - first_event_time)
         
-        first_action = planning_actions[0].get('timestamp', 0)
-        last_action = planning_actions[-1].get('timestamp', 0)
+        first_action = min(e.get('timestamp', 0) for e in planning_actions)
         
-        return max(0, last_action - first_action)
+        return max(0, build_start_time - first_action)
     
     def _calculate_revision_count(
         self, 

@@ -1,0 +1,68 @@
+{
+  "metadata": {
+    "dataset_name": "real_playstyle_sessions_template",
+    "dataset_type": "real_labeled_collection_template",
+    "version": "0.1.0",
+    "created_at": "2026-05-11",
+    "purpose": "Template for collecting real gameplay sessions with observed playstyle labels.",
+    "privacy_notes": [
+      "Use pseudonymous user_id values.",
+      "Do not include names, emails, chat text, or other direct identifiers.",
+      "Store consent records separately from the public validation artifact."
+    ],
+    "labeling_protocol": {
+      "minimum_annotators_per_session": 3,
+      "recommended_sessions_per_player": 3,
+      "primary_label_policy": "Use majority vote over annotations[].primary_playstyle when labels.primary_playstyle is absent.",
+      "categories": [
+        "planner",
+        "iterative_refiner",
+        "route_optimizer",
+        "complex_builder",
+        "resource_diversifier",
+        "risk_taker"
+      ]
+    }
+  },
+  "sessions": [
+    {
+      "user_id": "player_pseudonym_001",
+      "session_id": "session_001",
+      "game_id": "minecraft",
+      "collection_context": {
+        "scenario": "free_build_10min",
+        "session_duration_seconds": 600,
+        "data_source": "instrumented_game_client",
+        "consent_id": "consent_record_reference"
+      },
+      "annotations": [
+        {
+          "annotator_id": "annotator_a",
+          "primary_playstyle": "planner",
+          "secondary_playstyles": ["resource_diversifier"],
+          "confidence": 0.8,
+          "evidence": "Long preparation and resource selection before first build."
+        },
+        {
+          "annotator_id": "annotator_b",
+          "primary_playstyle": "planner",
+          "secondary_playstyles": [],
+          "confidence": 0.7,
+          "evidence": "Observed planning phase before construction."
+        },
+        {
+          "annotator_id": "annotator_c",
+          "primary_playstyle": "resource_diversifier",
+          "secondary_playstyles": ["planner"],
+          "confidence": 0.6,
+          "evidence": "Large item variety and moderate planning."
+        }
+      ],
+      "raw_events": [
+        {"type": "inventory_change", "timestamp": 1000, "items": ["stone", "glass"]},
+        {"type": "item_craft", "timestamp": 3000, "item": "minecraft:planks"},
+        {"type": "block_place", "timestamp": 7000, "position": {"x": 0, "y": 64, "z": 0}, "block_type": "minecraft:stone"}
+      ]
+    }
+  ]
+}

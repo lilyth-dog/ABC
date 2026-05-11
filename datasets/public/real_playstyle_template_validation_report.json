@@ -1,0 +1,109 @@
+{
+  "generated_at": "2026-05-11T02:06:54.051540Z",
+  "dataset_path": "datasets/validation/real_playstyle_sessions_template.json",
+  "dataset_metadata": {
+    "dataset_name": "real_playstyle_sessions_template",
+    "dataset_type": "real_labeled_collection_template",
+    "version": "0.1.0",
+    "created_at": "2026-05-11",
+    "purpose": "Template for collecting real gameplay sessions with observed playstyle labels.",
+    "privacy_notes": [
+      "Use pseudonymous user_id values.",
+      "Do not include names, emails, chat text, or other direct identifiers.",
+      "Store consent records separately from the public validation artifact."
+    ],
+    "labeling_protocol": {
+      "minimum_annotators_per_session": 3,
+      "recommended_sessions_per_player": 3,
+      "primary_label_policy": "Use majority vote over annotations[].primary_playstyle when labels.primary_playstyle is absent.",
+      "categories": [
+        "planner",
+        "iterative_refiner",
+        "route_optimizer",
+        "complex_builder",
+        "resource_diversifier",
+        "risk_taker"
+      ]
+    }
+  },
+  "claim_boundary": "This validates observable playstyle category scoring. It does not validate claims about inferring a user's true personality.",
+  "category_definitions": {
+    "planner": {
+      "description": "Preparation actions before the first build action.",
+      "minimum_signal": "At least one preparation action and one build action."
+    },
+    "iterative_refiner": {
+      "description": "Frequent placement revisions at the same location.",
+      "minimum_signal": "At least one block_place followed by a matching block_break."
+    },
+    "route_optimizer": {
+      "description": "Efficient movement path across multiple movement events.",
+      "minimum_signal": "At least two player_move events."
+    },
+    "complex_builder": {
+      "description": "High spatial spread and vertical variation in build events.",
+      "minimum_signal": "At least two block_place events with positions."
+    },
+    "resource_diversifier": {
+      "description": "Broad variety of inventory and block resources.",
+      "minimum_signal": "Inventory or block type diversity."
+    },
+    "risk_taker": {
+      "description": "Actions in low-height or low-light positions.",
+      "minimum_signal": "Positioned actions with y < 40 or light_level < 7."
+    }
+  },
+  "summary": {
+    "labeled_sessions": 1,
+    "correct_predictions": 1,
+    "accuracy": 1.0,
+    "annotated_sessions": 1,
+    "mean_pairwise_annotation_agreement": 0.3333,
+    "confusion": {
+      "planner": {
+        "planner": 1
+      }
+    },
+    "failures": []
+  },
+  "sessions": [
+    {
+      "user_id": "player_pseudonym_001",
+      "session_id": "session_001",
+      "game_id": "minecraft",
+      "expected_primary_playstyle": "planner",
+      "expected_label_source": "annotation_majority",
+      "annotation_vote_counts": {
+        "planner": 2,
+        "resource_diversifier": 1
+      },
+      "annotation_pairwise_agreement": 0.3333,
+      "predicted_primary_playstyle": "planner",
+      "is_correct": true,
+      "category_scores": {
+        "planner": 1.0,
+        "iterative_refiner": 0.0,
+        "route_optimizer": 0.0,
+        "complex_builder": 0.0,
+        "resource_diversifier": 0.15,
+        "risk_taker": 0.0
+      },
+      "parsed_metrics": {
+        "planning_time": 6000,
+        "revision_count": 0,
+        "complexity": 0.0,
+        "path_efficiency": 1.0,
+        "risk_taking": 0.0,
+        "diversity": 0.15
+      },
+      "event_features": {
+        "event_count": 3,
+        "preparation_count": 2,
+        "build_count": 1,
+        "move_count": 0,
+        "resource_type_count": 3,
+        "risky_event_count": 0
+      }
+    }
+  ]
+}

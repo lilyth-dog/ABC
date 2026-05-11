@@ -73,6 +73,7 @@
 - **[FINAL_STATUS_REPORT.md](FINAL_STATUS_REPORT.md)** - 최종 상태 리포트
 - **[COMPREHENSIVE_EVALUATION.md](COMPREHENSIVE_EVALUATION.md)** - 종합 평가 리포트
 - **[PLAYSTYLE_CATEGORY_VALIDATION.md](PLAYSTYLE_CATEGORY_VALIDATION.md)** - 플레이 스타일 카테고리 검증
+- **[PLAYSTYLE_DATA_COLLECTION_PROTOCOL.md](PLAYSTYLE_DATA_COLLECTION_PROTOCOL.md)** - 실제 플레이 스타일 라벨 데이터 수집 프로토콜
 - **[../report.tex](../report.tex)** - 실증분석 LaTeX 보고서
 - **[../datasets/public/empirical_analysis_report.json](../datasets/public/empirical_analysis_report.json)** - 실증분석 JSON 산출물
 - **[../datasets/public/playstyle_validation_report.json](../datasets/public/playstyle_validation_report.json)** - 플레이 스타일 검증 JSON 산출물

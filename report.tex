@@ -59,7 +59,11 @@
 추가했다. 이 fixture는 실제 사용자 성격 라벨이 아니라, 검증 스크립트가 사전 정의된 카테고리를
 재현 가능하게 산출하는지 확인하기 위한 규칙 기반 예시다. 카테고리는 \texttt{planner},
 \texttt{iterative\_refiner}, \texttt{route\_optimizer}, \texttt{complex\_builder},
-\texttt{resource\_diversifier}, \texttt{risk\_taker}로 정의했다.
+\texttt{resource\_diversifier}, \texttt{risk\_taker}로 정의했다. 후속 실제 데이터 검증을 위해
+\texttt{datasets/validation/real\_playstyle\_sessions\_template.json}와
+\texttt{docs/PLAYSTYLE\_DATA\_COLLECTION\_PROTOCOL.md}도 추가했다. 실제 데이터셋에서는
+\texttt{annotations[]}의 다중 annotator 라벨을 majority vote로 집계하고 pairwise agreement를
+함께 보고한다.
 
 \section{결과}
 \subsection{테스트 실행 결과}
@@ -159,7 +163,9 @@ Failures & 0 \\
 \end{table}
 
 이 결과는 카테고리 scoring mechanics의 재현성 검증이다. 실제 사용자 플레이 스타일 일반화
-성능을 주장하려면 사람이 라벨링한 실제 세션 데이터가 필요하다.
+성능을 주장하려면 사람이 라벨링한 실제 세션 데이터가 필요하다. 검증 스크립트는 실제 데이터가
+제공될 경우 annotator majority label, confusion table, failure examples, pairwise agreement를
+동일한 JSON 형식으로 산출한다.
 
 \section{공개 데이터 점검}
 저장소에 포함된 공개 데이터는 \texttt{opendota\_real\_match\_8650963582.json}

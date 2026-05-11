@@ -27,9 +27,15 @@ The current validation target is:
 - Dataset type: `synthetic_calibration_fixture`
 - Label source: rule-designed examples
 - Current size: 6 labeled sessions, one per category
+- Real-data template: `datasets/validation/real_playstyle_sessions_template.json`
 
 Because the fixture is synthetic, it validates scoring mechanics and reporting
 format only. It is not evidence that the categories generalize to real users.
+
+For real sessions, use `annotations[]` with at least three independent
+annotators. If `labels.primary_playstyle` is absent, the validator uses majority
+vote over `annotations[].primary_playstyle` and reports pairwise annotator
+agreement.
 
 ## Command
 
@@ -41,6 +47,14 @@ The command writes:
 
 ```text
 datasets/public/playstyle_validation_report.json
+```
+
+For a real labeled dataset:
+
+```bash
+PYTHONPATH=backend python3 backend/validate_playstyle_categories.py \
+  --dataset datasets/validation/real_playstyle_sessions.json \
+  --output datasets/public/real_playstyle_validation_report.json
 ```
 
 ## Current result
@@ -73,3 +87,6 @@ and compare:
 - per-category confusion
 - failure examples
 - inter-rater agreement if multiple annotators are used
+
+See `docs/PLAYSTYLE_DATA_COLLECTION_PROTOCOL.md` for the collection and
+annotation protocol.

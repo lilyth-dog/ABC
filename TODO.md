@@ -9,12 +9,16 @@
   - Fixture path: `datasets/validation/labeled_playstyle_sessions.json`
   - Report path: `datasets/public/playstyle_validation_report.json`
   - Scope: scoring mechanics only, not real-user generalization.
+- [x] Add a real labeled playstyle session collection template and protocol.
+  - Template path: `datasets/validation/real_playstyle_sessions_template.json`
+  - Protocol path: `docs/PLAYSTYLE_DATA_COLLECTION_PROTOCOL.md`
 - [ ] Expand real-game validation beyond the current committed samples.
   - Current OpenDota artifact has 12 converted events.
   - Current full pipeline artifact has 8 raw events.
 - [ ] Add TESS and workout/motion datasets to the evaluation environment or provide reproducible download/setup steps.
 - [ ] Validate playstyle category analysis against real labeled user sessions.
   - Current fixture verifies execution and scoring mechanics, not real-user generalization.
+  - Validator now supports majority vote and pairwise agreement from `annotations[]`.
 - [ ] Run MuMax3-backed simulation on an environment with the MuMax3 binary installed.
   - Current environment falls back to pre-computed patterns.
 - [ ] Add confidence intervals across independent machines or CI runners for latency measurements.
@@ -43,3 +47,4 @@
 - [x] Link `report.tex` and `datasets/public/empirical_analysis_report.json` from `docs/README.md`.
 - [x] Document that empirical robustness results are not evidence of external validity.
 - [x] Document playstyle category validation boundaries in `docs/PLAYSTYLE_CATEGORY_VALIDATION.md`.
+- [x] Document real playstyle data collection protocol.

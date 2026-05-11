@@ -178,6 +178,116 @@ def predict_primary_category(scores: Mapping[str, float]) -> str:
     return category if score > 0 else "uncategorized"
 
 
+def _count_labels(labels: List[str]) -> Dict[str, int]:
+    """
+    Count category labels.
+
+    Args:
+        labels: Category labels.
+
+    Returns:
+        Count per category.
+    """
+    counts: Dict[str, int] = {}
+    for label in labels:
+        counts[label] = counts.get(label, 0) + 1
+    return counts
+
+
+def _pairwise_agreement(labels: List[str]) -> Optional[float]:
+    """
+    Compute pairwise percent agreement for annotation labels.
+
+    Args:
+        labels: Annotator category labels.
+
+    Returns:
+        Pairwise agreement in [0, 1], or None when fewer than two labels exist.
+    """
+    if len(labels) < 2:
+        return None
+
+    total_pairs = len(labels) * (len(labels) - 1) / 2
+    counts = _count_labels(labels)
+    agreeing_pairs = sum(count * (count - 1) / 2 for count in counts.values())
+    return round(agreeing_pairs / total_pairs, 4)
+
+
+def _annotation_labels(session: Mapping[str, Any]) -> List[str]:
+    """
+    Extract valid annotation labels from a session.
+
+    Args:
+        session: Session payload.
+
+    Returns:
+        Annotator primary playstyle labels.
+    """
+    annotations = session.get("annotations", [])
+    if not isinstance(annotations, list):
+        return []
+
+    labels: List[str] = []
+    for annotation in annotations:
+        if isinstance(annotation, dict):
+            label = annotation.get("primary_playstyle")
+            if isinstance(label, str) and label in CATEGORY_DEFINITIONS:
+                labels.append(label)
+    return labels
+
+
+def resolve_expected_label(session: Mapping[str, Any]) -> Dict[str, Any]:
+    """
+    Resolve a session's expected primary category from labels or annotations.
+
+    Args:
+        session: Session payload.
+
+    Returns:
+        Expected-label metadata.
+    """
+    labels = session.get("labels", {})
+    explicit = labels.get("primary_playstyle") if isinstance(labels, dict) else None
+    annotator_labels = _annotation_labels(session)
+    vote_counts = _count_labels(annotator_labels)
+    agreement = _pairwise_agreement(annotator_labels)
+
+    if explicit:
+        return {
+            "expected": explicit,
+            "source": "labels.primary_playstyle",
+            "annotation_vote_counts": vote_counts,
+            "annotation_pairwise_agreement": agreement,
+        }
+
+    if not vote_counts:
+        return {
+            "expected": None,
+            "source": "unlabeled",
+            "annotation_vote_counts": vote_counts,
+            "annotation_pairwise_agreement": agreement,
+        }
+
+    sorted_votes = sorted(vote_counts.items(), key=lambda item: (-item[1], item[0]))
+    top_label, top_count = sorted_votes[0]
+    tied_labels = [label for label, count in sorted_votes if count == top_count]
+    if len(tied_labels) > 1:
+        return {
+            "expected": None,
+            "source": "annotation_tie",
+            "annotation_vote_counts": vote_counts,
+            "annotation_pairwise_agreement": agreement,
+            "tied_labels": tied_labels,
+        }
+
+    return {
+        "expected": top_label,
+        "source": "annotation_majority",
+        "annotation_vote_counts": vote_counts,
+        "annotation_pairwise_agreement": agreement,
+    }
+
+
 def _validate_dataset_payload(payload: Mapping[str, Any]) -> List[Dict[str, Any]]:
     """
     Validate and return sessions from a dataset payload.
@@ -206,6 +316,17 @@ def _validate_dataset_payload(payload: Mapping[str, Any]) -> List[Dict[str, Any]
         primary = labels.get("primary_playstyle") if isinstance(labels, dict) else None
         if primary and primary not in CATEGORY_DEFINITIONS:
             raise ValueError(f"Unknown primary_playstyle '{primary}' in {session.get('session_id')}")
+        annotations = session.get("annotations", [])
+        if annotations and not isinstance(annotations, list):
+            raise ValueError(f"annotations must be a list in {session.get('session_id')}")
+        for annotation in annotations if isinstance(annotations, list) else []:
+            if not isinstance(annotation, dict):
+                raise ValueError(f"Each annotation must be an object in {session.get('session_id')}")
+            annotation_label = annotation.get("primary_playstyle")
+            if annotation_label and annotation_label not in CATEGORY_DEFINITIONS:
+                raise ValueError(
+                    f"Unknown annotation primary_playstyle '{annotation_label}' in {session.get('session_id')}"
+                )
     return sessions
 
 
@@ -253,13 +374,16 @@ def analyze_session(session: Mapping[str, Any]) -> Dict[str, Any]:
     scores = score_playstyle_categories(metrics, event_features)
     predicted = predict_primary_category(scores)
 
-    labels = session.get("labels", {})
-    expected = labels.get("primary_playstyle") if isinstance(labels, dict) else None
+    expected_info = resolve_expected_label(session)
+    expected = expected_info["expected"]
     return {
         "user_id": session.get("user_id"),
         "session_id": session.get("session_id"),
         "game_id": game_id,
         "expected_primary_playstyle": expected,
+        "expected_label_source": expected_info["source"],
+        "annotation_vote_counts": expected_info["annotation_vote_counts"],
+        "annotation_pairwise_agreement": expected_info["annotation_pairwise_agreement"],
         "predicted_primary_playstyle": predicted,
         "is_correct": predicted == expected if expected else None,
         "category_scores": scores,
@@ -280,6 +404,11 @@ def summarize_results(session_results: List[Dict[str, Any]]) -> Dict[str, Any]:
     """
     labeled = [result for result in session_results if result["expected_primary_playstyle"]]
     correct = [result for result in labeled if result["is_correct"]]
+    agreement_values = [
+        float(result["annotation_pairwise_agreement"])
+        for result in session_results
+        if result.get("annotation_pairwise_agreement") is not None
+    ]
 
     confusion: Dict[str, Dict[str, int]] = {}
     failures: List[Dict[str, Any]] = []
@@ -302,6 +431,10 @@ def summarize_results(session_results: List[Dict[str, Any]]) -> Dict[str, Any]:
         "labeled_sessions": len(labeled),
         "correct_predictions": len(correct),
         "accuracy": round(len(correct) / len(labeled), 4) if labeled else None,
+        "annotated_sessions": sum(1 for result in session_results if result["annotation_vote_counts"]),
+        "mean_pairwise_annotation_agreement": (
+            round(sum(agreement_values) / len(agreement_values), 4) if agreement_values else None
+        ),
         "confusion": confusion,
         "failures": failures,
     }

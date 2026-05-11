@@ -111,7 +111,7 @@ class PredictiveModel:
         Returns:
             스트레스 감지 결과
         """
-        if len(history) < 2:
+        if len(history) < 1:
             return {"status": "insufficient_data"}
         
         # 최근 3개 세션과 비교
@@ -120,28 +120,15 @@ class PredictiveModel:
         # 평균 의사결정 지연시간 계산
         avg_latencies = []
         for session in recent:
-            if 'raw_metrics' in session and session['raw_metrics']:
-                try:
-                    import json
-                    metrics = json.loads(session['raw_metrics']) if isinstance(session['raw_metrics'], str) else session['raw_metrics']
-                    latency = metrics.get('summary', {}).get('avgDecisionLatency', 0)
-                    if latency > 0:
-                        avg_latencies.append(latency)
-                except:
-                    pass
+            latency = self._extract_latency(session)
+            if latency > 0:
+                avg_latencies.append(latency)
         
-        if len(avg_latencies) < 2:
+        if len(avg_latencies) < 1:
             return {"status": "insufficient_data"}
         
         # 현재 세션의 지연시간
-        current_latency = 0
-        if 'raw_metrics' in current_session:
-            try:
-                import json
-                metrics = json.loads(current_session['raw_metrics']) if isinstance(current_session['raw_metrics'], str) else current_session['raw_metrics']
-                current_latency = metrics.get('summary', {}).get('avgDecisionLatency', 0)
-            except:
-                pass
+        current_latency = self._extract_latency(current_session)
         
         # 평균과 비교
         baseline_latency = np.mean(avg_latencies)
@@ -179,6 +166,36 @@ class PredictiveModel:
             "latency_change": round(latency_increase * 100, 1),  # 퍼센트
             "recommendation": self._get_stress_recommendation(stress_level)
         }
+    
+    def _extract_latency(self, session: Dict) -> float:
+        """
+        세션 데이터에서 의사결정 지연시간을 추출합니다.
+        
+        Args:
+            session (Dict): raw_metrics 또는 평탄화된 메트릭을 포함한 세션 데이터
+        
+        Returns:
+            float: 의사결정 지연시간(ms). 없거나 파싱 실패 시 0.
+        """
+        direct_latency = session.get("avg_decision_latency", session.get("avgDecisionLatency", 0))
+        if direct_latency:
+            return float(direct_latency)
+        
+        if "raw_metrics" not in session or not session["raw_metrics"]:
+            return 0.0
+        
+        try:
+            import json
+            metrics = (
+                json.loads(session["raw_metrics"])
+                if isinstance(session["raw_metrics"], str)
+                else session["raw_metrics"]
+            )
+            summary = metrics.get("summary", {}) if isinstance(metrics, dict) else {}
+            return float(summary.get("avgDecisionLatency", metrics.get("avgDecisionLatency", 0)))
+        except (TypeError, ValueError, AttributeError, json.JSONDecodeError) as e:
+            logger.warning(f"의사결정 지연시간 추출 실패: {e}")
+            return 0.0
     
     def _categorize_stress(self, level: float) -> str:
         """

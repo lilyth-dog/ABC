@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-11T01:53:53.564161Z",
+  "generated_at": "2026-05-11T02:08:20.425538Z",
   "random_seed": 20260511,
   "theoretical_best_case": {
     "unit_test_pass_rate": 1.0,
@@ -9,14 +9,14 @@
     "randomized_robustness_success_rate": 1.0
   },
   "tier_1_execution": {
-    "backend_tests": "36/36 passed",
+    "backend_tests": "42/42 passed",
     "frontend_tests": "31/31 passed",
-    "backend_coverage": "60.29%"
+    "backend_coverage": "62.06%"
   },
   "tier_2_component_analysis": {
     "legacy_comprehensive_summary": {
       "parsing_accuracy": "100.00%",
-      "performance": "99109 events/sec",
+      "performance": "98824 events/sec",
       "consistency": "✓",
       "edge_cases_handled": 4,
       "real_data_files": 2
@@ -104,44 +104,44 @@
       {
         "event_count": 10,
         "repetitions": 30,
-        "median_ms": 0.05218497244641185,
-        "p95_ms": 0.06610762793570757,
-        "median_events_per_second": 191626.04733132484
+        "median_ms": 0.07333149551413953,
+        "p95_ms": 0.10371694515924901,
+        "median_events_per_second": 136367.05388166854
       },
       {
         "event_count": 50,
         "repetitions": 30,
-        "median_ms": 0.16911502461880445,
-        "p95_ms": 0.1849512365879491,
-        "median_events_per_second": 295656.75854468305
+        "median_ms": 0.28183148242533207,
+        "p95_ms": 0.2920950122643262,
+        "median_events_per_second": 177410.98180274063
       },
       {
         "event_count": 100,
         "repetitions": 30,
-        "median_ms": 0.3459275176282972,
-        "p95_ms": 0.3680615045595914,
-        "median_events_per_second": 289077.89899342746
+        "median_ms": 0.5764479865320027,
+        "p95_ms": 0.5988537945086136,
+        "median_events_per_second": 173476.18924235465
       },
       {
         "event_count": 500,
         "repetitions": 30,
-        "median_ms": 2.6098170201294124,
-        "p95_ms": 2.689556425320916,
-        "median_events_per_second": 191584.3126715476
+        "median_ms": 2.6021590165328234,
+        "p95_ms": 4.396748074213974,
+        "median_events_per_second": 192148.1342313244
       },
       {
         "event_count": 1000,
         "repetitions": 30,
-        "median_ms": 7.6828430173918605,
-        "p95_ms": 7.833696762099862,
-        "median_events_per_second": 130160.1500559458
+        "median_ms": 7.586593506857753,
+        "p95_ms": 7.820091745816171,
+        "median_events_per_second": 131811.46440705826
       },
       {
         "event_count": 5000,
         "repetitions": 30,
-        "median_ms": 140.3608500258997,
-        "p95_ms": 148.36737287114374,
-        "median_events_per_second": 35622.468794378125
+        "median_ms": 138.47819899092428,
+        "p95_ms": 145.28636351169553,
+        "median_events_per_second": 36106.766526676845
       }
     ],
     "real_data_summary": {

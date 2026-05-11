@@ -294,12 +294,12 @@ def randomized_edge_probe(trials: int = 200) -> Dict[str, Any]:
     }
 
 
-def planning_time_counterexample() -> Dict[str, Any]:
+def planning_time_semantics_check() -> Dict[str, Any]:
     """
-    Reproduce the planning-time discrepancy in the legacy evaluation.
+    Verify the chosen planning-time semantics.
 
     Returns:
-        Counterexample details.
+        Planning-time semantic check details.
     """
     events = [
         {"type": "inventory_change", "timestamp": 1000, "items": ["stone"]},
@@ -315,11 +315,11 @@ def planning_time_counterexample() -> Dict[str, Any]:
         "expected_first_prep_to_build_ms": expected_first_prep_to_build_ms,
         "expected_prep_action_span_ms": expected_prep_action_span_ms,
         "interpretation": (
-            "The implementation measures the span between planning actions, "
-            "while the legacy evaluation expects first preparation to first build."
+            "The implementation measures planning time from the first preparation "
+            "action before a build to the first build action."
         ),
-        "passes_current_implementation_semantics": metrics["planning_time"] == expected_prep_action_span_ms,
-        "passes_legacy_evaluation_semantics": metrics["planning_time"] == expected_first_prep_to_build_ms,
+        "passes_selected_semantics": metrics["planning_time"] == expected_first_prep_to_build_ms,
+        "would_pass_action_span_semantics": metrics["planning_time"] == expected_prep_action_span_ms,
     }
 
 
@@ -475,7 +475,7 @@ def run_empirical_analysis() -> Dict[str, Any]:
 
     performance = benchmark_parser([10, 50, 100, 500, 1000, 5000], repetitions=30)
     robustness = randomized_edge_probe(trials=200)
-    counterexample = planning_time_counterexample()
+    planning_time_check = planning_time_semantics_check()
     real_data = summarize_real_data()
     legacy_evaluation = _load_json_if_exists(PUBLIC_DATA_DIR / "evaluation_report.json")
     final_verification = _load_json_if_exists(REPO_ROOT / "test_results_final.json")
@@ -497,7 +497,7 @@ def run_empirical_analysis() -> Dict[str, Any]:
         },
         "tier_2_component_analysis": {
             "legacy_comprehensive_summary": legacy_evaluation.get("summary", {}),
-            "planning_time_counterexample": counterexample,
+            "planning_time_semantics_check": planning_time_check,
             "randomized_robustness": robustness,
         },
         "tier_3_full_evaluation": {
